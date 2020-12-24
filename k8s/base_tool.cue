@@ -3,8 +3,6 @@
 
 package k8s
 
-import "infralib.monogon.dev/k8s/apps/monitoring"
-
 objects: [ for v in objectSets for x in v {x}]
 
 objectSets: [
