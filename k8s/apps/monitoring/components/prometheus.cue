@@ -4,69 +4,21 @@
 package components
 
 import (
-	"encoding/json"
 	"encoding/yaml"
 	"infralib.monogon.dev/k8s/apps/monitoring/rules"
 )
 
 k8s: {
-	// Upstream images
-	imagestreams: {
-		#Tag: {
-			from: {
-				kind: "DockerImage"
-				name: string
-			}
-			referencePolicy: type: "Source"
-			name: "latest"
-		}
-		{[string]: spec: lookupPolicy: local: false}
-
-		proxy: spec: tags: [#Tag & {from: name: "registry.access.redhat.com/openshift3/oauth-proxy"}]
-	}
-
 	// This configures OpenShift's internal OAuth server for Prometheus and Alertmanager.
-	serviceaccounts: prometheus: metadata: annotations: {
-		"serviceaccounts.openshift.io/oauth-redirectreference.prometheus": json.Marshal({
-			kind:       "OAuthRedirectReference"
-			apiVersion: "v1"
-			reference: {
-				kind: "Route"
-				name: "prometheus"
-			}})
-
-		"serviceaccounts.openshift.io/oauth-redirectreference.alerts": json.Marshal({
-			kind:       "OAuthRedirectReference"
-			apiVersion: "v1"
-			reference: {
-				kind: "Route"
-				name: "prometheus-alerts"
-			}})
-	}
+	serviceaccounts: prometheus: {}
 
 	pvcs: {
 		{[string]: spec: {
-			// Binds to local HostPath volume
 			accessModes: ["ReadWriteOnce"]
 			resources: requests: storage: "1Gi"
 		}}
 
 		"prometheus-data-claim": {}
-	}
-
-	routes: prometheus: spec: {
-		port: targetPort: "prometheus"
-		to: name:         "prometheus"
-		tls: {
-			termination:                   "Reencrypt"
-			insecureEdgeTerminationPolicy: "Redirect"
-		}
-	}
-
-	services: [Name=_]: metadata: annotations: {
-		// OpenShift issues serving certificates using the cluster CA. This allows for
-		// end-to-end encryption inside the cluster (router -> pod).
-		"service.alpha.openshift.io/serving-cert-secret-name": "\(Name)-tls"
 	}
 
 	services: prometheus: spec: {
@@ -210,14 +162,6 @@ k8s: {
 					emptyDir: {}
 				}]
 			}
-		}
-	}
-
-	routes: "prometheus-alerts": spec: {
-		to: name: "prometheus-alerts"
-		tls: {
-			termination:                   "Reencrypt"
-			insecureEdgeTerminationPolicy: "Redirect"
 		}
 	}
 

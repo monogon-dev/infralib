@@ -4,7 +4,6 @@
 package components
 
 import (
-	"encoding/json"
 	"encoding/yaml"
 )
 
@@ -34,13 +33,7 @@ k8s: {
 
 	secrets: "grafana-proxy": stringData: session_secret: config.sessionSecret
 
-	serviceaccounts: grafana: metadata: annotations: "serviceaccounts.openshift.io/oauth-redirectreference.grafana": json.Marshal({
-		kind:       "OAuthRedirectReference"
-		apiVersion: "v1"
-		reference: {
-			kind: "Route"
-			name: "grafana"
-		}})
+	serviceaccounts: grafana: {}
 
 	services: grafana: spec: {
 		ports: [{
@@ -50,15 +43,6 @@ k8s: {
 			targetPort: 8443
 		}]
 		selector: app: "grafana"
-	}
-
-	routes: grafana: spec: {
-		port: targetPort: "grafana"
-		to: name:         "grafana"
-		tls: {
-			termination:                   "Reencrypt"
-			insecureEdgeTerminationPolicy: "Redirect"
-		}
 	}
 
 	statefulsets: grafana: spec: {

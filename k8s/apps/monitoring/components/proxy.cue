@@ -3,6 +3,7 @@
 
 package components
 
+// TODO: replace by gatekeeper proxy
 #proxyContainer: {
 	#prefix:         string
 	#serviceAccount: string

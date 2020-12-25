@@ -8,3 +8,6 @@ import (
 )
 
 k8s: base.#KubernetesBase
+
+// Assume that StatefulSets are always named same as the service.
+k8s: statefulsets: [Name=string]: spec: serviceName: Name

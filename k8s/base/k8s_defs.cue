@@ -5,6 +5,9 @@ package base
 
 import (
 	core_v1 "k8s.io/api/core/v1"
+	apps_v1 "k8s.io/api/apps/v1"
+	rbac_v1 "k8s.io/api/rbac/v1"
+	apiext_v1beta1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1"
 )
 
 // Rather than an unordered list, we maintain a map of named objects by type and map it k8s objects.
@@ -40,32 +43,39 @@ import (
 		metadata: labels: name: Name
 	}
 
-	// TODO: This should be route_v1.Route, but OpenShift does something funny with its schema definition
-	// where the host field is marked required, but can be left out during creation
-	// (kubectl also fails to validate the resulting object, oc is happy about it).
-	routes: [Name=_]: {
-		apiVersion: "route.openshift.io/v1"
-		kind:       "Route"
-		metadata: name: Name
-		spec: {
-			host: string | *null // Cluster generates a host name if empty
-			to: name: string
-			...
-		}
-	}
-
-	imagestreams: [Name=_]: {
-		apiVersion: "image.openshift.io/v1"
-		kind:       "ImageStream"
-		metadata: name: Name
-		...
-	}
-
-	// TODO: This should be apps_v1.StatefulSet, but OpenShift 3.11 is on betav1, which does not match
-	statefulsets: [Name=_]: {
-		apiVersion: "apps/v1beta1"
+	statefulsets: [Name=_]: apps_v1.#StatefulSet & {
+		apiVersion: "apps/v1"
 		kind:       "StatefulSet"
 		metadata: name: Name
-		...
+	}
+
+	deployments: [Name=_]: apps_v1.#Deployment & {
+		apiVersion: "apps/v1"
+		kind:       "Deployment"
+		metadata: name: Name
+	}
+
+	clusterrolebindings: [Name=_]: rbac_v1.#ClusterRoleBinding & {
+		apiVersion: "rbac.authorization.k8s.io/v1"
+		kind:       "ClusterRoleBinding"
+		metadata: name: Name
+	}
+
+	clusterroles: [Name=_]: rbac_v1.#ClusterRole & {
+		apiVersion: "rbac.authorization.k8s.io/v1"
+		kind:       "ClusterRole"
+		metadata: name: Name
+	}
+
+	rolebindings: [Name=_]: rbac_v1.#RoleBinding & {
+		apiVersion: "rbac.authorization.k8s.io/v1"
+		kind:       "RoleBinding"
+		metadata: name: Name
+	}
+
+	crds: [Name=_]: apiext_v1beta1.#CustomResourceDefinition & {
+		apiVersion: "apiextensions.k8s.io/v1beta1"
+		kind:       "CustomResourceDefinition"
+		metadata: name: Name
 	}
 }
