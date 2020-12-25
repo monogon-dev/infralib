@@ -23,6 +23,8 @@ objectSets: [
 	context.objects.clusterrolebindings,
 	context.objects.clusterroles,
 	context.objects.rolebindings,
+
+	context.objects.ingressroutes,
 ]
 
 // Prerequisite objects to apply first, in a separate kubectl call.

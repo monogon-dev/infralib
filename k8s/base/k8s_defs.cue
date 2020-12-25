@@ -20,6 +20,17 @@ import (
 		metadata: {name: Name}
 	}
 
+	// CRDs
+
+	// TODO: The Traefik CRD does not generate cleanly - enable typechecking against traefik_v1alpha1.#IngressRoute
+	ingressroutes: [Name=_]: {
+		apiVersion: "traefik.containo.us/v1alpha1"
+		kind:       "IngressRoute"
+		metadata: {name: Name, namespace: deploymentNamespace}
+		...
+	}
+
+	// Core objects
 	serviceaccounts: [Name=_]: core_v1.#ServiceAccount & {
 		apiVersion: "v1"
 		kind:       "ServiceAccount"
