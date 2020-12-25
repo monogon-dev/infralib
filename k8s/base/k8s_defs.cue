@@ -1,13 +1,14 @@
 // Copyright 2020 The Monogon Project Authors.
 // SPDX-License-Identifier: Apache-2.0
 
-package k8s
+package base
 
 import (
 	core_v1 "k8s.io/api/core/v1"
 )
 
-k8s: close({
+// Rather than an unordered list, we maintain a map of named objects by type and map it k8s objects.
+#KubernetesBase: {
 	serviceaccounts: [Name=_]: core_v1.#ServiceAccount & {
 		apiVersion: "v1"
 		kind:       "ServiceAccount"
@@ -49,6 +50,7 @@ k8s: close({
 		spec: {
 			host: string | *null // Cluster generates a host name if empty
 			to: name: string
+			...
 		}
 	}
 
@@ -56,6 +58,7 @@ k8s: close({
 		apiVersion: "image.openshift.io/v1"
 		kind:       "ImageStream"
 		metadata: name: Name
+		...
 	}
 
 	// TODO: This should be apps_v1.StatefulSet, but OpenShift 3.11 is on betav1, which does not match
@@ -63,5 +66,6 @@ k8s: close({
 		apiVersion: "apps/v1beta1"
 		kind:       "StatefulSet"
 		metadata: name: Name
+		...
 	}
-})
+}
