@@ -19,24 +19,26 @@ k8s: {
 		}}
 
 		"prometheus-data-claim": {}
+		"alertmanager-data-claim": {}
 	}
 
 	services: prometheus: spec: {
-		ports: [{
-			name:       "prometheus"
-			protocol:   "TCP"
-			port:       443
-			targetPort: 8443
-		}, {
-			name:       "prometheusapi"
-			protocol:   "TCP"
-			port:       9090
-			targetPort: 9090
-		}]
+		ports: [
+			{
+				name:       "prometheus"
+				protocol:   "TCP"
+				port:       80
+				targetPort: 8000
+			},
+			{
+				name:       "prometheusapi"
+				protocol:   "TCP"
+				port:       9090
+				targetPort: 9090
+			},
+		]
 		selector: app: "prometheus"
 	}
-
-	secrets: "prometheus-proxy": stringData: session_secret: config.sessionSecret
 
 	statefulsets: prometheus: spec: {
 		updateStrategy: type: "RollingUpdate"
@@ -50,18 +52,17 @@ k8s: {
 			spec: {
 				serviceAccountName: "prometheus"
 				containers: [
-					#proxyContainer & {
-						#prefix:         "prometheus"
-						#serviceAccount: "prometheus"
-						#frontendPort:   8443
-						#backendPort:    9090
-						#extraArgs: ["-skip-auth-regex=^/metrics"]
+					proxyContainer & {
+						_prefix:       "prometheus"
+						_frontendPort: 8000
+						_backendPort:  9090
+						_extraArgs: ["--skip-auth-regex=^/metrics"]
 					},
-					#proxyContainer & {
-						#prefix:         "alerts"
-						#serviceAccount: "prometheus"
-						#frontendPort:   9443
-						#backendPort:    9093
+					proxyContainer & {
+						_prefix:         "alerts"
+						_serviceAccount: "prometheus"
+						_frontendPort:   8001
+						_backendPort:    9093
 					},
 					{
 						name: "prometheus"
@@ -70,20 +71,25 @@ k8s: {
 							"--config.file=/etc/prometheus/prometheus.yml",
 							"--web.listen-address=:9090",
 							"--web.enable-lifecycle",
+							"--web.external-url=https://\(config.publicHostnames.prometheus)",
 						]
 						image:           config.images.prometheus
 						imagePullPolicy: "IfNotPresent"
 						ports: [{
 							containerPort: 9090
+							protocol:      "TCP"
 							name:          "api"
 						}]
-						volumeMounts: [{
-							mountPath: "/etc/prometheus"
-							name:      "prometheus-config"
-						}, {
-							mountPath: "/prometheus"
-							name:      "prometheus-data"
-						}]
+						volumeMounts: [
+							{
+								mountPath: "/etc/prometheus"
+								name:      "prometheus-config"
+							},
+							{
+								mountPath: "/prometheus"
+								name:      "prometheus-data"
+							},
+						]
 					}, {
 						name: "prometheus-reloader"
 						args: [
@@ -101,20 +107,25 @@ k8s: {
 						args: [
 							"--config.file=/etc/alertmanager/alertmanager.yml",
 							"--log.level=debug",
+							"--web.external-url=https://\(config.publicHostnames.alertmanager)",
 						]
 						image:           config.images.alertmanager
 						imagePullPolicy: "IfNotPresent"
 						ports: [{
 							containerPort: 9093
+							protocol:      "TCP"
 							name:          "web"
 						}]
-						volumeMounts: [{
-							mountPath: "/etc/alertmanager"
-							name:      "alertmanager-config"
-						}, {
-							mountPath: "/alertmanager"
-							name:      "alertmanager-data"
-						}]
+						volumeMounts: [
+							{
+								mountPath: "/etc/alertmanager"
+								name:      "alertmanager-config"
+							},
+							{
+								mountPath: "/alertmanager"
+								name:      "alertmanager-data"
+							},
+						]
 					}, {
 						name: "alertmanager-reloader"
 						args: [
@@ -130,37 +141,30 @@ k8s: {
 					}]
 
 				restartPolicy: "Always"
-				volumes: [{
-					name: "prometheus-config"
-					configMap: {
-						defaultMode: 420
-						name:        "prometheus"
-					}
-				}, {
-					name: "prometheus-secrets"
-					secret: secretName: "prometheus-proxy"
-				}, {
-					name: "prometheus-tls"
-					secret: secretName: "prometheus-tls"
-				}, {
-					name: "prometheus-data"
-					persistentVolumeClaim: claimName: "prometheus-data-claim"
-				}, {
-					name: "alertmanager-config"
-					configMap: {
-						defaultMode: 420
-						name:        "alertmanager"
-					}
-				}, {
-					name: "alerts-secrets"
-					secret: secretName: "prometheus-alerts-proxy"
-				}, {
-					name: "alerts-tls"
-					secret: secretName: "prometheus-alerts-tls"
-				}, {
-					name: "alertmanager-data"
-					emptyDir: {}
-				}]
+				volumes: [
+					{
+						name: "prometheus-config"
+						configMap: {
+							defaultMode: 420
+							name:        "prometheus"
+						}
+					},
+					{
+						name: "prometheus-data"
+						persistentVolumeClaim: claimName: "prometheus-data-claim"
+					},
+					{
+						name: "alertmanager-config"
+						configMap: {
+							defaultMode: 420
+							name:        "alertmanager"
+						}
+					},
+					{
+						name: "alertmanager-data"
+						persistentVolumeClaim: claimName: "alertmanager-data-claim"
+					},
+				]
 			}
 		}
 	}
@@ -168,14 +172,12 @@ k8s: {
 	services: "prometheus-alerts": spec: {
 		ports: [{
 			name:       "alerts"
-			port:       443
+			port:       80
 			protocol:   "TCP"
-			targetPort: 9443
+			targetPort: 8001
 		}]
 		selector: app: "prometheus"
 	}
-
-	secrets: "prometheus-alerts-proxy": stringData: session_secret: config.sessionSecret
 
 	configmaps: prometheus: data: {
 		"prometheus.yml": yaml.Marshal({
@@ -212,4 +214,36 @@ k8s: {
 	}
 
 	configmaps: alertmanager: data: "alertmanager.yml": yaml.Marshal(config.alertmanagerConfig)
+}
+
+k8s: ingressroutes: "prom-tls": {
+	spec: {
+		entryPoints: ["websecure"]
+		routes: [
+			{
+				match: "Host(`\(config.publicHostnames.prometheus)`) && PathPrefix(`/`)"
+				kind:  "Rule"
+				services: [
+					{
+						kind:     "Service"
+						name:     "prometheus"
+						port:     80
+						protocol: "TCP"
+					},
+				]
+			},
+			{
+				match: "Host(`\(config.publicHostnames.alertmanager)`) && PathPrefix(`/`)"
+				kind:  "Rule"
+				services: [
+					{
+						kind:     "Service"
+						name:     "prometheus-alerts"
+						port:     80
+						protocol: "TCP"
+					},
+				]
+			},
+		]
+	}
 }

@@ -11,3 +11,16 @@ k8s: base.#KubernetesBase
 
 // Assume that StatefulSets are always named same as the service.
 k8s: statefulsets: [Name=string]: spec: serviceName: Name
+
+// Use wildcard domain for all ingresses.
+k8s: ingressroutes: [_]: spec: {
+	tls: {
+		certResolver: "wildcardResolver"
+		domains: [
+			{
+				main: config.publicDomain
+				sans: ["*.\(config.publicDomain)"]
+			},
+		]
+	}
+}
