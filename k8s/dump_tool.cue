@@ -12,13 +12,13 @@ command: {
 	dump: {
 		task: print: {
 			kind: "print"
-			text: yaml.MarshalStream(objects)
+			text: yaml.MarshalStream(preObjects + objects)
 		}
 	}
 	dumpjson: {
 		task: print: {
 			kind: "print"
-			text: json.MarshalStream(objects)
+			text: json.MarshalStream(preObjects + objects)
 		}
 	}
 }

@@ -7,11 +7,12 @@ import (
 	"encoding/yaml"
 )
 
-command: "reload-configmaps": {
-	task: apply: {
+// apply-cm applies configmaps only for better performance during development.
+command: "apply-cm": {
+	task: apply: RemoteTask & {
 		kind: "exec"
-		cmd:  "kubectl apply --validate=false -f -"
-		_objects: [ for v in [k8s.configmaps] for x in v {x}]
+		_cmd: "kubectl apply --server-side -f -"
+		_objects: [ for v in [context.objects.configmaps] for x in v {x}]
 		stdin:  yaml.MarshalStream(_objects)
 		stdout: string
 	}
