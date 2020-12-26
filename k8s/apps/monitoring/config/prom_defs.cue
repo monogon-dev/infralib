@@ -23,7 +23,7 @@ package config
 	// Alert immediately, only use alert rules for delays.
 	group_wait: "0s"
 	// Disable alert grouping - individually send alerts to PagerDuty
-	group_by: ["..."]
+	group_by?: [...string]
 
 	repeat_interval?: string
 
