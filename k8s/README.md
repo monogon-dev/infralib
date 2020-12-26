@@ -14,15 +14,15 @@ First, switch to the right scope:
 
 Deploy a specific context:
 
-    cue -t context=monitoring-prod apply
+    cue -t context=monitoring-dev apply
     
 View the config that would be applied:
 
-    cue -t context=monitoring-prod dump
+    cue -t context=monitoring-dev dump
     
 Diff against config on cluster:
 
-    cue -t context=monitoring-prod diff
+    cue -t context=monitoring-dev diff
 
 Evaluate all contexts in scope to concrete values 
 (same computation as `dump`, but Cue syntax and error messages are more helpful):
@@ -31,4 +31,4 @@ Evaluate all contexts in scope to concrete values
 
 Evaluate specific context in scope:
 
-    cue eval -c -e 'contexts."monitoring-prod"'
+    cue eval -c -e 'contexts."monitoring-dev"'
