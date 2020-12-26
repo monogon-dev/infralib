@@ -67,7 +67,7 @@ k8s: {
 					{
 						name: "prometheus"
 						args: [
-							"--storage.tsdb.retention=30d",
+							"--storage.tsdb.retention=90d",
 							"--config.file=/etc/prometheus/prometheus.yml",
 							"--web.listen-address=:9090",
 							"--web.enable-lifecycle",
