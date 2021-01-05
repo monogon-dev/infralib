@@ -132,6 +132,14 @@ k8s: {
 								name:  "GF_ANALYTICS_CHECK_FOR_UPDATES"
 								value: "false"
 							},
+							{
+								name:  "GF_DATE_FORMATS_DEFAULT_TIMEZONE"
+								value: "UTC"
+							},
+							{
+								name:  "GF_USERS_DEFAULT_THEME"
+								value: "light"
+							},
 
 						] + _googleAuth
 
