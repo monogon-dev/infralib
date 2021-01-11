@@ -32,3 +32,14 @@ Evaluate all contexts in scope to concrete values
 Evaluate specific context in scope:
 
     cue eval -c -e 'contexts."monitoring-dev"'
+
+## Build and push container images
+
+Log in to registry:
+
+    gcloud auth login  # (if necessary)
+    gcloud docker --authorize-only
+    
+Build and push an image:
+
+    bazel run //k8s/apps/gerrit/build:push

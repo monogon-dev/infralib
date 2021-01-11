@@ -3,34 +3,6 @@
 
 package components
 
-// We need to override the entrypoint in order to copy our config.
-// See https://github.com/GerritCodeReview/docker-gerrit.
-//
-// We use an environment variable instead of a CM to pass the config:
-//
-//  - Only parts of the Gerrit config can be hot-reloaded. For correctness, we would have to
-//    redeploy the container by hashing the config into an annotation.
-//
-//  - Gerrit *really* wants a writable fs, so we can't just mount the CM to /var/gerrit/etc.
-//
-let _gerritStartup = """
-	set -euo pipefail
-	
-	export JAVA_OPTS='--add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED'
-	
-	# Initialize storage
-	if [[ ! -d /var/gerrit/git/All-Projects.git ]]; then
-	  echo "Initializing Gerrit site ..."
-	  java $JAVA_OPTS -jar /var/gerrit/bin/gerrit.war init --batch --install-all-plugins -d /var/gerrit
-	  java $JAVA_OPTS -jar /var/gerrit/bin/gerrit.war reindex -d /var/gerrit
-	fi
-
-	echo "${GERRIT_CONFIG}" > /var/gerrit/etc/gerrit.config
-	
-	echo "Running Gerrit ..."
-	exec /var/gerrit/bin/gerrit.sh run
-	"""
-
 let _gerritConfig = """
 [gerrit]
   basePath = git
@@ -133,7 +105,13 @@ k8s: {
 					{
 						name:  "gerrit"
 						image: config.images.gerrit
-						command: ["/bin/bash", "-c", _gerritStartup]
+
+						// We use an environment variable instead of a CM to pass the config:
+						//
+						//  - Only parts of the Gerrit config can be hot-reloaded. For correctness, we would have to
+						//    redeploy the container by hashing the config into an annotation.
+						//
+						//  - Gerrit *really* wants a writable fs, so we can't just mount the CM to /var/gerrit/etc.
 						env: [{name: "GERRIT_CONFIG", value: _gerritConfig}]
 						ports: [
 							{

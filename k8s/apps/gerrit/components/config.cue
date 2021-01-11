@@ -5,7 +5,7 @@ package components
 
 #Config: {
 	images: {
-		gerrit: "docker.io/gerritcodereview/gerrit:3.3.1@sha256:72b0c95042c8dd2bed0f021661ce967c3e4c004275500510de3e39fb4e18aa27"
+		gerrit: "gcr.io/nexantic-infra/gerrit:3.3.1-1@sha256:823731789f827706ebe20c0f59646008b0eca81bdeedb021e1c1b6b210e3e991"
 	}
 
 	// Hostname for Gerrit to run on (without https://)
