@@ -25,7 +25,7 @@ let _gerritConfig = """
   type = lucene
 
 [auth]
-  type = DEVELOPMENT_BECOME_ANY_ACCOUNT
+  type = OAUTH
 
 [receive]
   enableSignedPush = false
@@ -41,6 +41,10 @@ let _gerritConfig = """
 
 [cache]
   directory = cache
+
+[plugin "gerrit-oauth-provider-google-oauth"]
+        client-id = \(config.googleAuth.clientID)
+        client-secret = \(config.googleAuth.clientSecret)
 """
 
 k8s: {
