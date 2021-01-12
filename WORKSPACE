@@ -76,6 +76,11 @@ http_file(
     sha256 = "87ae5238ed9a36ffca15ee780123f333f7f7b1136d207a43f7b90c6ac55a5607",
     urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-stable-3.3/job/plugin-checks-bazel-stable-3.3/6/artifact/bazel-bin/plugins/checks/checks.jar"],
 )
+http_file(
+    name = "gerrit_phabricator_plugin_release",
+    downloaded_file_path = "its-phabricator.jar",
+    urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-stable-3.2/job/plugin-its-phabricator-bazel-stable-3.2/2/artifact/bazel-bin/plugins/its-phabricator/its-phabricator.jar"],
+)
 
 container_pull(
     name = "gerrit_base",
