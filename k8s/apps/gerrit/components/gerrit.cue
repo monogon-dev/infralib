@@ -26,6 +26,7 @@ let _gerritConfig = """
 
 [auth]
   type = OAUTH
+  gitBasicAuthPolicy = HTTP
 
 [receive]
   enableSignedPush = false
