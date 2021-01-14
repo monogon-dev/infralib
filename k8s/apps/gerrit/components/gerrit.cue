@@ -44,8 +44,9 @@ let _gerritConfig = """
   directory = cache
 
 [plugin "gerrit-oauth-provider-google-oauth"]
-        client-id = \(config.googleAuth.clientID)
-        client-secret = \(config.googleAuth.clientSecret)
+  client-id = \(config.googleAuth.clientID)
+  client-secret = \(config.googleAuth.clientSecret)
+  use-email-as-username = true
 """
 
 k8s: {
