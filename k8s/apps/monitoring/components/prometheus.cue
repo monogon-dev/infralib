@@ -56,7 +56,6 @@ k8s: {
 						_prefix:       "prometheus"
 						_frontendPort: 8000
 						_backendPort:  9090
-						_extraArgs: ["--skip-auth-regex=^/metrics"]
 					},
 					proxyContainer & {
 						_prefix:         "alerts"

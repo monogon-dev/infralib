@@ -7,7 +7,6 @@ proxyContainer: {
 	_prefix:       string
 	_frontendPort: number
 	_backendPort:  number
-	_extraArgs: [...string]
 
 	name:  "\(_prefix)-proxy"
 	image: config.images.proxy
