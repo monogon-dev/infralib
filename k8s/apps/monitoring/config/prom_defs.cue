@@ -27,6 +27,8 @@ package config
 
 	repeat_interval?: string
 
+	continue?: bool
+
 	match?: [string]: string
 	routes?: [...#Route]
 }
@@ -36,6 +38,10 @@ package config
 		service_key: string
 		// For some reasons, alerts show up as Critical no matter what we set here
 		severity: "critical" | "error" | "warning" | "info"
+	}]
+	webhook_configs?: [...{
+		url:            string
+		send_resolved?: bool
 	}]
 	...
 }]

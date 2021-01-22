@@ -89,7 +89,23 @@ k8s: {
 								name:      "prometheus-data"
 							},
 						]
-					}, {
+					},
+					{
+						name:  "calert"
+						image: config.images.calert
+						ports: [{
+							containerPort: 6000
+							protocol:      "TCP"
+							name:          "calert"
+						}]
+						volumeMounts: [
+							{
+								mountPath: "/etc/calert"
+								name:      "calert-config"
+							},
+						]
+					},
+					{
 						name: "prometheus-reloader"
 						args: [
 							"--reload-url=http://127.0.0.1:9090/-/reload",
@@ -157,6 +173,13 @@ k8s: {
 						configMap: {
 							defaultMode: 420
 							name:        "alertmanager"
+						}
+					},
+					{
+						name: "calert-config"
+						configMap: {
+							defaultMode: 420
+							name:        "calert"
 						}
 					},
 					{
