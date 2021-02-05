@@ -29,7 +29,13 @@ package config
 
 	continue?: bool
 
-	match?: [string]: string
+	match?: {
+		env:      #Env
+		severity: #Severity
+	} | {
+		type: "heartbeat"
+	}
+
 	routes?: [...#Route]
 }
 
