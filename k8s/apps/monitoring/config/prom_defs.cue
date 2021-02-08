@@ -32,6 +32,7 @@ package config
 	match?: {
 		env:      #Env
 		severity: #Severity
+		host?:    string
 	} | {
 		type: "heartbeat"
 	}
