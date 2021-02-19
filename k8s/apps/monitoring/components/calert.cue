@@ -26,8 +26,11 @@ template_file = "/etc/calert/message.tmpl"
 max_idle_conns =  100
 request_timeout = 8000
 
-[app.chat.firehose]
-notification_url = "\(config.googleChatWebhook)"
+[app.chat.firehose-dev]
+notification_url = "\(config.googleChatWebhooks.dev)"
+
+[app.chat.firehose-prod]
+notification_url = "\(config.googleChatWebhooks.prod)"
 """
 		"message.tmpl": """
 			*{{ .Labels.alertname | Title }} - {{.Status | Title }} ({{.Labels.severity | toUpper }})*

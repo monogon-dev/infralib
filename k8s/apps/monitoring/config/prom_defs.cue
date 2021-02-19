@@ -30,9 +30,9 @@ package config
 	continue?: bool
 
 	match?: {
-		env:      #Env
-		severity: #Severity
-		host?:    string
+		env:       #Env
+		severity?: #Severity
+		host?:     string
 	} | {
 		type: "heartbeat"
 	}
