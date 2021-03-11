@@ -53,13 +53,6 @@ _java_image_repos()
 
 # Gerrit dependencies
 
-http_file(
-    name = "gerrit_release",
-    downloaded_file_path = "gerrit.war",
-    sha256 = "617d2db4c5298ca821b4915a36fc8ffac76fff8119e738ed038a40de2b1d926b",
-    urls = ["https://gerrit-releases.storage.googleapis.com/gerrit-3.3.1.war"],
-)
-
 # Plugin binaries are fetched from Gerrit's official plugin repository... which happens to be a Jenkins instance:
 # https://gerrit-ci.gerritforge.com/view/Plugins-stable-3.3/
 
