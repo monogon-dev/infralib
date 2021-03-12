@@ -72,6 +72,7 @@ http_file(
 http_file(
     name = "gerrit_phabricator_plugin_release",
     downloaded_file_path = "its-phabricator.jar",
+    sha256 = "091cb5055eaee5a6f8378876d70dddcd91a3623e8084a6a5d3f1ae435a73b145",
     urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-stable-3.2/job/plugin-its-phabricator-bazel-stable-3.2/2/artifact/bazel-bin/plugins/its-phabricator/its-phabricator.jar"],
 )
 
