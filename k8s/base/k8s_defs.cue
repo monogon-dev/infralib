@@ -7,6 +7,7 @@ import (
 	core_v1 "k8s.io/api/core/v1"
 	apps_v1 "k8s.io/api/apps/v1"
 	rbac_v1 "k8s.io/api/rbac/v1"
+	admissionregistration_v1 "k8s.io/api/admissionregistration/v1"
 	apiext_v1beta1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1"
 	apiext_v1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
 )
@@ -75,6 +76,18 @@ import (
 		metadata: {name: Name, namespace: deploymentNamespace}
 	}
 
+	mutatingwebhookconfigurations: [Name=_]: admissionregistration_v1.#MutatingWebhookConfiguration & {
+		apiVersion: "admissionregistration.k8s.io/v1"
+		kind:       "MutatingWebhookConfiguration"
+		metadata: {name: Name, namespace: deploymentNamespace}
+	}
+
+	validatingwebhookconfigurations: [Name=_]: admissionregistration_v1.#ValidatingWebhookConfiguration & {
+		apiVersion: "admissionregistration.k8s.io/v1"
+		kind:       "ValidatingWebhookConfiguration"
+		metadata: {name: Name, namespace: deploymentNamespace}
+	}
+
 	clusterrolebindings: [Name=_]: rbac_v1.#ClusterRoleBinding & {
 		apiVersion: "rbac.authorization.k8s.io/v1"
 		kind:       "ClusterRoleBinding"
@@ -90,6 +103,12 @@ import (
 	rolebindings: [Name=_]: rbac_v1.#RoleBinding & {
 		apiVersion: "rbac.authorization.k8s.io/v1"
 		kind:       "RoleBinding"
+		metadata: {name: Name, namespace: deploymentNamespace}
+	}
+
+	roles: [Name=_]: rbac_v1.#Role & {
+		apiVersion: "rbac.authorization.k8s.io/v1"
+		kind:       "Role"
 		metadata: {name: Name, namespace: deploymentNamespace}
 	}
 

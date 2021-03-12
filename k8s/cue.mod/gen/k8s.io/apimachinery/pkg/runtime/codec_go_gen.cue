@@ -7,6 +7,12 @@
 
 package runtime
 
+// codec binds an encoder and decoder.
+_#codec: {
+	Encoder: #Encoder
+	Decoder: #Decoder
+}
+
 // NoopEncoder converts an Decoder to a Serializer or Codec for code that expects them but only uses decoding.
 #NoopEncoder: {
 	Decoder: #Decoder
@@ -19,5 +25,16 @@ _#noopEncoderIdentifier: #Identifier & "noop"
 	Encoder: #Encoder
 }
 
+_#base64Serializer: {
+	Encoder: #Encoder
+	Decoder: #Decoder
+}
+
 _#internalGroupVersionerIdentifier: "internal"
 _#disabledGroupVersionerIdentifier: "disabled"
+
+_#internalGroupVersioner: {
+}
+
+_#disabledGroupVersioner: {
+}

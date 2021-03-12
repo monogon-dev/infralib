@@ -20,9 +20,12 @@ objectSets: [
 	context.objects.services,
 	context.objects.statefulsets,
 	context.objects.deployments,
+	context.objects.validatingwebhookconfigurations,
+	context.objects.mutatingwebhookconfigurations,
 	context.objects.clusterrolebindings,
 	context.objects.clusterroles,
 	context.objects.rolebindings,
+	context.objects.roles,
 
 	context.objects.ingressroutes,
 ]
