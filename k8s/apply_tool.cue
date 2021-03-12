@@ -33,3 +33,10 @@ command: apply: {
 	}
 
 }
+
+// apply-fast skips prereqs (like crds)
+command: "apply-fast": RemoteTask & {
+	kind:  "exec"
+	_cmd:  "kubectl apply --field-manager=infra-cue-apply --server-side -f -"
+	stdin: yaml.MarshalStream(objects)
+}
