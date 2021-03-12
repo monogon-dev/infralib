@@ -6,6 +6,41 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_file")
 
+# rules_go and gazelle
+
+http_archive(
+    name = "io_bazel_rules_go",
+    sha256 = "7904dbecbaffd068651916dce77ff3437679f9d20e1a7956bff43826e7645fcc",
+    urls = [
+        "https://mirror.bazel.build/github.com/bazelbuild/rules_go/releases/download/v0.25.1/rules_go-v0.25.1.tar.gz",
+        "https://github.com/bazelbuild/rules_go/releases/download/v0.25.1/rules_go-v0.25.1.tar.gz",
+    ],
+)
+
+load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
+
+go_rules_dependencies()
+
+go_register_toolchains(version = "1.15.6")
+
+http_archive(
+    name = "bazel_gazelle",
+    sha256 = "222e49f034ca7a1d1231422cdb67066b885819885c356673cb1f72f748a3c9d4",
+    urls = [
+        "https://mirror.bazel.build/github.com/bazelbuild/bazel-gazelle/releases/download/v0.22.3/bazel-gazelle-v0.22.3.tar.gz",
+        "https://github.com/bazelbuild/bazel-gazelle/releases/download/v0.22.3/bazel-gazelle-v0.22.3.tar.gz",
+    ],
+)
+
+load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies", "go_repository")
+
+gazelle_dependencies()
+
+load("//go:deps.bzl", "go_repositories")
+
+# gazelle:repository_macro go/deps.bzl%go_repositories
+go_repositories()
+
 # rules_docker setup
 
 http_archive(
@@ -21,6 +56,13 @@ load(
 )
 
 container_repositories()
+
+load(
+    "@io_bazel_rules_docker//go:image.bzl",
+    _go_image_repos = "repositories",
+)
+
+_go_image_repos()
 
 load("@io_bazel_rules_docker//repositories:deps.bzl", container_deps = "deps")
 
@@ -40,7 +82,6 @@ load(
     "@io_bazel_rules_docker//container:container.bzl",
     "container_pull",
 )
-
 
 # rules_docker Java rules
 
@@ -69,6 +110,7 @@ http_file(
     sha256 = "87ae5238ed9a36ffca15ee780123f333f7f7b1136d207a43f7b90c6ac55a5607",
     urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-stable-3.3/job/plugin-checks-bazel-stable-3.3/6/artifact/bazel-bin/plugins/checks/checks.jar"],
 )
+
 http_file(
     name = "gerrit_phabricator_plugin_release",
     downloaded_file_path = "its-phabricator.jar",
@@ -82,4 +124,12 @@ container_pull(
     registry = "index.docker.io",
     repository = "gerritcodereview/gerrit",
     tag = "3.3.1",
+)
+
+# Forked version of smtprelay, which adds support for plain auth tokens and environment variables for secrets.
+go_repository(
+    name = "com_github_leoluk_smtprelay",
+    importpath = "github.com/leoluk/smtprelay",
+    sum = "h1:Ms5WjHimjP1LAl+7jMKnnmmrzkQmVkfOUm6kBbY/BqQ=",
+    version = "v1.5.0-1",
 )
