@@ -8,6 +8,7 @@ import (
 	apps_v1 "k8s.io/api/apps/v1"
 	rbac_v1 "k8s.io/api/rbac/v1"
 	apiext_v1beta1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1"
+	apiext_v1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
 )
 
 // Rather than an unordered list, we maintain a map of named objects by type and map it k8s objects.
@@ -92,8 +93,14 @@ import (
 		metadata: {name: Name, namespace: deploymentNamespace}
 	}
 
-	crds: [Name=_]: apiext_v1beta1.#CustomResourceDefinition & {
+	crdsLegacy: [Name=_]: apiext_v1beta1.#CustomResourceDefinition & {
 		apiVersion: "apiextensions.k8s.io/v1beta1"
+		kind:       "CustomResourceDefinition"
+		metadata: {name: Name, namespace: deploymentNamespace}
+	}
+
+	crds: [Name=_]: apiext_v1.#CustomResourceDefinition & {
+		apiVersion: "apiextensions.k8s.io/v1"
 		kind:       "CustomResourceDefinition"
 		metadata: {name: Name, namespace: deploymentNamespace}
 	}
