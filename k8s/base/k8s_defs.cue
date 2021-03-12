@@ -32,6 +32,26 @@ import (
 		...
 	}
 
+	// Cert-Manager
+	issuers: [Name=_]: {
+		apiVersion: "cert-manager.io/v1"
+		kind:       "Issuer"
+		metadata: {name: Name, namespace: deploymentNamespace}
+		...
+	}
+	clusterissuers: [Name=_]: {
+		apiVersion: "cert-manager.io/v1"
+		kind:       "ClusterIssuer"
+		metadata: {name: Name}
+		...
+	}
+	certificates: [Name=_]: {
+		apiVersion: "cert-manager.io/v1"
+		kind:       "Certificate"
+		metadata: {name: Name, namespace: deploymentNamespace}
+		...
+	}
+
 	// Core objects
 	serviceaccounts: [Name=_]: core_v1.#ServiceAccount & {
 		apiVersion: "v1"

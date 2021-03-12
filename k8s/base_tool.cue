@@ -28,6 +28,10 @@ objectSets: [
 	context.objects.roles,
 
 	context.objects.ingressroutes,
+
+	context.objects.issuers,
+	context.objects.clusterissuers,
+	context.objects.certificates,
 ]
 
 // Prerequisite objects to apply first, in a separate kubectl call.
