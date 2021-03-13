@@ -3,6 +3,7 @@
 
 package components
 
+// https://gerrit-review.googlesource.com/Documentation/config-gerrit.html
 let _gerritConfig = """
 [gerrit]
   basePath = git
@@ -31,8 +32,16 @@ let _gerritConfig = """
 [receive]
   enableSignedPush = false
 
+[user]
+  email = \(config.userEmail)
+
 [sendemail]
-  smtpServer = localhost
+  smtpServer = \(config.smtpServer)
+  smtpServerPort = \(config.smtpPort)
+  smtpUser = \(config.smtpUser)
+  smtpPass = \(config.smtpPass)
+
+  smtpEncryption = tls
 
 [sshd]
   listenAddress = *:29418

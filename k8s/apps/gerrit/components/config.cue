@@ -25,6 +25,15 @@ package components
 
 	// Google OAuth credentials
 	googleAuth: #GoogleAuth
+
+	// SMTP authentication
+	smtpServer: string
+	smtpPort:   uint
+	smtpUser:   string
+	smtpPass:   string
+
+	// Gerrit's own email address (for Git commits and notification mails)
+	userEmail: string
 }
 
 config: #Config
