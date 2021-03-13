@@ -11,7 +11,7 @@ let _gerritConfig = """
   serverId = \(config.serverID)
 
 [sshd]
-  advertisedAddress = \(config.publicHostname)
+  advertisedAddress = \(config.publicHostname):\(config.sshPort)
 
 [container]
   javaOptions = "-Dflogger.backend_factory=com.google.common.flogger.backend.log4j.Log4jBackendFactory#getInstance"
@@ -100,6 +100,20 @@ k8s: {
 				name:       "git-ssh"
 				protocol:   "TCP"
 				port:       29418
+				targetPort: "git-ssh"
+			},
+		]
+		selector: app: "gerrit"
+	}
+
+	services: "gerrit-ssh": spec: {
+		type: "NodePort"
+		ports: [
+			{
+				name:       "git-ssh"
+				protocol:   "TCP"
+				port:       29418
+				nodePort:   config.sshPort
 				targetPort: "git-ssh"
 			},
 		]

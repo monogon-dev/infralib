@@ -34,6 +34,10 @@ package components
 
 	// Gerrit's own email address (for Git commits and notification mails)
 	userEmail: string
+
+	// NodePort requested from the cluster. The service needs to be manually
+	// deleted before changing this on an existing cluster.
+	sshPort: uint & >=30000 & <=32767
 }
 
 config: #Config
