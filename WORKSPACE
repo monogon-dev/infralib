@@ -100,30 +100,30 @@ _java_image_repos()
 http_file(
     name = "gerrit_oauth_plugin_release",
     downloaded_file_path = "oauth.jar",
-    sha256 = "42ff6c3a8da36cc8e747529b6990274edddbf30338707ef231e28c15863175bd",
-    urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-stable-3.3/job/plugin-oauth-bazel-master-stable-3.3/4/artifact/bazel-bin/plugins/oauth/oauth.jar"],
+    sha256 = "a3462d7c977be025f394c749178bfb91b9830b9b9e54d1ce8ba7af0cabdfbba0",
+    urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-stable-3.3/job/plugin-oauth-bazel-master-stable-3.3/8/artifact/bazel-bin/plugins/oauth/oauth.jar"],
 )
 
 http_file(
     name = "gerrit_checks_plugin_release",
     downloaded_file_path = "checks.jar",
-    sha256 = "87ae5238ed9a36ffca15ee780123f333f7f7b1136d207a43f7b90c6ac55a5607",
-    urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-stable-3.3/job/plugin-checks-bazel-stable-3.3/6/artifact/bazel-bin/plugins/checks/checks.jar"],
+    sha256 = "9cf9699c851495fc8ac98766244d1f20a5cc68e4f41d41c46a73c61dd8292ba5",
+    urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-stable-3.3/job/plugin-checks-bazel-stable-3.3/8/artifact/bazel-bin/plugins/checks/checks.jar"],
 )
 
 http_file(
     name = "gerrit_phabricator_plugin_release",
     downloaded_file_path = "its-phabricator.jar",
-    sha256 = "091cb5055eaee5a6f8378876d70dddcd91a3623e8084a6a5d3f1ae435a73b145",
-    urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-stable-3.2/job/plugin-its-phabricator-bazel-stable-3.2/2/artifact/bazel-bin/plugins/its-phabricator/its-phabricator.jar"],
+    sha256 = "ccec5e09d95b9dc0d3e7423f6fb78da1094737c4a1c7402b201a6da061c77c66",
+    urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-stable-3.2/job/plugin-its-phabricator-bazel-stable-3.2/3/artifact/bazel-bin/plugins/its-phabricator/its-phabricator.jar"],
 )
 
 container_pull(
     name = "gerrit_base",
-    digest = "sha256:72b0c95042c8dd2bed0f021661ce967c3e4c004275500510de3e39fb4e18aa27",
+    digest = "sha256:43ae9db61fc8de201f1e707b29daef39ebd789821a85e6d21fe4000b82acbf51",
     registry = "index.docker.io",
     repository = "gerritcodereview/gerrit",
-    tag = "3.3.1",
+    tag = "3.3.2",
 )
 
 # Forked version of smtprelay, which adds support for plain auth tokens and environment variables for secrets.

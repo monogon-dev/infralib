@@ -25,5 +25,5 @@ container_push(
     image = ":gerrit_image",
     registry = "gcr.io",
     repository = "nexantic-infra/gerrit",
-    tag = "3.3.1-2",
+    tag = "3.3.2-1",
 )
