@@ -11,7 +11,7 @@ package components
 
 #Config: {
 	images: {
-		gerrit: "gcr.io/nexantic-infra/gerrit:3.3.2-4@sha256:2e500cb1555c455365c81ebba207c677d871bb38de53447f02badd089184858d"
+		gerrit: "gcr.io/nexantic-infra/gerrit:3.3.2-5@sha256:10b5753f2a9739528fa8b10cc9788627d42a786720ee378747cc22b195b1999b"
 	}
 
 	// Hostname for Gerrit to run on (without https://)
@@ -41,6 +41,11 @@ package components
 
 	// Human-readable short name for the instance (will be part of the email subject line)
 	instanceName: string
+
+	// Custom title displayed in Gerrit's header
+	headerName:            string
+	headerBackgroundColor: string & =~"^#(?:[0-9a-fA-F]{3}){1,2}$"
+	headerForegroundColor: string & =~"^#(?:[0-9a-fA-F]{3}){1,2}$"
 }
 
 config: #Config

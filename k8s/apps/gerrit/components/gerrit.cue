@@ -71,6 +71,25 @@ let _gerritConfig = """
   enabled = UiFeature__comment_context
 """
 
+let _customThemePlugin = """
+const customTheme = document.createElement('dom-module');
+customTheme.innerHTML = `<template>
+    <style>
+        html {
+            --header-background-color: \(config.headerBackgroundColor);
+            --header-text-color: \(config.headerForegroundColor);
+            --header-title-content: "\(config.headerName)";
+        }
+    </style>
+</template>
+`;
+customTheme.register('theme-plugin');
+
+Gerrit.install(plugin => {
+  plugin.registerStyleModule('app-theme', 'theme-plugin');
+});
+"""
+
 k8s: {
 	pvcs: {
 		{[string]: spec: {
@@ -154,7 +173,11 @@ k8s: {
 						//    redeploy the container by hashing the config into an annotation.
 						//
 						//  - Gerrit *really* wants a writable fs, so we can't just mount the CM to /var/gerrit/etc.
-						env: [{name: "GERRIT_CONFIG", value: _gerritConfig}]
+						env: [
+							{name: "GERRIT_CONFIG", value:       _gerritConfig},
+							{name: "GERRIT_THEME_PLUGIN", value: _customThemePlugin},
+						]
+
 						ports: [
 							{
 								protocol:      "TCP"

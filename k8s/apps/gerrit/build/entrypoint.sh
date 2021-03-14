@@ -11,6 +11,7 @@ if [[ ! -d /var/gerrit/git/All-Projects.git ]]; then
 fi
 
 echo "${GERRIT_CONFIG}" > /var/gerrit/etc/gerrit.config
+echo "${GERRIT_THEME_PLUGIN}" > /var/gerrit/tmp/custom-theme.js
 
 echo "Running Gerrit ..."
 exec /var/gerrit/bin/gerrit.sh run

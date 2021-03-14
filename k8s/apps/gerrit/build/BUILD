@@ -30,6 +30,14 @@ container_image(
     directory = "/",
     entrypoint = ["/entrypoint.sh"],
     files = [":entrypoint.sh"],
+
+    # Apparently, the directories created by rules_docker are owned by
+    # root:root and there's no way of changing the owner. This means that we
+    # need this ugly hack to put this file in a place where we can write to it
+    # from the entrypoint script.
+    symlinks = {
+    	"/var/gerrit/plugins/custom-theme.js": "/var/gerrit/tmp/custom-theme.js"
+    },
 )
 
 container_push(
@@ -38,5 +46,5 @@ container_push(
     image = ":gerrit_image",
     registry = "gcr.io",
     repository = "nexantic-infra/gerrit",
-    tag = "3.3.2-4",
+    tag = "3.3.2-5",
 )
