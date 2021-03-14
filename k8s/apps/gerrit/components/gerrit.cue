@@ -9,6 +9,7 @@ let _gerritConfig = """
   basePath = git
   canonicalWebUrl = https://\(config.publicHostname)/
   serverId = \(config.serverID)
+  instanceName = \(config.instanceName)
 
 [sshd]
   advertisedAddress = \(config.publicHostname):\(config.sshPort)
@@ -42,6 +43,8 @@ let _gerritConfig = """
   smtpPass = \(config.smtpPass)
 
   smtpEncryption = tls
+
+  addInstanceNameInSubject = true
 
 [sshd]
   listenAddress = *:29418

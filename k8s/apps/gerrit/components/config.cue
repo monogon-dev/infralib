@@ -38,6 +38,9 @@ package components
 	// NodePort requested from the cluster. The service needs to be manually
 	// deleted before changing this on an existing cluster.
 	sshPort: uint & >=30000 & <=32767
+
+	// Human-readable short name for the instance (will be part of the email subject line)
+	instanceName: string
 }
 
 config: #Config
