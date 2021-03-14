@@ -94,28 +94,63 @@ _java_image_repos()
 
 # Gerrit dependencies
 
+http_file(
+    name = "gerrit_release",
+    downloaded_file_path = "gerrit.war",
+    sha256 = "f26b044257bf3e9e265bd015d20e40ddfe4201d9bf0a13dc51e5c90960a7c437",
+    urls = ["https://gerrit-ci.gerritforge.com/view/Gerrit/job/Gerrit-bazel-java11-master/1101/artifact/gerrit/bazel-bin/gerrit.war"],
+)
+
+http_archive(
+    name = "gerrit_core_plugins",
+    sha256 = "1e94f6caa1d8996d8b2a302f1391ae3e7f87cc6d2576f50353182aba1174073e",
+    urls = ["https://gerrit-ci.gerritforge.com/view/Gerrit/job/Gerrit-bazel-java11-master/1101/artifact/gerrit/bazel-bin/plugins/*zip*/plugins.zip"],
+    build_file = "@//k8s/apps/gerrit/build:BUILD.plugins"
+)
+
 # Plugin binaries are fetched from Gerrit's official plugin repository... which happens to be a Jenkins instance:
 # https://gerrit-ci.gerritforge.com/view/Plugins-stable-3.3/
 
 http_file(
     name = "gerrit_oauth_plugin_release",
     downloaded_file_path = "oauth.jar",
-    sha256 = "a3462d7c977be025f394c749178bfb91b9830b9b9e54d1ce8ba7af0cabdfbba0",
-    urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-stable-3.3/job/plugin-oauth-bazel-master-stable-3.3/8/artifact/bazel-bin/plugins/oauth/oauth.jar"],
+    sha256 = "b4f27666ebef9db5352089a6cd394415aeacf741ea62de3901f674da74bdfbb4",
+    urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-master/job/plugin-oauth-bazel-master-master/47/artifact/bazel-bin/plugins/oauth/oauth.jar"],
 )
 
 http_file(
     name = "gerrit_checks_plugin_release",
     downloaded_file_path = "checks.jar",
-    sha256 = "9cf9699c851495fc8ac98766244d1f20a5cc68e4f41d41c46a73c61dd8292ba5",
-    urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-stable-3.3/job/plugin-checks-bazel-stable-3.3/8/artifact/bazel-bin/plugins/checks/checks.jar"],
+    sha256 = "7c28b26660661a149a3c20b5de01f7ab24bac8f0a95bfb177e3ef04a830e50fd",
+    urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-master/job/plugin-checks-bazel-master/41/artifact/bazel-bin/plugins/checks/checks.jar"],
 )
 
 http_file(
     name = "gerrit_phabricator_plugin_release",
     downloaded_file_path = "its-phabricator.jar",
-    sha256 = "ccec5e09d95b9dc0d3e7423f6fb78da1094737c4a1c7402b201a6da061c77c66",
-    urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-stable-3.2/job/plugin-its-phabricator-bazel-stable-3.2/3/artifact/bazel-bin/plugins/its-phabricator/its-phabricator.jar"],
+    sha256 = "54993eaf91198d72af6e0fbe2321cccbbed394abb84988a1b9d3055b81e29e12",
+    urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-master/job/plugin-its-phabricator-bazel-master/4/artifact/bazel-bin/plugins/its-phabricator/its-phabricator.jar"],
+)
+
+http_file(
+    name = "gerrit_lfs_plugin_release",
+    downloaded_file_path = "lfs.jar",
+    sha256 = "a8c0e55b2f3541f8763a7348df97f58cea1964fc3c541564255c9289a68e6951",
+    urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-master/job/plugin-lfs-bazel-master-master/30/artifact/bazel-bin/plugins/lfs/lfs.jar"],
+)
+
+http_file(
+    name = "gerrit_gravatar_plugin_release",
+    downloaded_file_path = "avatars-gravatar.jar",
+    sha256 = "86179eb325085da90ca7ae5b6058a0056949fca40c9e8c523571430e9380cb5c",
+    urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-master/job/plugin-avatars-gravatar-bazel-master/2/artifact/bazel-bin/plugins/avatars-gravatar/avatars-gravatar.jar"],
+)
+
+http_file(
+    name = "gerrit_uploadvalidator_plugin_release",
+    downloaded_file_path = "uploadvalidator.jar",
+    sha256 = "bc546ef9a2610eb03f9f4dd6b154e579f37e08cbd77c6a14b86060808c349feb",
+    urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-master/job/plugin-uploadvalidator-bazel-master/14/artifact/bazel-bin/plugins/uploadvalidator/uploadvalidator.jar"],
 )
 
 container_pull(

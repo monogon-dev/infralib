@@ -56,6 +56,16 @@ let _gerritConfig = """
   client-id = \(config.googleAuth.clientID)
   client-secret = \(config.googleAuth.clientSecret)
   use-email-as-username = true
+
+[experiments]
+  # Fancy new checks tab
+  enabled = UiFeature__ci_reboot_checks
+  # https://gerrit-review.googlesource.com/c/gerrit/+/286259
+  enabled = UiFeature__new_change_summary_ui
+  # https://gerrit-review.googlesource.com/c/gerrit/+/297181
+  enabled = UiFeature__new_image_diff_ui
+  # https://gerrit-review.googlesource.com/c/gerrit/+/293506
+  enabled = UiFeature__comment_context
 """
 
 k8s: {
