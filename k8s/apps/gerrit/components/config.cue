@@ -11,7 +11,7 @@ package components
 
 #Config: {
 	images: {
-		gerrit: "gcr.io/nexantic-infra/gerrit:3.3.2-5@sha256:10b5753f2a9739528fa8b10cc9788627d42a786720ee378747cc22b195b1999b"
+		gerrit: "gcr.io/nexantic-infra/gerrit:3.3.2-6@sha256:99ac0c257ddb27259801664669c1f9d326c8eb1455d9647d61b45359f531098c"
 	}
 
 	// Hostname for Gerrit to run on (without https://)

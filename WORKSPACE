@@ -153,6 +153,13 @@ http_file(
     urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-master/job/plugin-uploadvalidator-bazel-master/14/artifact/bazel-bin/plugins/uploadvalidator/uploadvalidator.jar"],
 )
 
+http_file(
+    name = "gerrit_simplesubmitrules_plugin_release",
+    downloaded_file_path = "simple-submit-rules.jar",
+    sha256 = "c125055a21c5cf4c2b74afa29be73df65e033075e019891fbf68ff3dcd4190d9",
+    urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-master/job/plugin-simple-submit-rules-bazel-master-master/2/artifact/bazel-bin/plugins/simple-submit-rules/simple-submit-rules.jar"],
+)
+
 container_pull(
     name = "gerrit_base",
     digest = "sha256:43ae9db61fc8de201f1e707b29daef39ebd789821a85e6d21fe4000b82acbf51",

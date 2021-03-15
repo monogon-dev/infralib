@@ -11,6 +11,7 @@ container_image(
         "@gerrit_lfs_plugin_release//file:lfs.jar",
         "@gerrit_gravatar_plugin_release//file:avatars-gravatar.jar",
         "@gerrit_uploadvalidator_plugin_release//file:uploadvalidator.jar",
+        "@gerrit_simplesubmitrules_plugin_release//file:simple-submit-rules.jar",
         "@gerrit_core_plugins//:plugins",
     ]
 )
@@ -46,5 +47,5 @@ container_push(
     image = ":gerrit_image",
     registry = "gcr.io",
     repository = "nexantic-infra/gerrit",
-    tag = "3.3.2-5",
+    tag = "3.3.2-6",
 )
