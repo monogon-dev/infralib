@@ -35,4 +35,4 @@ import (
 	objects: namespaces: "\(namespace)": {}
 }
 
-contexts: [Name=string]: #Context
+contexts: [Name=string]: #Context & {namespace: Name}
