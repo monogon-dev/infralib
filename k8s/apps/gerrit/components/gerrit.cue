@@ -30,6 +30,9 @@ let _gerritConfig = """
   type = OAUTH
   gitBasicAuthPolicy = HTTP
 
+[oauth]
+  allowRegisterNewEmail = true
+
 [receive]
   enableSignedPush = false
 
