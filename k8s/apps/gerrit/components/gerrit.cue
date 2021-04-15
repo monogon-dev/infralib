@@ -72,6 +72,8 @@ let _gerritConfig = """
   enabled = UiFeature__new_image_diff_ui
   # https://gerrit-review.googlesource.com/c/gerrit/+/293506
   enabled = UiFeature__comment_context
+
+\(config.extraConfig)
 """
 
 let _customThemePlugin = """

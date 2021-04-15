@@ -46,6 +46,9 @@ package components
 	headerName:            string
 	headerBackgroundColor: string & =~"^#(?:[0-9a-fA-F]{3}){1,2}$"
 	headerForegroundColor: string & =~"^#(?:[0-9a-fA-F]{3}){1,2}$"
+
+	// Extra configuration to add to the main Gerrit config file
+	extraConfig: string | *""
 }
 
 config: #Config
