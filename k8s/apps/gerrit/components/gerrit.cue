@@ -73,6 +73,16 @@ let _gerritConfig = """
   # https://gerrit-review.googlesource.com/c/gerrit/+/293506
   enabled = UiFeature__comment_context
 
+# Match Gerrit change IDs and link them to the same instance
+[commentlink "changeid"]
+  match = (I[0-9a-f]{8,40})
+  link = "#/q/$1"
+
+# Match fully-qualified issue links like github.com/monogon-dev/monogon#1
+[commentlink "github-projectlink"]
+  match = "([A-Za-z0-9_.-]+)/([A-Za-z0-9_.-]+)#([0-9]+)"
+  link = "https://github.com/$1/$2/issues/$3"
+
 \(config.extraConfig)
 """
 
