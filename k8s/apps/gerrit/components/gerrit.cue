@@ -29,6 +29,7 @@ let _gerritConfig = """
 [auth]
   type = OAUTH
   gitBasicAuthPolicy = HTTP
+  userNameToLowerCase = true
 
 [oauth]
   allowRegisterNewEmail = true
