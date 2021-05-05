@@ -99,7 +99,7 @@ k8s: {
 				containers: [
 					{
 						name:  "jenkins"
-						image: config.images.jenkins
+						image: config.images.controller
 						ports: [
 							{
 								protocol:      "TCP"

@@ -22,7 +22,7 @@ package components
 
 #Config: {
 	images: {
-		jenkins: "gcr.io/monogon-infra/jenkins:2.77.3-lts-centos7-4"
+		controller: "gcr.io/monogon-infra/jenkins:2.77.3-lts-centos7-4"
 	}
 
 	// Hostname for Jenkins to run on (without https://)
