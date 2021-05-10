@@ -142,6 +142,13 @@ k8s: {
 								name:  "JAVA_OPTS"
 								value: "-Djenkins.install.runSetupWizard=false"
 							},
+							{
+								// Force upgrade of plugins that ship with the
+								// Jenkins image, or that have been installed
+								// manually.
+								name:  "TRY_UPGRADE_IF_NO_MARKER"
+								value: "true"
+							},
 						]
 					},
 				]
