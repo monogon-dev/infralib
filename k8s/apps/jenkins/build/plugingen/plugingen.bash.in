@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Most of this comes from github.com/bazelbuild/bazel-gazelle/internal/gazelle.bash.in.
+# It's very hacky.
+
+# Copyright 2017 The Bazel Authors. All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+PLUGINGEN_SHORT_PATH=@@PLUGINGEN_SHORT_PATH@@
+
+# find_runfile prints the location of a runfile in the source workspace,
+# either by reading the symbolic link or reading the runfiles manifest.
+function find_runfile {
+  local runfile=$1
+  if [ -f "$runfile" ]; then
+    readlink "$runfile"
+    return
+  fi
+  runfile=$(echo "$runfile" | sed -e 's!^\(\.\./\|external/\)!!')
+  if grep -q "^$runfile" MANIFEST; then
+    grep "^$runfile" MANIFEST | head -n 1 | cut -d' ' -f2
+    return
+  fi
+  # printing nothing indicates failure
+}
+
+# bazel_build_get_path builds a given target and prints the absolute path
+# to the generated binary. This only works for rules that produce a single file.
+function bazel_build_get_path {
+  local build_log=$(mktemp plugingen_build.XXXX.json --tmpdir)
+  bazel build --build_event_json_file="$build_log" "$1"
+  grep "^{\"id\":{\"targetCompleted\":{\"label\":\"$1\"" "$build_log" | \
+    sed -e 's!^.*file://\([^"]*\).*$!\1!'
+  rm -f "$build_log"
+}
+
+plugingen_short_path=$(find_runfile "$PLUGINGEN_SHORT_PATH")
+if [ -z "$plugingen_short_path" ]; then
+  echo "error: could not locate plugingen binary" >&2
+  exit 1
+fi
+if [ -z "${BUILD_WORKSPACE_DIRECTORY-}" ]; then
+  echo "error: BUILD_WORKSPACE_DIRECOTRY not set" >&2
+  exit 1
+fi
+
+cd "$BUILD_WORKSPACE_DIRECTORY"
+"$plugingen_short_path" -plugingen_workspace_macros k8s/apps/jenkins/build/workspace.bzl -plugingen_build_macros k8s/apps/jenkins/build/build.bzl
+

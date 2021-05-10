@@ -8,3 +8,6 @@ load("@bazel_gazelle//:def.bzl", "gazelle")
 # gazelle:exclude build
 # gazelle:exclude k8s
 gazelle(name = "gazelle")
+
+load("//k8s/apps/jenkins/build/plugingen:workspace.bzl", "jenkins_plugingen")
+jenkins_plugingen(name = "jenkins_plugingen")

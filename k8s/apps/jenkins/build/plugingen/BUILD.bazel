@@ -1,0 +1,24 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+exports_files(
+    [
+        "plugingen.bash.in",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "plugingen_lib",
+    srcs = [
+        "api.go",
+        "main.go",
+    ],
+    importpath = "infralib.monogon.dev/k8s/apps/jenkins/build/plugingen",
+    visibility = ["//visibility:private"],
+)
+
+go_binary(
+    name = "plugingen",
+    embed = [":plugingen_lib"],
+    visibility = ["//visibility:public"],
+)
