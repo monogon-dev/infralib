@@ -30,12 +30,12 @@ func (r *resolvedPlugin) repositoryName() string {
 
 // fileName generates the file name at which the plugin will be downloaded.
 func (r *resolvedPlugin) fileName() string {
-	return fmt.Sprintf("%s.hpi", r.name)
+	return fmt.Sprintf("%s.jpi", r.name)
 }
 
 // url generates a download URL for the plugin.
 func (r *resolvedPlugin) url() string {
-	return fmt.Sprintf("https://updates.jenkins.io/download/plugins/%s/%s/%s", r.name, r.version, r.fileName())
+	return fmt.Sprintf("https://updates.jenkins.io/download/plugins/%s/%s/%s.hpi", r.name, r.version, r.name)
 }
 
 // dependencyTree is a map from a plugin name into a list of plugins names that
