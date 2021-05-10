@@ -215,7 +215,7 @@ http_file(
 )
 
 container_pull(
-    name = "jenkins_base",
+    name = "jenkins_controller_base",
     digest = "sha256:fc64595c5f210b5975eec7b3930dda22f064e3ad047853a099390e578e1b059e",
     registry = "index.docker.io",
     repository = "jenkins/jenkins",

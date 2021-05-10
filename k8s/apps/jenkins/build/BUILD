@@ -1,8 +1,8 @@
 load("@io_bazel_rules_docker//container:container.bzl", "container_image", "container_push")
 
 container_image(
-    name = "jenkins_image",
-    base = "@jenkins_base//image",
+    name = "controller_image",
+    base = "@jenkins_controller_base//image",
     directory = "/usr/share/jenkins/ref/plugins",
     files = [
         # Configuration-as-code plugin, allowing Jenkins to be configured from
@@ -28,10 +28,10 @@ container_image(
 )
 
 container_push(
-    name = "push",
+    name = "controller_push",
     format = "Docker",
-    image = "jenkins_image",
+    image = "controller_image",
     registry = "gcr.io",
-    repository = "monogon-infra/jenkins",
-    tag = "2.77.3-lts-centos7-4",
+    repository = "monogon-infra/jenkins-controller",
+    tag = "2.77.3-lts-centos7-8",
 )
