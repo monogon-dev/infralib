@@ -33,5 +33,5 @@ container_push(
     image = "controller_image",
     registry = "gcr.io",
     repository = "monogon-infra/jenkins-controller",
-    tag = "2.77.3-lts-centos7-8",
+    tag = "2.289-centos7-1",
 )

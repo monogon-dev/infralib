@@ -216,10 +216,10 @@ http_file(
 
 container_pull(
     name = "jenkins_controller_base",
-    digest = "sha256:fc64595c5f210b5975eec7b3930dda22f064e3ad047853a099390e578e1b059e",
+    digest = "sha256:a487a419ef87244de6ba6ae0af88ce4eefdcf369a752f7f1412a893650d7a2fc",
     registry = "index.docker.io",
     repository = "jenkins/jenkins",
-    tag = "2.77.3-lts-centos7",
+    tag = "2.289-centos7",
 )
 
 # Forked version of smtprelay, which adds support for plain auth tokens and environment variables for secrets.
