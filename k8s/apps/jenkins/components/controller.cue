@@ -72,6 +72,14 @@ k8s: {
 						domain:       strings.Join(config.googleAuth.restrictDomains, ",")
 					}
 				}
+				nodes: [
+					for agent in config.agents {
+						permanent: {
+							name:     agent.name
+							remoteFS: "/home/ci/work"
+						}
+					},
+				]
 			}
 			unclassified: {
 				location: {
@@ -80,6 +88,29 @@ k8s: {
 				}
 			}
 		})))'
+
+		// This script gets executed on the controller's startup and does the following:
+		// - sets the HMAC key for agent secrets as configured by config.agentSecret.
+		// - sets the agent listener hostname to the controller's kubernetes
+		//   DNS name. This allows us to run agents on the same service fabric
+		//   as the controller without having to expose the controller's agent
+		//   listener port to the Internet.
+		"jenkins-controller-init-scripts": data: "cue.groovy.override": '\(base64.Encode(null, '''
+			logger = java.util.logging.Logger.getLogger('dev.monogon.infra.k8s.apps.jenkins')
+			logger.info("Monogon: checking JNLP agent secret is as configured...")
+			byte[] keyWant = ("\( base64.Encode(null, config.agentSecret) )").decodeBase64()
+			hk = new jenkins.security.HMACConfidentialKey(jenkins.slaves.JnlpSlaveAgentProtocol.class, "secret");
+			cs = jenkins.security.ConfidentialStore.get()
+			byte[] keyGot = cs.load(hk)
+			if (keyGot != keyWant) {
+			    jenkins.security.ConfidentialStore.get().store(hk, keyWant)
+			    logger.info("Monogon: secret differs, replaced, restarting instance...")
+			    jenkins.model.Jenkins.instance.restart()
+			} else {
+			    logger.info("Monogon: secret correct, continuing startup...")
+			}
+			System.setProperty("hudson.TcpSlaveAgentListener.hostName", "\(config.internalHostname)")
+			'''))'
 	}
 
 	deployments: "jenkins-controller": spec: {
@@ -103,6 +134,11 @@ k8s: {
 								containerPort: 8080
 								name:          "web"
 							},
+							{
+								protocol:      "TCP"
+								containerPort: 50000
+								name:          "agent"
+							},
 						]
 						volumeMounts: [
 							{
@@ -113,11 +149,19 @@ k8s: {
 								mountPath: "/var/jenkins_config"
 								name:      "jenkins-controller-configuration"
 							},
+							{
+								mountPath: "/usr/share/jenkins/ref/init.groovy.d"
+								name:      "jenkins-controller-init-scripts"
+							},
 						]
 						env: [
 							{
 								name:  "MONOGON_CONFIG_SHASUM"
 								value: k8s.secrets."jenkins-controller-configuration"._dataSum.full
+							},
+							{
+								name:  "MONOGON_INIT_SCRIPTS_SHASUM"
+								value: k8s.secrets."jenkins-controller-init-scripts"._dataSum.full
 							},
 							{
 								name:  "CASC_JENKINS_CONFIG"
@@ -160,6 +204,10 @@ k8s: {
 						name: "jenkins-controller-configuration"
 						secret: secretName: "jenkins-controller-configuration"
 					},
+					{
+						name: "jenkins-controller-init-scripts"
+						secret: secretName: "jenkins-controller-init-scripts"
+					},
 				]
 			}
 		}
@@ -172,6 +220,12 @@ k8s: {
 				protocol:   "TCP"
 				port:       80
 				targetPort: "web"
+			},
+			{
+				name:       "agent"
+				protocol:   "TCP"
+				port:       50000
+				targetPort: "agent"
 			},
 		]
 		selector: deployments."jenkins-controller".spec.selector.matchLabels
