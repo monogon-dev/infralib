@@ -9,12 +9,16 @@ k8s: {for agentConfig in config.agents {
 		accessModes: ["ReadWriteOnce"]
 	}
 	configmaps: "jenkins-agent-\(agentConfig.name)-configuration": data: {
+		// Configure available resources and other CI 'niceties'.
+		// Set available RAM to be slightly less than the amount of RAM
+		// guaranteed by the container, so that the Jenkins agent, Bazel server
+		// and source code in tmpfs fit.
 		".bazelrc": """
-			build --local_ram_resources=15360
-			build --local_cpu_resources=16
-			build --jobs=16
+			build --local_ram_resources=\(agentConfig.memory*1024-1024)
+			build --local_cpu_resources=\(agentConfig.cpus)
+			build --jobs=\(agentConfig.cpus)
 			build --curses=no
-			test --jobs=16
+			test --jobs=\(agentConfig.cpus)
 			test --curses=no
 			"""
 	}
@@ -44,10 +48,10 @@ k8s: {for agentConfig in config.agents {
 						},
 					]
 					resources: {
-						requests: memory: "16G"
-						requests: cpu:    "16"
-						limits: memory:   "16G"
-						limits: cpu:      "16"
+						requests: memory: "\(agentConfig.memory)G"
+						requests: cpu:    "\(agentConfig.cpus)"
+						limits: memory:   "\(agentConfig.memory)G"
+						limits: cpu:      "\(agentConfig.cpus)"
 					}
 					volumeMounts: [
 						{
@@ -70,7 +74,9 @@ k8s: {for agentConfig in config.agents {
 				},
 			]
 			securityContext: {
-				runAsUser:  994
+				// uid of 'ci' user in image.
+				runAsUser: 994
+				// gid of 'ci' group in image.
 				runAsGroup: 992
 				fsGroup:    992
 			}

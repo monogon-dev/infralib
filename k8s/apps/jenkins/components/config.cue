@@ -42,6 +42,13 @@ import (
 	// JNLP URL to connect agent JAR to. Defaults to standard URL for the
 	// controller.
 	jnlpURL: string | *"https://\(config.publicHostname)/computer/\(name)/jenkins-agent.jnlp"
+
+	// Number of CPU cores available to the agent.
+	cpus: int & >0 | *16
+	// Gigabytes of memory available to the agent.
+	// The agent always allocates one gigabyte of RAM for housekeeping, so this
+	// has to be at least two gigabytes.
+	memory: int & >1 | *16
 }
 
 #Config: {
