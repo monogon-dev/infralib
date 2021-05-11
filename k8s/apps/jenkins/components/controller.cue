@@ -5,6 +5,7 @@ package components
 
 import (
 	"encoding/yaml"
+	"encoding/base64"
 	"strings"
 )
 
@@ -18,10 +19,8 @@ k8s: {
 		"jenkins-controller-home": {}
 	}
 
-	// TODO(q3k): migrate this to a secret, as this holds OAuth client
-	// configuration.
-	configmaps: {
-		"jenkins-controller-configuration": data: "cue.yaml": yaml.Marshal({
+	secrets: {
+		"jenkins-controller-configuration": data: "cue.yaml": '\(base64.Encode(null, yaml.Marshal({
 			jenkins: {
 				numExecutors:          0
 				scmCheckoutRetryCount: 2
@@ -82,7 +81,7 @@ k8s: {
 					url:          "https://\(config.publicHostname)/"
 				}
 			}
-		})
+		})))'
 	}
 
 	deployments: "jenkins-controller": spec: {
@@ -120,7 +119,7 @@ k8s: {
 						env: [
 							{
 								name:  "MONOGON_CONFIG_SHASUM"
-								value: k8s.configmaps."jenkins-controller-configuration"._dataSum.full
+								value: k8s.secrets."jenkins-controller-configuration"._dataSum.full
 							},
 							{
 								name:  "CASC_JENKINS_CONFIG"
@@ -161,7 +160,7 @@ k8s: {
 					},
 					{
 						name: "jenkins-controller-configuration"
-						configMap: name: "jenkins-controller-configuration"
+						secret: secretName: "jenkins-controller-configuration"
 					},
 				]
 			}
