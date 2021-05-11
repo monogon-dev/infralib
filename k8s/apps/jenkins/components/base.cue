@@ -23,6 +23,13 @@ k8s: deployments: [Name=string]: spec: {
 		name: Name
 	}
 }
+k8s: statefulsets: [Name=string]: spec: {
+	selector: matchLabels: app: Name
+	template: metadata: {
+		labels: app: Name
+		name: Name
+	}
+}
 
 // Generate hidden sha256sum field of every configmap/secret - this can be used
 // to make deployments automatically restart on configmap/secret change by
@@ -59,3 +66,6 @@ k8s: ingressroutes: [_]: spec: {
 		]
 	}
 }
+
+// Assume that StatefulSets are always named same as the service.
+k8s: statefulsets: [Name=string]: spec: serviceName: Name
