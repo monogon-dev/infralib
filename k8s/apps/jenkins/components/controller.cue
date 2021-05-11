@@ -11,12 +11,10 @@ import (
 
 k8s: {
 	pvcs: {
-		{[string]: spec: {
+		"jenkins-controller-home": spec: {
 			resources: requests: storage: "50Gi"
 			accessModes: ["ReadWriteOnce"]
-		}}
-
-		"jenkins-controller-home": {}
+		}
 	}
 
 	secrets: {
