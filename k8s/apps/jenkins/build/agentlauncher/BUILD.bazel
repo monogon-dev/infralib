@@ -1,0 +1,14 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "agentlauncher_lib",
+    srcs = ["main.go"],
+    importpath = "infralib.monogon.dev/k8s/apps/jenkins/build/agentlauncher",
+    visibility = ["//visibility:private"],
+)
+
+go_binary(
+    name = "agentlauncher",
+    embed = [":agentlauncher_lib"],
+    visibility = ["//visibility:public"],
+)

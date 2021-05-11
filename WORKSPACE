@@ -172,6 +172,14 @@ container_pull(
     tag = "2.289-centos7",
 )
 
+container_pull(
+    name = "monogon_builder",
+    digest = "sha256:2f2e6e0f078e88ecd2872b4a7671203fd062cfae79138aa5b36e7ebf689c3692",
+    registry = "gcr.io",
+    repository = "monogon-infra/monogon-builder",
+    tag = "1620723905",
+)
+
 # Forked version of smtprelay, which adds support for plain auth tokens and environment variables for secrets.
 go_repository(
     name = "com_github_leoluk_smtprelay",
