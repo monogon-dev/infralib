@@ -14,6 +14,7 @@ container_image(
     base = "@jenkins_controller_base//image",
     directory = "/usr/share/jenkins/ref/plugins",
     files = jenkins_plugin_files_all(),
+    mode = "0o644",
 )
 
 container_push(
@@ -22,7 +23,7 @@ container_push(
     image = "controller_image",
     registry = "gcr.io",
     repository = "monogon-infra/jenkins-controller",
-    tag = "2.289-centos7-2",
+    tag = "2.289-centos7-3",
 )
 
 # The Jenkins agent image is based on the Monogon monorepo's build container.
