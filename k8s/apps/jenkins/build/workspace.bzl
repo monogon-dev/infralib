@@ -25,6 +25,13 @@ def jenkins_plugin_repositories():
         sha256 = "abf3344d603cec6b9a8608ab04b89b7a9fcfa01acc8b0fa049a4bf275e66cc6c",
         urls = ["https://updates.jenkins.io/download/plugins/authentication-tokens/1.4/authentication-tokens.hpi"],
     )
+    # Jenkins plugin authorize-project, required by: toplevel
+    http_file(
+        name = "jenkins_authorize_project_plugin_release",
+        downloaded_file_path = "authorize-project.jpi",
+        sha256 = "acc1a8425b2ad7ebcd156ff2446535d428f863cdfa4b3190b3b6b63b3cf1f51c",
+        urls = ["https://updates.jenkins.io/download/plugins/authorize-project/1.4.0/authorize-project.hpi"],
+    )
     # Jenkins plugin bootstrap4-api, required by: junit -> matrix-project -> gerrit-code-review -> toplevel
     http_file(
         name = "jenkins_bootstrap4_api_plugin_release",

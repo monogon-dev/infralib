@@ -67,10 +67,39 @@ var (
 	flagPlugins         string
 	flagWorkspaceMacros string
 	flagBuildMacros     string
+
+	// defaultPlugins is a top-level list of plugins requested to be present
+	// within the Jenkins controller image. All specified plugins will install
+	// at their newest available version.
+	//
+	// If you want to install more plugins into Monogon's Jenkins instances,
+	// you've come to the right place - modify this list and:
+	//
+	//   $ bazel run//:jenkins_plugingen
+	//
+	// If you're using this tool outside of Monogon, you can also override the
+	// -pluginden_plugins when running plugingen, any value set there takes
+	// precedence over this list.
+	defaultPlugins = []string{
+		// Provides the ability to configure Jenkins via YAML files on startup.
+		"configuration-as-code",
+		// Provides Google Workspace (ex. GSuite) login.
+		"google-login",
+		// Provides fine-graind RBAC for internal permissions.
+		"role-strategy",
+		// Provides integration with Gerrit.
+		"gerrit-code-review",
+		// Provides a level of security against rogue builds (eg. modified
+		// Jenkinsfile, or rogue semi-privileged user that can modify jobs but
+		// does not have full controller access) by allowing them limited
+		// privileges when interacting with the controller, preventing
+		// privilege escalation.
+		"authorize-project",
+	}
 )
 
 func main() {
-	flag.StringVar(&flagPlugins, "plugingen_plugins", "configuration-as-code,google-login,role-strategy,gerrit-code-review", "Comma-separated list of Jenkins plugins")
+	flag.StringVar(&flagPlugins, "plugingen_plugins", strings.Join(defaultPlugins, ","), "Comma-separated list of Jenkins plugins")
 	flag.StringVar(&flagWorkspaceMacros, "plugingen_workspace_macros", "", "Path to generated file that will contain workspace starlark macros")
 	flag.StringVar(&flagBuildMacros, "plugingen_build_macros", "", "Path to generated file that will contain build starlark macros")
 	flag.Parse()

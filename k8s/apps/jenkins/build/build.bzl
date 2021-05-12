@@ -7,6 +7,7 @@ def jenkins_plugin_files_all():
         "@jenkins_ace_editor_plugin_release//file:ace-editor.jpi",
         "@jenkins_apache_httpcomponents_client_4_api_plugin_release//file:apache-httpcomponents-client-4-api.jpi",
         "@jenkins_authentication_tokens_plugin_release//file:authentication-tokens.jpi",
+        "@jenkins_authorize_project_plugin_release//file:authorize-project.jpi",
         "@jenkins_bootstrap4_api_plugin_release//file:bootstrap4-api.jpi",
         "@jenkins_branch_api_plugin_release//file:branch-api.jpi",
         "@jenkins_caffeine_api_plugin_release//file:caffeine-api.jpi",
