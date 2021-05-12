@@ -81,6 +81,11 @@ k8s: {
 					},
 				]
 			}
+			security: {
+				queueItemAuthenticator: authenticators: [
+					{global: strategy: "anonymousAuthorizationStrategy"},
+				]
+			}
 			unclassified: {
 				location: {
 					adminAddress: config.adminAddress
