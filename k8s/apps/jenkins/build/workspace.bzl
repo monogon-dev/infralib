@@ -71,8 +71,8 @@ def jenkins_plugin_repositories():
     http_file(
         name = "jenkins_credentials_plugin_release",
         downloaded_file_path = "credentials.jpi",
-        sha256 = "a523acf4023083d287385fb01c7e33da4f046c8862a475c632601c2acee6875a",
-        urls = ["https://updates.jenkins.io/download/plugins/credentials/2.3.18/credentials.hpi"],
+        sha256 = "fb56dcfdee65fdf4e16098d0e8ff46d634c99ea34730251e177ab28ad60c23bf",
+        urls = ["https://updates.jenkins.io/download/plugins/credentials/2.4.1/credentials.hpi"],
     )
     # Jenkins plugin display-url-api, required by: mailer -> google-login -> toplevel
     http_file(
@@ -225,8 +225,8 @@ def jenkins_plugin_repositories():
     http_file(
         name = "jenkins_structs_plugin_release",
         downloaded_file_path = "structs.jpi",
-        sha256 = "d65848910acb93c2bc54daafd0e5bd28d5c07f5513d3a1ece4aa24fbe73bd1bb",
-        urls = ["https://updates.jenkins.io/download/plugins/structs/1.22/structs.hpi"],
+        sha256 = "0d53d44b4ce7f887436921a81321f1738de7391a35912c1096fe412df4d6338a",
+        urls = ["https://updates.jenkins.io/download/plugins/structs/1.23/structs.hpi"],
     )
     # Jenkins plugin trilead-api, required by: git-client -> gerrit-code-review -> toplevel
     http_file(
@@ -246,8 +246,8 @@ def jenkins_plugin_repositories():
     http_file(
         name = "jenkins_workflow_cps_plugin_release",
         downloaded_file_path = "workflow-cps.jpi",
-        sha256 = "59e1e540474281a1120bca92adeb5f42774735f75c32193ac25ccfa6e7f379ec",
-        urls = ["https://updates.jenkins.io/download/plugins/workflow-cps/2.90/workflow-cps.hpi"],
+        sha256 = "a2f27d60882c2c378aab6ce448019565ea128b7ef2ebbac9b70296598d6de12b",
+        urls = ["https://updates.jenkins.io/download/plugins/workflow-cps/2.91/workflow-cps.hpi"],
     )
     # Jenkins plugin workflow-job, required by: gerrit-code-review -> toplevel
     http_file(
