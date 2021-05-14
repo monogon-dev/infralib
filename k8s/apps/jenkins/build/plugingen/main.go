@@ -95,6 +95,9 @@ var (
 		// privileges when interacting with the controller, preventing
 		// privilege escalation.
 		"authorize-project",
+		// Provides 'Jenkins Pipeline' functionality, ie. build configuration
+		// through Jenkins files in repositories.
+		"workflow-aggregator",
 	}
 )
 

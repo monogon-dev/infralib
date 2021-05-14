@@ -60,7 +60,7 @@ def jenkins_plugin_repositories():
         sha256 = "750ac787cff781117491fb9dca6f3ba1695d840f56c234bf90263b8ff8c1a61f",
         urls = ["https://updates.jenkins.io/download/plugins/checks-api/1.7.0/checks-api.hpi"],
     )
-    # Jenkins plugin cloudbees-folder, required by: workflow-multibranch -> gerrit-code-review -> toplevel
+    # Jenkins plugin cloudbees-folder, required by: workflow-aggregator -> toplevel
     http_file(
         name = "jenkins_cloudbees_folder_plugin_release",
         downloaded_file_path = "cloudbees-folder.jpi",
@@ -81,12 +81,26 @@ def jenkins_plugin_repositories():
         sha256 = "fb56dcfdee65fdf4e16098d0e8ff46d634c99ea34730251e177ab28ad60c23bf",
         urls = ["https://updates.jenkins.io/download/plugins/credentials/2.4.1/credentials.hpi"],
     )
+    # Jenkins plugin credentials-binding, required by: pipeline-model-definition -> workflow-aggregator -> toplevel
+    http_file(
+        name = "jenkins_credentials_binding_plugin_release",
+        downloaded_file_path = "credentials-binding.jpi",
+        sha256 = "96717293200861e0e41b9f2b4edbd24c308a95a957476f6ff3239cb7ca9ec80e",
+        urls = ["https://updates.jenkins.io/download/plugins/credentials-binding/1.24/credentials-binding.hpi"],
+    )
     # Jenkins plugin display-url-api, required by: mailer -> google-login -> toplevel
     http_file(
         name = "jenkins_display_url_api_plugin_release",
         downloaded_file_path = "display-url-api.jpi",
         sha256 = "d49a09c346455418f45eb34d883e3c82ca00d7fa58cdce1a452224e032401e41",
         urls = ["https://updates.jenkins.io/download/plugins/display-url-api/2.3.4/display-url-api.hpi"],
+    )
+    # Jenkins plugin durable-task, required by: workflow-durable-task-step -> workflow-aggregator -> toplevel
+    http_file(
+        name = "jenkins_durable_task_plugin_release",
+        downloaded_file_path = "durable-task.jpi",
+        sha256 = "c1f1ecbc984feb96413be11f82675ce04989864e2c346c21165a4510fd52aaf0",
+        urls = ["https://updates.jenkins.io/download/plugins/durable-task/1.36/durable-task.hpi"],
     )
     # Jenkins plugin echarts-api, required by: junit -> matrix-project -> gerrit-code-review -> toplevel
     http_file(
@@ -123,6 +137,13 @@ def jenkins_plugin_repositories():
         sha256 = "e9f1489ebf338512d74886a8d3b28d5ce911c6d295120e1178a4b1556a00c278",
         urls = ["https://updates.jenkins.io/download/plugins/git-client/3.7.1/git-client.hpi"],
     )
+    # Jenkins plugin git-server, required by: workflow-cps-global-lib -> workflow-aggregator -> toplevel
+    http_file(
+        name = "jenkins_git_server_plugin_release",
+        downloaded_file_path = "git-server.jpi",
+        sha256 = "aea06b730b6a55ed4f29ab5f912152ec070314b5cd70ac78eb6ad0dc05833de9",
+        urls = ["https://updates.jenkins.io/download/plugins/git-server/1.9/git-server.hpi"],
+    )
     # Jenkins plugin google-login, required by: toplevel
     http_file(
         name = "jenkins_google_login_plugin_release",
@@ -130,7 +151,14 @@ def jenkins_plugin_repositories():
         sha256 = "1203f79a6bcf4ed0e9df95472d3225eb3267863ce8987f51643c0148df2a4f6e",
         urls = ["https://updates.jenkins.io/download/plugins/google-login/1.6/google-login.hpi"],
     )
-    # Jenkins plugin jackson2-api, required by: junit -> matrix-project -> gerrit-code-review -> toplevel
+    # Jenkins plugin handlebars, required by: pipeline-stage-view -> workflow-aggregator -> toplevel
+    http_file(
+        name = "jenkins_handlebars_plugin_release",
+        downloaded_file_path = "handlebars.jpi",
+        sha256 = "f7e21a44c88bcd2db3e40552e5972bb2b0cb85e5bf9bc571b29a4e0b65a4986d",
+        urls = ["https://updates.jenkins.io/download/plugins/handlebars/3.0.8/handlebars.hpi"],
+    )
+    # Jenkins plugin jackson2-api, required by: workflow-aggregator -> toplevel
     http_file(
         name = "jenkins_jackson2_api_plugin_release",
         downloaded_file_path = "jackson2-api.jpi",
@@ -158,6 +186,13 @@ def jenkins_plugin_repositories():
         sha256 = "1f2055755e61c1299fe622745b3db30ada7f639eedb413b3ccc2d381a8e6f49d",
         urls = ["https://updates.jenkins.io/download/plugins/junit/1.49/junit.hpi"],
     )
+    # Jenkins plugin lockable-resources, required by: workflow-aggregator -> toplevel
+    http_file(
+        name = "jenkins_lockable_resources_plugin_release",
+        downloaded_file_path = "lockable-resources.jpi",
+        sha256 = "d8d84120f2ad35906a608ff9a4d08c81de6cd9c43223850c46a2cac65cdb0600",
+        urls = ["https://updates.jenkins.io/download/plugins/lockable-resources/2.10/lockable-resources.hpi"],
+    )
     # Jenkins plugin mailer, required by: google-login -> toplevel
     http_file(
         name = "jenkins_mailer_plugin_release",
@@ -169,8 +204,8 @@ def jenkins_plugin_repositories():
     http_file(
         name = "jenkins_matrix_auth_plugin_release",
         downloaded_file_path = "matrix-auth.jpi",
-        sha256 = "0e2a9c6258fff7e4965cb5b30e8d1ae66f41916192f4adb4f79aa0b12ad07be5",
-        urls = ["https://updates.jenkins.io/download/plugins/matrix-auth/2.6.6/matrix-auth.hpi"],
+        sha256 = "11df9cf292b6a5b72ce4eae66daac64caffc2e057fa4f91d5d244a460f9aa045",
+        urls = ["https://updates.jenkins.io/download/plugins/matrix-auth/2.6.7/matrix-auth.hpi"],
     )
     # Jenkins plugin matrix-project, required by: gerrit-code-review -> toplevel
     http_file(
@@ -178,6 +213,97 @@ def jenkins_plugin_repositories():
         downloaded_file_path = "matrix-project.jpi",
         sha256 = "a69da6850734c71092144aa28eaf6cb7e70afe7e6e0058a5f2ce9056775846dd",
         urls = ["https://updates.jenkins.io/download/plugins/matrix-project/1.18/matrix-project.hpi"],
+    )
+    # Jenkins plugin momentjs, required by: pipeline-stage-view -> workflow-aggregator -> toplevel
+    http_file(
+        name = "jenkins_momentjs_plugin_release",
+        downloaded_file_path = "momentjs.jpi",
+        sha256 = "ca3c2d264cff55f71e900dc7de1f13c0bfbffdb9b3419b854dce175bcb8a4848",
+        urls = ["https://updates.jenkins.io/download/plugins/momentjs/1.1.1/momentjs.hpi"],
+    )
+    # Jenkins plugin pipeline-build-step, required by: workflow-aggregator -> toplevel
+    http_file(
+        name = "jenkins_pipeline_build_step_plugin_release",
+        downloaded_file_path = "pipeline-build-step.jpi",
+        sha256 = "c773d35aeab00f07805e3a18855f1ab1cd5521fdfa8474a0ae22ad5930d8d130",
+        urls = ["https://updates.jenkins.io/download/plugins/pipeline-build-step/2.13/pipeline-build-step.hpi"],
+    )
+    # Jenkins plugin pipeline-graph-analysis, required by: pipeline-rest-api -> pipeline-stage-view -> workflow-aggregator -> toplevel
+    http_file(
+        name = "jenkins_pipeline_graph_analysis_plugin_release",
+        downloaded_file_path = "pipeline-graph-analysis.jpi",
+        sha256 = "f02897344ae9f33a0e338b881df82ac64c318502ef17a38760746a6909932cae",
+        urls = ["https://updates.jenkins.io/download/plugins/pipeline-graph-analysis/1.10/pipeline-graph-analysis.hpi"],
+    )
+    # Jenkins plugin pipeline-input-step, required by: workflow-aggregator -> toplevel
+    http_file(
+        name = "jenkins_pipeline_input_step_plugin_release",
+        downloaded_file_path = "pipeline-input-step.jpi",
+        sha256 = "eb82c943c09dbe4dcd57ea8ac43d33a68e544ca64620e5bcb433fdaf470a3bac",
+        urls = ["https://updates.jenkins.io/download/plugins/pipeline-input-step/2.12/pipeline-input-step.hpi"],
+    )
+    # Jenkins plugin pipeline-milestone-step, required by: workflow-aggregator -> toplevel
+    http_file(
+        name = "jenkins_pipeline_milestone_step_plugin_release",
+        downloaded_file_path = "pipeline-milestone-step.jpi",
+        sha256 = "ac11055024e0173088875d7b2ec3f2f005076f8827492d56fbd7076aae19f590",
+        urls = ["https://updates.jenkins.io/download/plugins/pipeline-milestone-step/1.3.2/pipeline-milestone-step.hpi"],
+    )
+    # Jenkins plugin pipeline-model-api, required by: pipeline-model-definition -> workflow-aggregator -> toplevel
+    http_file(
+        name = "jenkins_pipeline_model_api_plugin_release",
+        downloaded_file_path = "pipeline-model-api.jpi",
+        sha256 = "6dad92104cd97ac00b1f47780c73aef5a8ddedb61460f6a76a5bd0865de356f1",
+        urls = ["https://updates.jenkins.io/download/plugins/pipeline-model-api/1.8.4/pipeline-model-api.hpi"],
+    )
+    # Jenkins plugin pipeline-model-definition, required by: workflow-aggregator -> toplevel
+    http_file(
+        name = "jenkins_pipeline_model_definition_plugin_release",
+        downloaded_file_path = "pipeline-model-definition.jpi",
+        sha256 = "18713c1861015a37e218cb4c1bc1d9479eadea2951555ab85224f0492032cf8d",
+        urls = ["https://updates.jenkins.io/download/plugins/pipeline-model-definition/1.8.4/pipeline-model-definition.hpi"],
+    )
+    # Jenkins plugin pipeline-model-extensions, required by: pipeline-model-definition -> workflow-aggregator -> toplevel
+    http_file(
+        name = "jenkins_pipeline_model_extensions_plugin_release",
+        downloaded_file_path = "pipeline-model-extensions.jpi",
+        sha256 = "4fcdfb3a5baf3586892ae66915894eaa3782932a2c6e84b8d90742276f52af52",
+        urls = ["https://updates.jenkins.io/download/plugins/pipeline-model-extensions/1.8.4/pipeline-model-extensions.hpi"],
+    )
+    # Jenkins plugin pipeline-rest-api, required by: pipeline-stage-view -> workflow-aggregator -> toplevel
+    http_file(
+        name = "jenkins_pipeline_rest_api_plugin_release",
+        downloaded_file_path = "pipeline-rest-api.jpi",
+        sha256 = "9388d4b3001828a7bcd0c00fdb24bde3183ac3d973a27cf65be50f9d1b1c3e89",
+        urls = ["https://updates.jenkins.io/download/plugins/pipeline-rest-api/2.19/pipeline-rest-api.hpi"],
+    )
+    # Jenkins plugin pipeline-stage-step, required by: workflow-aggregator -> toplevel
+    http_file(
+        name = "jenkins_pipeline_stage_step_plugin_release",
+        downloaded_file_path = "pipeline-stage-step.jpi",
+        sha256 = "a98f62174dbd6aa0ba978efb839f2f814f0acf4c4d264e7740aa3747bf6c6523",
+        urls = ["https://updates.jenkins.io/download/plugins/pipeline-stage-step/2.5/pipeline-stage-step.hpi"],
+    )
+    # Jenkins plugin pipeline-stage-tags-metadata, required by: pipeline-model-definition -> workflow-aggregator -> toplevel
+    http_file(
+        name = "jenkins_pipeline_stage_tags_metadata_plugin_release",
+        downloaded_file_path = "pipeline-stage-tags-metadata.jpi",
+        sha256 = "c0475dae538431dcb745bb9fb579b7bad424bc9a5c061639212e3ecc521af935",
+        urls = ["https://updates.jenkins.io/download/plugins/pipeline-stage-tags-metadata/1.8.4/pipeline-stage-tags-metadata.hpi"],
+    )
+    # Jenkins plugin pipeline-stage-view, required by: workflow-aggregator -> toplevel
+    http_file(
+        name = "jenkins_pipeline_stage_view_plugin_release",
+        downloaded_file_path = "pipeline-stage-view.jpi",
+        sha256 = "5dee54199a33e8f959e4e35b8c265713b11768086d20a8c1dd596ddfe45297ce",
+        urls = ["https://updates.jenkins.io/download/plugins/pipeline-stage-view/2.19/pipeline-stage-view.hpi"],
+    )
+    # Jenkins plugin plain-credentials, required by: credentials-binding -> pipeline-model-definition -> workflow-aggregator -> toplevel
+    http_file(
+        name = "jenkins_plain_credentials_plugin_release",
+        downloaded_file_path = "plain-credentials.jpi",
+        sha256 = "5a82ca66b397daccf663695b531fdf7ea993d5c1cb03f1b4692dbe804d163ba8",
+        urls = ["https://updates.jenkins.io/download/plugins/plain-credentials/1.7/plain-credentials.hpi"],
     )
     # Jenkins plugin plugin-util-api, required by: junit -> matrix-project -> gerrit-code-review -> toplevel
     http_file(
@@ -242,19 +368,47 @@ def jenkins_plugin_repositories():
         sha256 = "62b46838e493cfc6950382b4e4975d865cd3bfbfc58ada704b9dd96ff101e457",
         urls = ["https://updates.jenkins.io/download/plugins/trilead-api/1.0.13/trilead-api.hpi"],
     )
-    # Jenkins plugin workflow-api, required by: workflow-cps -> gerrit-code-review -> toplevel
+    # Jenkins plugin workflow-aggregator, required by: toplevel
+    http_file(
+        name = "jenkins_workflow_aggregator_plugin_release",
+        downloaded_file_path = "workflow-aggregator.jpi",
+        sha256 = "bdcc467277e6e589853ef2d1dab9ca8cf6872017a306b6bf6223b9a90be24bf6",
+        urls = ["https://updates.jenkins.io/download/plugins/workflow-aggregator/2.6/workflow-aggregator.hpi"],
+    )
+    # Jenkins plugin workflow-api, required by: workflow-aggregator -> toplevel
     http_file(
         name = "jenkins_workflow_api_plugin_release",
         downloaded_file_path = "workflow-api.jpi",
         sha256 = "31dbd413de8ba2ae585f37fd6a31a5a3e5067dd41b1ef8f74eab9e8a297f2c1c",
         urls = ["https://updates.jenkins.io/download/plugins/workflow-api/2.42/workflow-api.hpi"],
     )
+    # Jenkins plugin workflow-basic-steps, required by: workflow-aggregator -> toplevel
+    http_file(
+        name = "jenkins_workflow_basic_steps_plugin_release",
+        downloaded_file_path = "workflow-basic-steps.jpi",
+        sha256 = "1b11a2de09de70a4f61bd015223f490189d1fc7e24eb82da42e187a083bc1c4a",
+        urls = ["https://updates.jenkins.io/download/plugins/workflow-basic-steps/2.23/workflow-basic-steps.hpi"],
+    )
     # Jenkins plugin workflow-cps, required by: gerrit-code-review -> toplevel
     http_file(
         name = "jenkins_workflow_cps_plugin_release",
         downloaded_file_path = "workflow-cps.jpi",
-        sha256 = "a2f27d60882c2c378aab6ce448019565ea128b7ef2ebbac9b70296598d6de12b",
-        urls = ["https://updates.jenkins.io/download/plugins/workflow-cps/2.91/workflow-cps.hpi"],
+        sha256 = "2d93521fc0fff26b22c5e424b2f817e81944ccc5c5a35566e0abfe96fe9e6391",
+        urls = ["https://updates.jenkins.io/download/plugins/workflow-cps/2.92/workflow-cps.hpi"],
+    )
+    # Jenkins plugin workflow-cps-global-lib, required by: workflow-aggregator -> toplevel
+    http_file(
+        name = "jenkins_workflow_cps_global_lib_plugin_release",
+        downloaded_file_path = "workflow-cps-global-lib.jpi",
+        sha256 = "febe5b4f114f771b535f0de326f39a46f0d8d6bd81ce072e448a8ce6b2eca499",
+        urls = ["https://updates.jenkins.io/download/plugins/workflow-cps-global-lib/2.19/workflow-cps-global-lib.hpi"],
+    )
+    # Jenkins plugin workflow-durable-task-step, required by: workflow-aggregator -> toplevel
+    http_file(
+        name = "jenkins_workflow_durable_task_step_plugin_release",
+        downloaded_file_path = "workflow-durable-task-step.jpi",
+        sha256 = "c2cfa846ae0e4e0f50db77f18d7d84bf32b77576a5b2d05a151040a8565d8b55",
+        urls = ["https://updates.jenkins.io/download/plugins/workflow-durable-task-step/2.39/workflow-durable-task-step.hpi"],
     )
     # Jenkins plugin workflow-job, required by: gerrit-code-review -> toplevel
     http_file(
@@ -267,8 +421,8 @@ def jenkins_plugin_repositories():
     http_file(
         name = "jenkins_workflow_multibranch_plugin_release",
         downloaded_file_path = "workflow-multibranch.jpi",
-        sha256 = "129ed8328e9d9363c661ca530a04e2429d29674440eaf41c215e6e471405bcf3",
-        urls = ["https://updates.jenkins.io/download/plugins/workflow-multibranch/2.23/workflow-multibranch.hpi"],
+        sha256 = "374ff453a7c249061d72a98be13e02c2df22716f6ed946b1e3ab30ad9bba1616",
+        urls = ["https://updates.jenkins.io/download/plugins/workflow-multibranch/2.24/workflow-multibranch.hpi"],
     )
     # Jenkins plugin workflow-scm-step, required by: gerrit-code-review -> toplevel
     http_file(
@@ -284,7 +438,7 @@ def jenkins_plugin_repositories():
         sha256 = "e0e39cbe0c3ebfb2d3f80edfef470d3c7d033c7deafac8c6e553e7d391ea1287",
         urls = ["https://updates.jenkins.io/download/plugins/workflow-step-api/2.23/workflow-step-api.hpi"],
     )
-    # Jenkins plugin workflow-support, required by: workflow-cps -> gerrit-code-review -> toplevel
+    # Jenkins plugin workflow-support, required by: workflow-aggregator -> toplevel
     http_file(
         name = "jenkins_workflow_support_plugin_release",
         downloaded_file_path = "workflow-support.jpi",

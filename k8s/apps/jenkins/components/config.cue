@@ -53,7 +53,7 @@ import (
 
 #Config: {
 	images: {
-		controller: "gcr.io/monogon-infra/jenkins-controller:2.289-centos7-4"
+		controller: "gcr.io/monogon-infra/jenkins-controller:2.289-centos7-5"
 		agent:      "gcr.io/monogon-infra/jenkins-agent:monogon-builder-19c98c7be48005d26d813c66ff9d491a5b39375b"
 	}
 
