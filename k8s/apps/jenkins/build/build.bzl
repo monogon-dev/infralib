@@ -27,6 +27,7 @@ def jenkins_plugin_files_all():
         "@jenkins_google_login_plugin_release//file:google-login.jpi",
         "@jenkins_handlebars_plugin_release//file:handlebars.jpi",
         "@jenkins_jackson2_api_plugin_release//file:jackson2-api.jpi",
+        "@jenkins_job_dsl_plugin_release//file:job-dsl.jpi",
         "@jenkins_jquery3_api_plugin_release//file:jquery3-api.jpi",
         "@jenkins_jsch_plugin_release//file:jsch.jpi",
         "@jenkins_junit_plugin_release//file:junit.jpi",

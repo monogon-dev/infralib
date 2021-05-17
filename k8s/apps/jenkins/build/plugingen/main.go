@@ -85,7 +85,7 @@ var (
 		"configuration-as-code",
 		// Provides Google Workspace (ex. GSuite) login.
 		"google-login",
-		// Provides fine-graind RBAC for internal permissions.
+		// Provides fine-grained RBAC for internal permissions.
 		"role-strategy",
 		// Provides integration with Gerrit.
 		"gerrit-code-review",
@@ -98,6 +98,10 @@ var (
 		// Provides 'Jenkins Pipeline' functionality, ie. build configuration
 		// through Jenkins files in repositories.
 		"workflow-aggregator",
+		// Provides the ability to configure Jenkins jobs from init scripts.
+		// Even if you use Jenkinsfiles, you still need to first configure a
+		// job that will actually use these Jenkinsfiles.
+		"job-dsl",
 	}
 )
 

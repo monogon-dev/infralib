@@ -165,6 +165,13 @@ def jenkins_plugin_repositories():
         sha256 = "ac310cd381d311594d6853f4b3241822b7068109b8727291138c9bc3cbcdeac1",
         urls = ["https://updates.jenkins.io/download/plugins/jackson2-api/2.12.3/jackson2-api.hpi"],
     )
+    # Jenkins plugin job-dsl, required by: toplevel
+    http_file(
+        name = "jenkins_job_dsl_plugin_release",
+        downloaded_file_path = "job-dsl.jpi",
+        sha256 = "7071a35d75d0593e3cbed695ba0cee41133f31753b87aeeea4c6e0624527b222",
+        urls = ["https://updates.jenkins.io/download/plugins/job-dsl/1.77/job-dsl.hpi"],
+    )
     # Jenkins plugin jquery3-api, required by: bootstrap4-api -> junit -> matrix-project -> gerrit-code-review -> toplevel
     http_file(
         name = "jenkins_jquery3_api_plugin_release",
@@ -333,7 +340,7 @@ def jenkins_plugin_repositories():
         sha256 = "935cbae4b46678d5adf9faac9a68029f52a04e0d0c89c9038a7ab95ca6b676dc",
         urls = ["https://updates.jenkins.io/download/plugins/scm-api/2.6.4/scm-api.hpi"],
     )
-    # Jenkins plugin script-security, required by: workflow-cps -> gerrit-code-review -> toplevel
+    # Jenkins plugin script-security, required by: job-dsl -> toplevel
     http_file(
         name = "jenkins_script_security_plugin_release",
         downloaded_file_path = "script-security.jpi",
