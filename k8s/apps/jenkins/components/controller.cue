@@ -103,6 +103,9 @@ k8s: {
 					}},
 				]
 			}]
+			jobs: [ for job in config.jobs {
+				script: job.script
+			}]
 		})))'
 
 		// This script gets executed on the controller's startup and does the following:
