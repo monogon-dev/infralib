@@ -92,6 +92,17 @@ k8s: {
 					url:          "https://\(config.publicHostname)/"
 				}
 			}
+			credentials: system: domainCredentials: [ for credential in config.credentials {
+				credentials: [
+					{usernamePassword: {
+						description: "\(credential.name)"
+						id:          "\(credential.name)"
+						scope:       "GLOBAL"
+						username:    "\(credential.username)"
+						password:    "\(credential.password)"
+					}},
+				]
+			}]
 		})))'
 
 		// This script gets executed on the controller's startup and does the following:

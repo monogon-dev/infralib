@@ -51,6 +51,14 @@ import (
 	memory: int & >1 | *16
 }
 
+// A Jenkins credential, currently always a username:password pair. This
+// credential will be saved into the Jenkins Controller CasC YAML.
+#Credential: {
+	name:     =~"^[a-z0-9\\-]{3,16}$"
+	username: string
+	password: string
+}
+
 #Config: {
 	images: {
 		controller: "gcr.io/monogon-infra/jenkins-controller:2.289-centos7-5"
@@ -105,6 +113,9 @@ import (
 
 	// List of agents to run within the same namespace as the controller.
 	agents: [...#Agent]
+
+	// Credentials that should be available to the Jenkins Controller.
+	credentials: [...#Credential]
 }
 
 config: #Config
