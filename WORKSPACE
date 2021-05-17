@@ -97,8 +97,8 @@ _java_image_repos()
 http_file(
     name = "gerrit_release",
     downloaded_file_path = "gerrit.war",
-    sha256 = "134b781c5efa9c52bf6b99b339a9a6308e4ad3623440d6fb9019a8fd9c60c5f0",
-    urls = ["https://gerrit-ci.gerritforge.com/view/Gerrit/job/Gerrit-bazel-java11-master/1231/artifact/gerrit/bazel-bin/gerrit.war"],
+    sha256 = "8e5edec29f7d317a842f1165a8cabd03e8e40cbba232ed672a2c040ddb767003",
+    urls = ["https://gerrit-ci.gerritforge.com/view/Gerrit/job/Gerrit-bazel-java11-master/1337/artifact/gerrit/bazel-bin/gerrit.war"],
 )
 
 http_archive(
@@ -121,15 +121,15 @@ http_file(
 http_file(
     name = "gerrit_checks_plugin_release",
     downloaded_file_path = "checks.jar",
-    sha256 = "9520d2db60c09a716acbddabc091c1f3688aadc29134cfbe3952b185fb89f556",
-    urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-master/job/plugin-checks-bazel-master/44/artifact/bazel-bin/plugins/checks/checks.jar"],
+    sha256 = "f06c2327d6bbb1f25deba3be285b443a9b508ee3ec6eb237fe39b2b035d85880",
+    urls = ["https://gerrit-ci.gerritforge.com/job/plugin-checks-bazel-master/lastSuccessfulBuild/artifact/bazel-bin/plugins/checks/checks.jar"],
 )
 
 http_file(
     name = "gerrit_phabricator_plugin_release",
     downloaded_file_path = "its-phabricator.jar",
-    sha256 = "54993eaf91198d72af6e0fbe2321cccbbed394abb84988a1b9d3055b81e29e12",
-    urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-master/job/plugin-its-phabricator-bazel-master/4/artifact/bazel-bin/plugins/its-phabricator/its-phabricator.jar"],
+    sha256 = "721713e94b805d5211544fd9be74f0ca308889636dbf085c6ea419c3067f2d7a",
+    urls = ["https://gerrit-ci.gerritforge.com/job/plugin-its-phabricator-bazel-master/5/artifact/bazel-bin/plugins/its-phabricator/its-phabricator.jar"],
 )
 
 http_file(
@@ -142,15 +142,31 @@ http_file(
 http_file(
     name = "gerrit_uploadvalidator_plugin_release",
     downloaded_file_path = "uploadvalidator.jar",
-    sha256 = "b09ab2a8c174567306cc56ac6feeb38ad1e2f329ce540009da3a06d1c60d54f1",
-    urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-master/job/plugin-uploadvalidator-bazel-master/18/artifact/bazel-bin/plugins/uploadvalidator/uploadvalidator.jar"],
+    sha256 = "37fefa565196798a2032667a3b101b7ebd0dde20ead6a5e496ee45499efb0117",
+    urls = ["https://gerrit-ci.gerritforge.com/job/plugin-uploadvalidator-bazel-master/23/artifact/bazel-bin/plugins/uploadvalidator/uploadvalidator.jar"],
 )
 
 http_file(
     name = "gerrit_simplesubmitrules_plugin_release",
     downloaded_file_path = "simple-submit-rules.jar",
-    sha256 = "c243b2f2f05fb0c6f1f9b3c557f359e888894de2434ca01780a49a9638d5e030",
-    urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-master/job/plugin-simple-submit-rules-bazel-master-master/3/artifact/bazel-bin/plugins/simple-submit-rules/simple-submit-rules.jar"],
+    sha256 = "faed15caddf665a9e4d0fda0afe9b76b76898e9d508875066d936934596f09c5",
+    urls = ["https://gerrit-ci.gerritforge.com/job/plugin-simple-submit-rules-bazel-master-master/4/artifact/bazel-bin/plugins/simple-submit-rules/simple-submit-rules.jar"],
+)
+
+# Manually built from gerrit Git clone and gerrit/plugins/webhook Git clone:
+#
+#     gerrit $ git rev-parse HEAD
+#     bbc7de3c0adf9ad74e0cb848a126a91b5a244709
+#     gerrit $ (cd plugins/webhooks && git rev-parse HEAD)
+#     9fc9c2d4e69f7e2701cbcd873977d3312a231a81
+#     gerrit $ bazel build //plugins/webhooks
+#     gerrit $ gsutil cp bazel-bin/plugins/webhooks/webhooks.jar monogon-infra-public/webhooks-114abfec5105b3d175e1aae0a00ca0b62069bbe374caf5f619a275daad22a2a7.jar
+#
+http_file(
+    name = "gerrit_webhooks_plugin_release",
+    downloaded_file_path = "webhooks.jar",
+    sha256 = "114abfec5105b3d175e1aae0a00ca0b62069bbe374caf5f619a275daad22a2a7",
+    urls = ["https://storage.googleapis.com/monogon-infra-public/webhooks-114abfec5105b3d175e1aae0a00ca0b62069bbe374caf5f619a275daad22a2a7.jar"],
 )
 
 container_pull(

@@ -11,6 +11,7 @@ container_image(
         "@gerrit_gravatar_plugin_release//file:avatars-gravatar.jar",
         "@gerrit_uploadvalidator_plugin_release//file:uploadvalidator.jar",
         "@gerrit_simplesubmitrules_plugin_release//file:simple-submit-rules.jar",
+        "@gerrit_webhooks_plugin_release//file:webhooks.jar",
         "@gerrit_core_plugins//:plugins",
     ]
 )
@@ -45,6 +46,6 @@ container_push(
     format = "Docker",
     image = ":gerrit_image",
     registry = "gcr.io",
-    repository = "nexantic-infra/gerrit",
-    tag = "3.4.0-1",
+    repository = "monogon-infra/gerrit",
+    tag = "3.4.0-3",
 )
