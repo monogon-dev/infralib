@@ -83,7 +83,7 @@ k8s: {
 			}
 			security: {
 				queueItemAuthenticator: authenticators: [
-					{global: strategy: "anonymousAuthorizationStrategy"},
+					{global: strategy: "triggeringUsersAuthorizationStrategy"},
 				]
 			}
 			unclassified: {
