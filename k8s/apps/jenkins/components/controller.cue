@@ -210,6 +210,12 @@ k8s: {
 								value: "true"
 							},
 						]
+						resources: {
+							requests: memory: "2G"
+							requests: cpu:    "0.5"
+							limits: memory:   "4G"
+							limits: cpu:      "1"
+						}
 					},
 				]
 
