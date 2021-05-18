@@ -199,6 +199,11 @@ import (
 					daysToKeep 90
 				}
 			}
+			factory {
+				workflowBranchProjectFactory {
+					scriptPath "\(jenkinsfile)"
+				}
+			}
 			triggers {
 				periodicFolderTrigger {
 					interval '30m'
@@ -209,6 +214,8 @@ import (
 	// The name of the job. A limited alphabet/length ensures this is safe to
 	// use as part of a larger name or within URL/path parts.
 	name: =~"^[a-z0-9\\-]{3,16}$"
+	// Path to Jenkinsfile groovy script that Jenkins will execute.
+	jenkinsfile: string | *"Jenkinsfile"
 	// The ID of credentials used to authenticate against gerrit. This should
 	// correspond to the name field of a Credential within #Config.credentials.
 	gerritCredentials: string
