@@ -192,6 +192,9 @@ k8s: {
 						env: [
 							{name: "GERRIT_CONFIG", value:       _gerritConfig},
 							{name: "GERRIT_THEME_PLUGIN", value: _customThemePlugin},
+							if config.reinit {
+								{name: "GERRIT_REINIT", value: "true"}
+							},
 						]
 
 						ports: [

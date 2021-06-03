@@ -47,5 +47,5 @@ container_push(
     image = ":gerrit_image",
     registry = "gcr.io",
     repository = "monogon-infra/gerrit",
-    tag = "3.4.0-3",
+    tag = "3.4.0-5",
 )

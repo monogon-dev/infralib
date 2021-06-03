@@ -11,7 +11,7 @@ package components
 
 #Config: {
 	images: {
-		gerrit: "gcr.io/monogon-infra/gerrit:3.4.0-3@sha256:3d5cd30534db2742e95cec5b7cdadac07290dbc9888ab8851dcf3a6c5882a7ee"
+		gerrit: "gcr.io/monogon-infra/gerrit:3.4.0-5@sha256:1647bbcc8e7e51c89975432e9c55e63c1020c0cda8cca99ca52de5f09e2d4b48"
 	}
 
 	// Hostname for Gerrit to run on (without https://)
@@ -49,6 +49,9 @@ package components
 
 	// Extra configuration to add to the main Gerrit config file
 	extraConfig: string | *""
+
+	// Whether to reinitalize Gerrit on startup, ie. run `gerrit.war init -d $home`.
+	reinit: bool | *false
 }
 
 config: #Config
