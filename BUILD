@@ -4,8 +4,6 @@
 load("@bazel_gazelle//:def.bzl", "gazelle")
 
 # gazelle:prefix infralib.monogon.dev
-# gazelle:exclude ansible
-# gazelle:exclude build
 # gazelle:exclude k8s
 gazelle(name = "gazelle")
 
