@@ -1,7 +1,10 @@
 // Copyright 2020 The Monogon Project Authors.
 // SPDX-License-Identifier: Apache-2.0
 
-package k8s
+package tools
+
+// Map of contexts to apply
+contexts: {...}
 
 // Read context from command line argument (i.e. -t context=example.com), in addition to the implicit scope. We
 // currently support deployment to only one, explicitly specified context at the time. The alternative would be to

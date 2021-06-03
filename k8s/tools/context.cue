@@ -1,7 +1,7 @@
 // Copyright 2020 The Monogon Project Authors.
 // SPDX-License-Identifier: Apache-2.0
 
-package k8s
+package tools
 
 import (
 	"infralib.monogon.dev/k8s/base"
@@ -34,5 +34,3 @@ import (
 	// Specified namespace is created by default
 	objects: namespaces: "\(namespace)": {}
 }
-
-contexts: [Name=string]: #Context & {namespace: Name}

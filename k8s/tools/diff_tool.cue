@@ -1,7 +1,7 @@
 // Copyright 2020 The Monogon Project Authors.
 // SPDX-License-Identifier: Apache-2.0
 
-package k8s
+package tools
 
 import "encoding/yaml"
 
