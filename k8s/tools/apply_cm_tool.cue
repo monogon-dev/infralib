@@ -10,8 +10,9 @@ import (
 // apply-cm applies configmaps only for better performance during development.
 command: "apply-cm": {
 	task: apply: RemoteTask & {
-		kind: "exec"
-		_cmd: "kubectl apply --server-side -f -"
+		kind:     "exec"
+		_kubectl: string
+		_cmd:     _kubectl + "apply --server-side -f -"
 		_objects: [ for v in [context.objects.configmaps] for x in v {x}]
 		stdin:  yaml.MarshalStream(_objects)
 		stdout: string

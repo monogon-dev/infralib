@@ -12,9 +12,10 @@ import (
 
 command: apply: {
 	task: prereqs: RemoteTask & {
-		kind:  "exec"
-		_cmd:  "kubectl apply --field-manager=infra-cue-apply --server-side -f -"
-		stdin: yaml.MarshalStream(preObjects)
+		kind:     "exec"
+		_kubectl: string
+		_cmd:     _kubectl + "apply --field-manager=infra-cue-apply --server-side -f -"
+		stdin:    yaml.MarshalStream(preObjects)
 	}
 
 	task: apply: RemoteTask & {
@@ -28,15 +29,17 @@ command: apply: {
 
 		// TODO: do we want to use --force-conflicts by default? How do we even deal with conflicts? Fix the operator?
 
-		_cmd:  "kubectl apply --field-manager=infra-cue-apply --server-side -f -"
-		stdin: yaml.MarshalStream(objects)
+		_kubectl: string
+		_cmd:     _kubectl + "apply --field-manager=infra-cue-apply --server-side -f -"
+		stdin:    yaml.MarshalStream(objects)
 	}
 
 }
 
 // apply-fast skips prereqs (like crds)
 command: "apply-fast": RemoteTask & {
-	kind:  "exec"
-	_cmd:  "kubectl apply --field-manager=infra-cue-apply --server-side -f -"
-	stdin: yaml.MarshalStream(objects)
+	kind:     "exec"
+	_kubectl: string
+	_cmd:     _kubectl + "apply --field-manager=infra-cue-apply --server-side -f -"
+	stdin:    yaml.MarshalStream(objects)
 }

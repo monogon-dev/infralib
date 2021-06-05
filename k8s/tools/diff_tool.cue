@@ -7,16 +7,18 @@ import "encoding/yaml"
 
 command: diff: {
 	task: diff: RemoteTask & {
-		kind:  "exec"
-		_cmd:  "kubectl diff --server-side --field-manager=infra-cue-apply --force-conflicts=true -f -"
-		stdin: yaml.MarshalStream(preObjects + objects)
+		kind:     "exec"
+		_kubectl: string
+		_cmd:     _kubectl + "diff --server-side --field-manager=infra-cue-apply --force-conflicts=true -f -"
+		stdin:    yaml.MarshalStream(preObjects + objects)
 	}
 }
 
 command: "diff-fast": {
 	task: diff: RemoteTask & {
-		kind:  "exec"
-		_cmd:  "kubectl diff --server-side --field-manager=infra-cue-apply --force-conflicts=true -f -"
-		stdin: yaml.MarshalStream(objects)
+		kind:     "exec"
+		_kubectl: string
+		_cmd:     _kubectl + "diff --server-side --field-manager=infra-cue-apply --force-conflicts=true -f -"
+		stdin:    yaml.MarshalStream(objects)
 	}
 }

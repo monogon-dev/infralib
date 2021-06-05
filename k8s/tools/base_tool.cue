@@ -45,7 +45,8 @@ preObjects: [ for v in [
 ] for x in v {x}]
 
 RemoteTask: {
-	_cmd: string
+	_kubectl: "kubectl --context=\(context.context) "
+	_cmd:     string
 
 	if context.hostname == "local" {
 		cmd: _cmd

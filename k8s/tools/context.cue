@@ -16,8 +16,8 @@ import (
 	namespace: string
 
 	// kubectl context to deploy to. This context is defined by the kubectl configuration of the local or remote host.
-	// Contexts should be uniquely named to prevent ambiguity and deployment to the wrong host.
-	context: string
+	// Local contexts should be uniquely named to prevent ambiguity and deployment to the wrong host.
+	context: string | *"default"
 
 	// SSH remote host to deploy the objects to by invoking a remote kubectl command, or "local" to use the local kubectl.
 	hostname: string | "local"
