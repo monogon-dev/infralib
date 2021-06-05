@@ -12,7 +12,7 @@ command: "apply-cm": {
 	task: apply: RemoteTask & {
 		kind:     "exec"
 		_kubectl: string
-		_cmd:     _kubectl + "apply --server-side -f -"
+		_cmd:     _kubectl + "apply --field-manager=infra-cue-apply --server-side -f -"
 		_objects: [ for v in [context.objects.configmaps] for x in v {x}]
 		stdin:  yaml.MarshalStream(_objects)
 		stdout: string
