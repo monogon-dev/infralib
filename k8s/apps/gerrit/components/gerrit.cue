@@ -64,6 +64,9 @@ let _gerritConfig = """
   client-secret = \(config.googleAuth.clientSecret)
   use-email-as-username = true
 
+[plugin "webhooks"]
+  sslVerify = true
+
 [experiments]
   # Fancy new checks tab
   enabled = UiFeature__ci_reboot_checks
