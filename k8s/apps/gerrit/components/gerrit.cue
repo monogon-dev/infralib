@@ -59,6 +59,11 @@ let _gerritConfig = """
 [cache]
   directory = cache
 
+[cache "web_sessions"]
+  maxAge = 90 days
+  memoryLimit = 8192
+  diskLimit = 256m
+
 [plugin "gerrit-oauth-provider-google-oauth"]
   client-id = \(config.googleAuth.clientID)
   client-secret = \(config.googleAuth.clientSecret)
