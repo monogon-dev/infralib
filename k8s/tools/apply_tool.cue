@@ -8,7 +8,6 @@ import (
 )
 
 // Use a custom field manager by default in order to conflict with any manually-ran local- or server-side apply.
-// TODO: k3s apparently ignores this and always lists "k3s" as the manager?
 
 command: apply: {
 	task: prereqs: RemoteTask & {
