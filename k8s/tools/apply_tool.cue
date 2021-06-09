@@ -27,8 +27,6 @@ command: apply: {
 		// truncated input leads to accidental deletion?  --server-side also doesn't appear to work with --prune. Perhaps we
 		// would be better off with a list of objects to delete?
 
-		// TODO: do we want to use --force-conflicts by default? How do we even deal with conflicts? Fix the operator?
-
 		_kubectl: string
 		_cmd:     _kubectl + "apply --field-manager=infra-cue-apply --server-side -f -"
 		stdin:    yaml.MarshalStream(objects)
@@ -42,4 +40,14 @@ command: "apply-fast": RemoteTask & {
 	_kubectl: string
 	_cmd:     _kubectl + "apply --field-manager=infra-cue-apply --server-side -f -"
 	stdin:    yaml.MarshalStream(objects)
+}
+
+// Same as apply, but with --force-conflicts to override rogue field managers.
+//
+// A common scenario where this is needed is the initial "takeover" of an existing
+// configuration hand-deployed using kubectl.
+command: "apply-force": RemoteTask & {
+	kind:  "exec"
+	_cmd:  command.apply.task.apply._cmd + " --force-conflicts"
+	stdin: yaml.MarshalStream(objects)
 }
