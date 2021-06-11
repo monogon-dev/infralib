@@ -12,6 +12,7 @@ fi
 
 ln -s /var/gerrit/custom-plugins/* /var/gerrit/plugins/
 
+echo "${GERRIT_SITECSS}" > /var/gerrit/etc/GerritSite.css
 echo "${GERRIT_CONFIG}" > /var/gerrit/etc/gerrit.config
 echo "${GERRIT_THEME_PLUGIN}" > /var/gerrit/plugins/custom-theme.js
 

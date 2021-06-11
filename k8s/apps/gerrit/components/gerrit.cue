@@ -114,6 +114,64 @@ Gerrit.install(plugin => {
 });
 """
 
+// GerritSite.css is only applied to the "classic" Gerrit UI, which is almost nothing
+// these days (most is PolyGerrit and styled through plugins). However, some internal
+// pages like the OAuth login page still use this and this is how to style them.
+let _gerritSiteCss = """
+	/* Clean up OAuth login form */
+
+	#login_oauth {
+			text-align: center;
+	}
+
+	#login_oauth form#login_form {
+			margin: auto;
+			width: 12em;
+	}
+
+	/* Button-ify the links */
+	#login_oauth div#providers div {
+			padding: 1em;
+			border-style: solid;
+			margin: 1em;
+	}
+
+	/* Replace button texts */
+	#login_oauth div#providers a {
+			font-size: 0;
+	}
+
+	#login_oauth div#-azure-oauth a:after {
+			content: "Azure / Office365";
+			font-size: initial;
+	}
+
+	#login_oauth div#-google-oauth a:after {
+			content: "Google";
+			font-size: initial;
+	}
+
+	/* Remove the oversized oauth logo */
+	#login_oauth #logo_img {
+			display: none;
+	}
+
+	/* Why would anyone need a Cancel link? */
+	#login_oauth div#providers + div {
+			display: none;
+	}
+
+	/* Kill the generic "What is OAuth protocol" text */
+	#login_oauth div#providers + div + div {
+			display: none;
+	}
+
+	/* Remove "Available OAuth providers" text */
+	#login_oauth #logo_box + div {
+			display: none !important;
+	}
+	"""
+
 k8s: {
 	pvcs: {
 		{[string]: spec: {
@@ -198,6 +256,7 @@ k8s: {
 						//
 						//  - Gerrit *really* wants a writable fs, so we can't just mount the CM to /var/gerrit/etc.
 						env: [
+							{name: "GERRIT_SITECSS", value:      _gerritSiteCss},
 							{name: "GERRIT_CONFIG", value:       _gerritConfig},
 							{name: "GERRIT_THEME_PLUGIN", value: _customThemePlugin},
 							if config.reinit {
