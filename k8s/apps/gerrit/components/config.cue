@@ -11,7 +11,7 @@ package components
 
 #Config: {
 	images: {
-		gerrit: "gcr.io/monogon-infra/gerrit:3.4.0-5@sha256:1647bbcc8e7e51c89975432e9c55e63c1020c0cda8cca99ca52de5f09e2d4b48"
+		gerrit: "gcr.io/monogon-infra/gerrit:3.4.0-6@sha256:e4aab7d8d2048d4f309cf1e62dc6cf472c786070900d2aa70f0f9760936770a8"
 	}
 
 	// Hostname for Gerrit to run on (without https://)
@@ -50,7 +50,8 @@ package components
 	// Extra configuration to add to the main Gerrit config file
 	extraConfig: string | *""
 
-	// Whether to reinitalize Gerrit on startup, ie. run `gerrit.war init -d $home`.
+	// Whether to reinitalize and reindex Gerrit on startup, ie. run `gerrit.war init -d $home`.
+	// This is temporarily required for some upgrades that include schema changes.
 	reinit: bool | *false
 }
 

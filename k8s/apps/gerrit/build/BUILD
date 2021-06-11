@@ -3,16 +3,11 @@ load("@io_bazel_rules_docker//container:container.bzl", "container_image", "cont
 container_image(
     name = "with_plugins",
     base = "@gerrit_base//image",
-    directory = "/var/gerrit/plugins",
+    directory = "/var/gerrit/custom-plugins",
     files = [
         "@gerrit_checks_plugin_release//file:checks.jar",
         "@gerrit_oauth_plugin_release//file:oauth.jar",
-        "@gerrit_phabricator_plugin_release//file:its-phabricator.jar",
-        "@gerrit_gravatar_plugin_release//file:avatars-gravatar.jar",
-        "@gerrit_uploadvalidator_plugin_release//file:uploadvalidator.jar",
         "@gerrit_simplesubmitrules_plugin_release//file:simple-submit-rules.jar",
-        "@gerrit_webhooks_plugin_release//file:webhooks.jar",
-        "@gerrit_core_plugins//:plugins",
     ]
 )
 
@@ -32,13 +27,6 @@ container_image(
     entrypoint = ["/entrypoint.sh"],
     files = [":entrypoint.sh"],
 
-    # Apparently, the directories created by rules_docker are owned by
-    # root:root and there's no way of changing the owner. This means that we
-    # need this ugly hack to put this file in a place where we can write to it
-    # from the entrypoint script.
-    symlinks = {
-    	"/var/gerrit/plugins/custom-theme.js": "/var/gerrit/tmp/custom-theme.js"
-    },
 )
 
 container_push(
@@ -47,5 +35,5 @@ container_push(
     image = ":gerrit_image",
     registry = "gcr.io",
     repository = "monogon-infra/gerrit",
-    tag = "3.4.0-5",
+    tag = "3.4.0-6",
 )
