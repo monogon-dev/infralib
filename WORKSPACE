@@ -45,9 +45,9 @@ go_repositories()
 
 http_archive(
     name = "io_bazel_rules_docker",
-    sha256 = "1698624e878b0607052ae6131aa216d45ebb63871ec497f26c67455b34119c80",
-    strip_prefix = "rules_docker-0.15.0",
-    urls = ["https://github.com/bazelbuild/rules_docker/releases/download/v0.15.0/rules_docker-v0.15.0.tar.gz"],
+    sha256 = "59d5b42ac315e7eadffa944e86e90c2990110a1c8075f1cd145f487e999d22b3",
+    strip_prefix = "rules_docker-0.17.0",
+    urls = ["https://github.com/bazelbuild/rules_docker/releases/download/v0.17.0/rules_docker-v0.17.0.tar.gz"],
 )
 
 load(
@@ -146,10 +146,10 @@ container_pull(
 
 container_pull(
     name = "monogon_builder",
-    digest = "sha256:2f2e6e0f078e88ecd2872b4a7671203fd062cfae79138aa5b36e7ebf689c3692",
+    digest = "sha256:afd386ff0806b394e2cc12bcddc9bf0b3d03db48d9f9e609ea174794631d7ca3",
     registry = "gcr.io",
     repository = "monogon-infra/monogon-builder",
-    tag = "1620723905",
+    tag = "1626219512",
 )
 
 # Forked version of smtprelay, which adds support for plain auth tokens and environment variables for secrets.

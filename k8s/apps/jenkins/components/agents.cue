@@ -75,10 +75,10 @@ k8s: {for agentConfig in config.agents {
 			]
 			securityContext: {
 				// uid of 'ci' user in image.
-				runAsUser: 994
+				runAsUser: 500
 				// gid of 'ci' group in image.
-				runAsGroup: 992
-				fsGroup:    992
+				runAsGroup: 1000
+				fsGroup:    1000
 			}
 			restartPolicy: "Always"
 			volumes: [

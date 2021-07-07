@@ -240,7 +240,7 @@ import (
 #Config: {
 	images: {
 		controller: "gcr.io/monogon-infra/jenkins-controller:2.289-centos7-6"
-		agent:      "gcr.io/monogon-infra/jenkins-agent:monogon-builder-19c98c7be48005d26d813c66ff9d491a5b39375b"
+		agent:      "gcr.io/monogon-infra/jenkins-agent:monogon-builder-1626262040"
 	}
 
 	// Hostname for Jenkins to run on (without https://)

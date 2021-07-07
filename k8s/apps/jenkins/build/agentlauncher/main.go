@@ -4,15 +4,12 @@
 package main
 
 import (
-	"context"
 	"flag"
 	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
-	"os/exec"
-	"os/signal"
 	"syscall"
 )
 
@@ -63,19 +60,7 @@ func main() {
 	}
 
 	log.Printf("Agent JAR downloaded, starting...")
-	ctx, cancel := context.WithCancel(context.Background())
-	s := make(chan os.Signal, 1)
-	signal.Notify(s, syscall.SIGTERM)
-	go func() {
-		<-s
-		log.Printf("SIGTERM received, stopping agent subprocess...")
-		cancel()
-	}()
-
-	cmd := exec.CommandContext(ctx, "java", "-jar", jarPath, "-jnlpUrl", flagJNLPURL, "-secret", flagSecret)
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	if err := cmd.Run(); err != nil {
-		log.Fatalf("Process returned: %v", err)
+	if err := syscall.Exec("/usr/bin/java", []string{"java", "-jar", jarPath, "-jnlpUrl", flagJNLPURL, "-secret", flagSecret}, os.Environ()); err != nil {
+		log.Fatalf("exec failed: %v", err)
 	}
 }
