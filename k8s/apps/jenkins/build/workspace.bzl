@@ -29,6 +29,146 @@ def jenkins_plugin_repositories():
         sha256 = "acc1a8425b2ad7ebcd156ff2446535d428f863cdfa4b3190b3b6b63b3cf1f51c",
         urls = ["https://updates.jenkins.io/download/plugins/authorize-project/1.4.0/authorize-project.hpi"],
     )
+    # Jenkins plugin blueocean, required by: toplevel
+    http_file(
+        name = "jenkins_blueocean_plugin_release",
+        downloaded_file_path = "blueocean.jpi",
+        sha256 = "406b7a3e38956aecec3b4780b8413cc6dfd724abd74750d07aefbc5281fe8f26",
+        urls = ["https://updates.jenkins.io/download/plugins/blueocean/1.24.8/blueocean.hpi"],
+    )
+    # Jenkins plugin blueocean-autofavorite, required by: blueocean -> toplevel
+    http_file(
+        name = "jenkins_blueocean_autofavorite_plugin_release",
+        downloaded_file_path = "blueocean-autofavorite.jpi",
+        sha256 = "8aaf0df1533387cff3a81d04c544e8f650eba5e0c0df2c93dffb3af79770074b",
+        urls = ["https://updates.jenkins.io/download/plugins/blueocean-autofavorite/1.2.4/blueocean-autofavorite.hpi"],
+    )
+    # Jenkins plugin blueocean-bitbucket-pipeline, required by: blueocean -> toplevel
+    http_file(
+        name = "jenkins_blueocean_bitbucket_pipeline_plugin_release",
+        downloaded_file_path = "blueocean-bitbucket-pipeline.jpi",
+        sha256 = "4583996cf6951be5261f96c3f90dd93f7c9ed28d8f5a92a21ab31fca211e7b5b",
+        urls = ["https://updates.jenkins.io/download/plugins/blueocean-bitbucket-pipeline/1.24.8/blueocean-bitbucket-pipeline.hpi"],
+    )
+    # Jenkins plugin blueocean-commons, required by: blueocean -> toplevel
+    http_file(
+        name = "jenkins_blueocean_commons_plugin_release",
+        downloaded_file_path = "blueocean-commons.jpi",
+        sha256 = "6637636a19e85e2d6c9c0150a02dfcbb88fb1f975ffb28ee68ba6994de014944",
+        urls = ["https://updates.jenkins.io/download/plugins/blueocean-commons/1.24.8/blueocean-commons.hpi"],
+    )
+    # Jenkins plugin blueocean-config, required by: blueocean -> toplevel
+    http_file(
+        name = "jenkins_blueocean_config_plugin_release",
+        downloaded_file_path = "blueocean-config.jpi",
+        sha256 = "61994738b9436664966ce790562dab9285acad72c2f380162f813f84eacf06ee",
+        urls = ["https://updates.jenkins.io/download/plugins/blueocean-config/1.24.8/blueocean-config.hpi"],
+    )
+    # Jenkins plugin blueocean-core-js, required by: blueocean -> toplevel
+    http_file(
+        name = "jenkins_blueocean_core_js_plugin_release",
+        downloaded_file_path = "blueocean-core-js.jpi",
+        sha256 = "92d4fef4ef4f42dd303d08547997384798e76f058afc45c46a15768914c80914",
+        urls = ["https://updates.jenkins.io/download/plugins/blueocean-core-js/1.24.8/blueocean-core-js.hpi"],
+    )
+    # Jenkins plugin blueocean-dashboard, required by: blueocean -> toplevel
+    http_file(
+        name = "jenkins_blueocean_dashboard_plugin_release",
+        downloaded_file_path = "blueocean-dashboard.jpi",
+        sha256 = "9a62639272634a4444403f45f6fcb406e51ad4c09f752cbb82e809e354a2aa7f",
+        urls = ["https://updates.jenkins.io/download/plugins/blueocean-dashboard/1.24.8/blueocean-dashboard.hpi"],
+    )
+    # Jenkins plugin blueocean-display-url, required by: blueocean -> toplevel
+    http_file(
+        name = "jenkins_blueocean_display_url_plugin_release",
+        downloaded_file_path = "blueocean-display-url.jpi",
+        sha256 = "f4179b8221e6c330317bd8a037d4074a03361290687a25c162335ee82710b303",
+        urls = ["https://updates.jenkins.io/download/plugins/blueocean-display-url/2.4.1/blueocean-display-url.hpi"],
+    )
+    # Jenkins plugin blueocean-events, required by: blueocean -> toplevel
+    http_file(
+        name = "jenkins_blueocean_events_plugin_release",
+        downloaded_file_path = "blueocean-events.jpi",
+        sha256 = "43bd236b0a9963e1fc3ff34a4d24c8e2eb83b9c2771ac9744721ea567c7c629b",
+        urls = ["https://updates.jenkins.io/download/plugins/blueocean-events/1.24.8/blueocean-events.hpi"],
+    )
+    # Jenkins plugin blueocean-git-pipeline, required by: blueocean -> toplevel
+    http_file(
+        name = "jenkins_blueocean_git_pipeline_plugin_release",
+        downloaded_file_path = "blueocean-git-pipeline.jpi",
+        sha256 = "8792cf273933c80e95021961c3f73fd3ada7ced7a66c600055b2c531d2797122",
+        urls = ["https://updates.jenkins.io/download/plugins/blueocean-git-pipeline/1.24.8/blueocean-git-pipeline.hpi"],
+    )
+    # Jenkins plugin blueocean-github-pipeline, required by: blueocean -> toplevel
+    http_file(
+        name = "jenkins_blueocean_github_pipeline_plugin_release",
+        downloaded_file_path = "blueocean-github-pipeline.jpi",
+        sha256 = "103907cdb206d16b0fdb789b5ceeaa4724fa26d53b39f6890f8cb252f313ee29",
+        urls = ["https://updates.jenkins.io/download/plugins/blueocean-github-pipeline/1.24.8/blueocean-github-pipeline.hpi"],
+    )
+    # Jenkins plugin blueocean-i18n, required by: blueocean -> toplevel
+    http_file(
+        name = "jenkins_blueocean_i18n_plugin_release",
+        downloaded_file_path = "blueocean-i18n.jpi",
+        sha256 = "4b1d40944c6098268a3a3e6f724f573aafb09a1dd9441f50ff8787b0e2751086",
+        urls = ["https://updates.jenkins.io/download/plugins/blueocean-i18n/1.24.8/blueocean-i18n.hpi"],
+    )
+    # Jenkins plugin blueocean-jwt, required by: blueocean -> toplevel
+    http_file(
+        name = "jenkins_blueocean_jwt_plugin_release",
+        downloaded_file_path = "blueocean-jwt.jpi",
+        sha256 = "fc678f8406ca46075232aba9da353ac5c4f4f62ec449a763b8b31c0368eb3315",
+        urls = ["https://updates.jenkins.io/download/plugins/blueocean-jwt/1.24.8/blueocean-jwt.hpi"],
+    )
+    # Jenkins plugin blueocean-personalization, required by: blueocean -> toplevel
+    http_file(
+        name = "jenkins_blueocean_personalization_plugin_release",
+        downloaded_file_path = "blueocean-personalization.jpi",
+        sha256 = "aa26e2a0f53927c7e6ba35e95de4b88c8d2c40b930337158c9d6a64868060858",
+        urls = ["https://updates.jenkins.io/download/plugins/blueocean-personalization/1.24.8/blueocean-personalization.hpi"],
+    )
+    # Jenkins plugin blueocean-pipeline-api-impl, required by: blueocean -> toplevel
+    http_file(
+        name = "jenkins_blueocean_pipeline_api_impl_plugin_release",
+        downloaded_file_path = "blueocean-pipeline-api-impl.jpi",
+        sha256 = "d92bab4d4ea8508a37cb8dd955bd56007192502976a682880151219e31658283",
+        urls = ["https://updates.jenkins.io/download/plugins/blueocean-pipeline-api-impl/1.24.8/blueocean-pipeline-api-impl.hpi"],
+    )
+    # Jenkins plugin blueocean-pipeline-editor, required by: blueocean -> toplevel
+    http_file(
+        name = "jenkins_blueocean_pipeline_editor_plugin_release",
+        downloaded_file_path = "blueocean-pipeline-editor.jpi",
+        sha256 = "c1cc5b99be80fde7bfdc3c7c09d6e7de8748b84bfd1e2a23b8b409edd4a600c5",
+        urls = ["https://updates.jenkins.io/download/plugins/blueocean-pipeline-editor/1.24.8/blueocean-pipeline-editor.hpi"],
+    )
+    # Jenkins plugin blueocean-pipeline-scm-api, required by: blueocean-git-pipeline -> blueocean -> toplevel
+    http_file(
+        name = "jenkins_blueocean_pipeline_scm_api_plugin_release",
+        downloaded_file_path = "blueocean-pipeline-scm-api.jpi",
+        sha256 = "a6c1cdeb1d57c261ba75d6a3e83020d71084863ed98f6cec1dd0c012129c44c3",
+        urls = ["https://updates.jenkins.io/download/plugins/blueocean-pipeline-scm-api/1.24.8/blueocean-pipeline-scm-api.hpi"],
+    )
+    # Jenkins plugin blueocean-rest, required by: blueocean -> toplevel
+    http_file(
+        name = "jenkins_blueocean_rest_plugin_release",
+        downloaded_file_path = "blueocean-rest.jpi",
+        sha256 = "10c13594eb283259ced63101eda0caa99821801851ec87c62a62b4d04e4627ca",
+        urls = ["https://updates.jenkins.io/download/plugins/blueocean-rest/1.24.8/blueocean-rest.hpi"],
+    )
+    # Jenkins plugin blueocean-rest-impl, required by: blueocean -> toplevel
+    http_file(
+        name = "jenkins_blueocean_rest_impl_plugin_release",
+        downloaded_file_path = "blueocean-rest-impl.jpi",
+        sha256 = "7ca1446798e500b2f363e8dac326db37ceee477024553a7b7f7243c53c65606e",
+        urls = ["https://updates.jenkins.io/download/plugins/blueocean-rest-impl/1.24.8/blueocean-rest-impl.hpi"],
+    )
+    # Jenkins plugin blueocean-web, required by: blueocean -> toplevel
+    http_file(
+        name = "jenkins_blueocean_web_plugin_release",
+        downloaded_file_path = "blueocean-web.jpi",
+        sha256 = "c7e8cd7f609115ef70ce05eba998ad24ec4a5bba034237ee655869341252343c",
+        urls = ["https://updates.jenkins.io/download/plugins/blueocean-web/1.24.8/blueocean-web.hpi"],
+    )
     # Jenkins plugin bootstrap4-api, required by: junit -> matrix-project -> gerrit-code-review -> toplevel
     http_file(
         name = "jenkins_bootstrap4_api_plugin_release",
@@ -63,6 +203,13 @@ def jenkins_plugin_repositories():
         downloaded_file_path = "checks-api.jpi",
         sha256 = "effbec009c054395fd6052edea58887a16f3c4f96fbb86a14933fa9bcc9a8d0b",
         urls = ["https://updates.jenkins.io/download/plugins/checks-api/1.7.2/checks-api.hpi"],
+    )
+    # Jenkins plugin cloudbees-bitbucket-branch-source, required by: blueocean-bitbucket-pipeline -> blueocean -> toplevel
+    http_file(
+        name = "jenkins_cloudbees_bitbucket_branch_source_plugin_release",
+        downloaded_file_path = "cloudbees-bitbucket-branch-source.jpi",
+        sha256 = "e07dbacfbe9c95a3563e9952615a3b70d611800ef0bcd1bb97842591644a6985",
+        urls = ["https://updates.jenkins.io/download/plugins/cloudbees-bitbucket-branch-source/2.9.10/cloudbees-bitbucket-branch-source.hpi"],
     )
     # Jenkins plugin cloudbees-folder, required by: workflow-aggregator -> toplevel
     http_file(
@@ -113,6 +260,13 @@ def jenkins_plugin_repositories():
         sha256 = "eb6d4344b6ccfe54d629c3c6b27262a0eaae9b80f59841cdb6ef6655f68c8901",
         urls = ["https://updates.jenkins.io/download/plugins/echarts-api/5.1.2-9/echarts-api.hpi"],
     )
+    # Jenkins plugin favorite, required by: blueocean-rest-impl -> blueocean -> toplevel
+    http_file(
+        name = "jenkins_favorite_plugin_release",
+        downloaded_file_path = "favorite.jpi",
+        sha256 = "2cfa7f82b9268ba370f7067a18136822ae4fa5244eaa818095b6faf0bb9b293e",
+        urls = ["https://updates.jenkins.io/download/plugins/favorite/2.3.3/favorite.hpi"],
+    )
     # Jenkins plugin font-awesome-api, required by: bootstrap4-api -> junit -> matrix-project -> gerrit-code-review -> toplevel
     http_file(
         name = "jenkins_font_awesome_api_plugin_release",
@@ -148,6 +302,27 @@ def jenkins_plugin_repositories():
         sha256 = "34095b9ed64e9252dfa7591c8a49ce5e244732b0884325e9258670dae587a8b8",
         urls = ["https://updates.jenkins.io/download/plugins/git-server/1.10/git-server.hpi"],
     )
+    # Jenkins plugin github, required by: github-branch-source -> blueocean-github-pipeline -> blueocean -> toplevel
+    http_file(
+        name = "jenkins_github_plugin_release",
+        downloaded_file_path = "github.jpi",
+        sha256 = "24bfea243941611fdb75677af2b3ac3c6869549b45cdeaba4cdce1139f57aa8b",
+        urls = ["https://updates.jenkins.io/download/plugins/github/1.33.1/github.hpi"],
+    )
+    # Jenkins plugin github-api, required by: blueocean-github-pipeline -> blueocean -> toplevel
+    http_file(
+        name = "jenkins_github_api_plugin_release",
+        downloaded_file_path = "github-api.jpi",
+        sha256 = "b654ef6fe933b5b1ea3dace9314cacb47ea925d0056ab801d8cf1844cc66ab1e",
+        urls = ["https://updates.jenkins.io/download/plugins/github-api/1.123/github-api.hpi"],
+    )
+    # Jenkins plugin github-branch-source, required by: blueocean-github-pipeline -> blueocean -> toplevel
+    http_file(
+        name = "jenkins_github_branch_source_plugin_release",
+        downloaded_file_path = "github-branch-source.jpi",
+        sha256 = "f582b4fdcbd3ceffe1929712bc3a3e3e415d38e0c01986484fcb8f4eb06a2d35",
+        urls = ["https://updates.jenkins.io/download/plugins/github-branch-source/2.11.2/github-branch-source.hpi"],
+    )
     # Jenkins plugin google-login, required by: toplevel
     http_file(
         name = "jenkins_google_login_plugin_release",
@@ -162,12 +337,40 @@ def jenkins_plugin_repositories():
         sha256 = "f7e21a44c88bcd2db3e40552e5972bb2b0cb85e5bf9bc571b29a4e0b65a4986d",
         urls = ["https://updates.jenkins.io/download/plugins/handlebars/3.0.8/handlebars.hpi"],
     )
+    # Jenkins plugin handy-uri-templates-2-api, required by: cloudbees-bitbucket-branch-source -> blueocean-bitbucket-pipeline -> blueocean -> toplevel
+    http_file(
+        name = "jenkins_handy_uri_templates_2_api_plugin_release",
+        downloaded_file_path = "handy-uri-templates-2-api.jpi",
+        sha256 = "cd678d9809f695c7c40af1e8ee0a5e73efca07e2a3227fe60db1c3fb6d1d6fe8",
+        urls = ["https://updates.jenkins.io/download/plugins/handy-uri-templates-2-api/2.1.8-1.0/handy-uri-templates-2-api.hpi"],
+    )
+    # Jenkins plugin htmlpublisher, required by: blueocean-pipeline-api-impl -> blueocean -> toplevel
+    http_file(
+        name = "jenkins_htmlpublisher_plugin_release",
+        downloaded_file_path = "htmlpublisher.jpi",
+        sha256 = "6b973b9aacd1642ebf6ef53fb677ffca94ce576d13970eb26aad55da07a0d327",
+        urls = ["https://updates.jenkins.io/download/plugins/htmlpublisher/1.25/htmlpublisher.hpi"],
+    )
     # Jenkins plugin jackson2-api, required by: workflow-aggregator -> toplevel
     http_file(
         name = "jenkins_jackson2_api_plugin_release",
         downloaded_file_path = "jackson2-api.jpi",
         sha256 = "f5961521396f02c0518af70816bf6b2c4d12a4ef7194a1d2db65235eff609602",
         urls = ["https://updates.jenkins.io/download/plugins/jackson2-api/2.12.4/jackson2-api.hpi"],
+    )
+    # Jenkins plugin jenkins-design-language, required by: blueocean -> toplevel
+    http_file(
+        name = "jenkins_jenkins_design_language_plugin_release",
+        downloaded_file_path = "jenkins-design-language.jpi",
+        sha256 = "0bedbc3001c3e4538f5fc7df60dc190d4dee9176150ea891f16a2928e2f99f2f",
+        urls = ["https://updates.jenkins.io/download/plugins/jenkins-design-language/1.24.8/jenkins-design-language.hpi"],
+    )
+    # Jenkins plugin jjwt-api, required by: github-branch-source -> blueocean-github-pipeline -> blueocean -> toplevel
+    http_file(
+        name = "jenkins_jjwt_api_plugin_release",
+        downloaded_file_path = "jjwt-api.jpi",
+        sha256 = "b051f96e04239821191c3144cd17a52701d10433cb742851cd329b5140253fd3",
+        urls = ["https://updates.jenkins.io/download/plugins/jjwt-api/0.11.2-9.c8b45b8bb173/jjwt-api.hpi"],
     )
     # Jenkins plugin job-dsl, required by: toplevel
     http_file(
@@ -232,6 +435,13 @@ def jenkins_plugin_repositories():
         sha256 = "ca3c2d264cff55f71e900dc7de1f13c0bfbffdb9b3419b854dce175bcb8a4848",
         urls = ["https://updates.jenkins.io/download/plugins/momentjs/1.1.1/momentjs.hpi"],
     )
+    # Jenkins plugin okhttp-api, required by: github-api -> blueocean-github-pipeline -> blueocean -> toplevel
+    http_file(
+        name = "jenkins_okhttp_api_plugin_release",
+        downloaded_file_path = "okhttp-api.jpi",
+        sha256 = "df641b642ac840f0492ee25faea093e2ea093c0508f25eb7606ae77485d012fd",
+        urls = ["https://updates.jenkins.io/download/plugins/okhttp-api/3.14.9/okhttp-api.hpi"],
+    )
     # Jenkins plugin pipeline-build-step, required by: workflow-aggregator -> toplevel
     http_file(
         name = "jenkins_pipeline_build_step_plugin_release",
@@ -239,7 +449,7 @@ def jenkins_plugin_repositories():
         sha256 = "36cd38d7223305aa66bb5baf8d9770f7af19085379fa6897cffb4f7907e22a0e",
         urls = ["https://updates.jenkins.io/download/plugins/pipeline-build-step/2.15/pipeline-build-step.hpi"],
     )
-    # Jenkins plugin pipeline-graph-analysis, required by: pipeline-rest-api -> pipeline-stage-view -> workflow-aggregator -> toplevel
+    # Jenkins plugin pipeline-graph-analysis, required by: blueocean-pipeline-api-impl -> blueocean -> toplevel
     http_file(
         name = "jenkins_pipeline_graph_analysis_plugin_release",
         downloaded_file_path = "pipeline-graph-analysis.jpi",
@@ -309,7 +519,7 @@ def jenkins_plugin_repositories():
         sha256 = "5dee54199a33e8f959e4e35b8c265713b11768086d20a8c1dd596ddfe45297ce",
         urls = ["https://updates.jenkins.io/download/plugins/pipeline-stage-view/2.19/pipeline-stage-view.hpi"],
     )
-    # Jenkins plugin plain-credentials, required by: credentials-binding -> git -> gerrit-code-review -> toplevel
+    # Jenkins plugin plain-credentials, required by: blueocean-pipeline-api-impl -> blueocean -> toplevel
     http_file(
         name = "jenkins_plain_credentials_plugin_release",
         downloaded_file_path = "plain-credentials.jpi",
@@ -336,6 +546,13 @@ def jenkins_plugin_repositories():
         downloaded_file_path = "popper2-api.jpi",
         sha256 = "5017ae84595bcb71d350575e163a0e07e4c01f75f96144c070523d2aca42e551",
         urls = ["https://updates.jenkins.io/download/plugins/popper2-api/2.9.3-1/popper2-api.hpi"],
+    )
+    # Jenkins plugin pubsub-light, required by: blueocean-bitbucket-pipeline -> blueocean -> toplevel
+    http_file(
+        name = "jenkins_pubsub_light_plugin_release",
+        downloaded_file_path = "pubsub-light.jpi",
+        sha256 = "1f449c9aac92bb18f77aa81290fa9ee81ac5300129e0986c47a4b196211219d1",
+        urls = ["https://updates.jenkins.io/download/plugins/pubsub-light/1.16/pubsub-light.hpi"],
     )
     # Jenkins plugin role-strategy, required by: toplevel
     http_file(
@@ -365,6 +582,13 @@ def jenkins_plugin_repositories():
         sha256 = "9f8b34f1e657a4e88349663988b405e2dead6b1f9e737e8fac9736a69b6e5595",
         urls = ["https://updates.jenkins.io/download/plugins/snakeyaml-api/1.29.1/snakeyaml-api.hpi"],
     )
+    # Jenkins plugin sse-gateway, required by: blueocean-events -> blueocean -> toplevel
+    http_file(
+        name = "jenkins_sse_gateway_plugin_release",
+        downloaded_file_path = "sse-gateway.jpi",
+        sha256 = "8e9209c8a8a41389a2052c2a22e32ce016386caac9acd2acfb0a3332c2c8d51c",
+        urls = ["https://updates.jenkins.io/download/plugins/sse-gateway/1.24/sse-gateway.hpi"],
+    )
     # Jenkins plugin ssh-credentials, required by: gerrit-code-review -> toplevel
     http_file(
         name = "jenkins_ssh_credentials_plugin_release",
@@ -386,12 +610,26 @@ def jenkins_plugin_repositories():
         sha256 = "0d53d44b4ce7f887436921a81321f1738de7391a35912c1096fe412df4d6338a",
         urls = ["https://updates.jenkins.io/download/plugins/structs/1.23/structs.hpi"],
     )
+    # Jenkins plugin token-macro, required by: favorite -> blueocean-rest-impl -> blueocean -> toplevel
+    http_file(
+        name = "jenkins_token_macro_plugin_release",
+        downloaded_file_path = "token-macro.jpi",
+        sha256 = "37852544f0b8b3f34b776a29b84f2c2a6d4e5a3828fdabf68cb7786a1a9c4b4f",
+        urls = ["https://updates.jenkins.io/download/plugins/token-macro/266.v44a80cf277fd/token-macro.hpi"],
+    )
     # Jenkins plugin trilead-api, required by: git-client -> gerrit-code-review -> toplevel
     http_file(
         name = "jenkins_trilead_api_plugin_release",
         downloaded_file_path = "trilead-api.jpi",
         sha256 = "62b46838e493cfc6950382b4e4975d865cd3bfbfc58ada704b9dd96ff101e457",
         urls = ["https://updates.jenkins.io/download/plugins/trilead-api/1.0.13/trilead-api.hpi"],
+    )
+    # Jenkins plugin variant, required by: blueocean-web -> blueocean -> toplevel
+    http_file(
+        name = "jenkins_variant_plugin_release",
+        downloaded_file_path = "variant.jpi",
+        sha256 = "4c2985249aa9223dd4471898b0fe16849f7b2a16bf05870544062174605b67f3",
+        urls = ["https://updates.jenkins.io/download/plugins/variant/1.4/variant.hpi"],
     )
     # Jenkins plugin workflow-aggregator, required by: toplevel
     http_file(

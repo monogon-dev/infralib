@@ -102,6 +102,8 @@ var (
 		// Even if you use Jenkinsfiles, you still need to first configure a
 		// job that will actually use these Jenkinsfiles.
 		"job-dsl",
+		// Provides a modern frontend for the pipeline plugin.
+		"blueocean",
 	}
 )
 
