@@ -23,7 +23,7 @@ container_push(
     image = "controller_image",
     registry = "gcr.io",
     repository = "monogon-infra/jenkins-controller",
-    tag = "2.289-centos7-6",
+    tag = "2.306-centos7-1",
 )
 
 # The Jenkins agent image is based on the Monogon monorepo's build container.

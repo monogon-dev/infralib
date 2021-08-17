@@ -134,14 +134,15 @@ container_pull(
 )
 
 load("//k8s/apps/jenkins/build:workspace.bzl", "jenkins_plugin_repositories")
+
 jenkins_plugin_repositories()
 
 container_pull(
     name = "jenkins_controller_base",
-    digest = "sha256:a487a419ef87244de6ba6ae0af88ce4eefdcf369a752f7f1412a893650d7a2fc",
+    digest = "sha256:5f99922e7a1b21512c0727269e5f9c60f49cf25bab41fdb86071979379d18ce5",
     registry = "index.docker.io",
     repository = "jenkins/jenkins",
-    tag = "2.289-centos7",
+    tag = "2.306-centos7",
 )
 
 container_pull(
