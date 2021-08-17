@@ -78,7 +78,7 @@ var (
 	//   $ bazel run//:jenkins_plugingen
 	//
 	// If you're using this tool outside of Monogon, you can also override the
-	// -pluginden_plugins when running plugingen, any value set there takes
+	// -plugingen_plugins when running plugingen, any value set there takes
 	// precedence over this list.
 	defaultPlugins = []string{
 		// Provides the ability to configure Jenkins via YAML files on startup.

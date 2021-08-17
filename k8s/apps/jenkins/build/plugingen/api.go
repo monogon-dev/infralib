@@ -88,7 +88,6 @@ func getPluginSHA256(ctx context.Context, plugin, version string) (string, error
 		return "", fmt.Errorf("Client.Do(GET %q): %w", url, err)
 	}
 	defer res.Body.Close()
-	defer res.Body.Close()
 	switch res.StatusCode {
 	case 200:
 	case 404:
