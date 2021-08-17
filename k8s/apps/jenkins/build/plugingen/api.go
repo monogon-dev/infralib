@@ -26,7 +26,7 @@ const (
 var (
 	// downloadSHA256 is a regex that matches SHA256 sums in updates.jenkins.io
 	// HTML.
-	downloadSHA256 = regexp.MustCompile(`SHA-256: ([0-9a-f]{64})`)
+	downloadSHA256 = regexp.MustCompile(`SHA-256: <code>([0-9a-f]{64})</code>`)
 )
 
 // pluginsAPIPlugin is information about a plugin retrieved from
@@ -97,19 +97,21 @@ func getPluginSHA256(ctx context.Context, plugin, version string) (string, error
 	}
 
 	scanner := bufio.NewScanner(res.Body)
+	found := false
 	for scanner.Scan() {
 		line := scanner.Text()
-		if !strings.HasPrefix(line, "<tr>") {
+		if strings.Contains(line, fmt.Sprintf("%s/%s/%s.hpi", plugin, version, plugin)) {
+			found = true
 			continue
 		}
-		if !strings.Contains(line, fmt.Sprintf("%s/%s/%s.hpi", plugin, version, plugin)) {
-			continue
+
+		if found {
+			matches := downloadSHA256.FindStringSubmatch(line)
+			if len(matches) != 2 {
+				continue
+			}
+			return matches[1], nil
 		}
-		matches := downloadSHA256.FindStringSubmatch(line)
-		if len(matches) != 2 {
-			return "", fmt.Errorf("could not find SHA-256 in line %q", line)
-		}
-		return matches[1], nil
 	}
 	return "", fmt.Errorf("plugin version not found")
 }
