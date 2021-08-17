@@ -72,16 +72,6 @@ let _gerritConfig = """
 [plugin "webhooks"]
   sslVerify = true
 
-[experiments]
-  # Fancy new checks tab
-  enabled = UiFeature__ci_reboot_checks
-  # https://gerrit-review.googlesource.com/c/gerrit/+/286259
-  enabled = UiFeature__new_change_summary_ui
-  # https://gerrit-review.googlesource.com/c/gerrit/+/297181
-  enabled = UiFeature__new_image_diff_ui
-  # https://gerrit-review.googlesource.com/c/gerrit/+/293506
-  enabled = UiFeature__comment_context
-
 # Match Gerrit change IDs and link them to the same instance
 [commentlink "changeid"]
   match = (I[0-9a-f]{8,40})
