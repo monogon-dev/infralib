@@ -3,7 +3,7 @@
 
 package components
 
-k8s: {for agentConfig in config.agents {
+k8s: {for agentConfig in config.agents if agentConfig.deploy {
 	pvcs: "jenkins-agent-\(agentConfig.name)-bazel": spec: {
 		resources: requests: storage: "200Gi"
 		accessModes: ["ReadWriteOnce"]

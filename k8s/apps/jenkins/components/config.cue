@@ -49,6 +49,11 @@ import (
 	// The agent always allocates one gigabyte of RAM for housekeeping, so this
 	// has to be at least two gigabytes.
 	memory: int & >1 | *16
+
+	// Deploy the agent statefulset in addition to registering it with Jenkins.
+	// If set to false, the consumer must take care of deploying an appropriately
+	// configured agent.
+	deploy: bool | *true
 }
 
 // GerritPreSubmitJob is a Jenkins job that will run against open Gerrit
