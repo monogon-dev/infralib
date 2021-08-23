@@ -29,7 +29,7 @@ import (
 	//
 	// ...also happens to be painfully slow, increasing runtime by 10x. Therefore, we instead
 	// explicitly set the namespace for each kind in k8s_defs.cue and set that here.
-	objects: deploymentNamespace: *namespace | "kube-system"
+	objects: deploymentNamespace: *namespace | string
 
 	// Specified namespace is created by default
 	objects: namespaces: "\(namespace)": {}
