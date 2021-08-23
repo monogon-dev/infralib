@@ -61,7 +61,7 @@ k8s: {
 								"Overall/Read",
 								"Job/Read",
 							]
-							assignments: ["unauthenticated"]
+							assignments: ["anonymous"]
 						},
 					]
 				}
