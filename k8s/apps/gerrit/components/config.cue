@@ -12,7 +12,7 @@ package components
 #Config: {
 	images: {
 		// Don't forget to update javaHome when the base image was updated!
-		gerrit: "gcr.io/monogon-infra/gerrit:3.4.1-1@sha256:933ca11a05130cf927575e0f568853f02ef24a244484b35b228fa75c1fd5c8dc"
+		gerrit: "gcr.io/monogon-infra/gerrit:3.4.1-2@sha256:325dba47a7924362477bdcc55941507ce2997bc2284ac7a7c74b77f978ea6c78"
 	}
 
 	// Hostname for Gerrit to run on (without https://)
@@ -50,6 +50,9 @@ package components
 
 	// Extra configuration to add to the main Gerrit config file
 	extraConfig: string | *""
+
+	// Replication config file ($site_path/etc/replication.config)
+	replicationConfig: string | *""
 
 	// Whether to reinitalize and reindex Gerrit on startup, ie. run `gerrit.war init -d $home`.
 	// This is temporarily required for some upgrades that include schema changes.

@@ -246,9 +246,10 @@ k8s: {
 						//
 						//  - Gerrit *really* wants a writable fs, so we can't just mount the CM to /var/gerrit/etc.
 						env: [
-							{name: "GERRIT_SITECSS", value:      _gerritSiteCss},
-							{name: "GERRIT_CONFIG", value:       _gerritConfig},
-							{name: "GERRIT_THEME_PLUGIN", value: _customThemePlugin},
+							{name: "GERRIT_SITECSS", value:            _gerritSiteCss},
+							{name: "GERRIT_CONFIG", value:             _gerritConfig},
+							{name: "GERRIT_REPLICATION_CONFIG", value: config.replicationConfig},
+							{name: "GERRIT_THEME_PLUGIN", value:       _customThemePlugin},
 							if config.reinit {
 								{name: "GERRIT_REINIT", value: "true"}
 							},
@@ -267,7 +268,7 @@ k8s: {
 							},
 						]
 						volumeMounts: [
-							for k in ["git", "etc", "db", "index", "cache", "logs", "data"] {
+							for k in ["git", "etc", "db", "index", "cache", "logs", "data", ".ssh"] {
 								mountPath: "/var/gerrit/\(k)"
 								name:      "gerrit-data"
 								subPath:   k
