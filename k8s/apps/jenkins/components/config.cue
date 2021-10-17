@@ -244,7 +244,7 @@ import (
 
 #Config: {
 	images: {
-		controller: string | *"gcr.io/monogon-infra/jenkins-controller:2.306-centos7-2@sha256:2a9b8d08a6da0017d66169f57079d3a897ee56eb7e10b37cf184a902bf0323f2"
+		controller: string | *"gcr.io/monogon-infra/jenkins-controller:2.316-centos7-1@sha256:7d9d53937f45f209e64a8726a97fdc14d652914d7e2e0549f690afd97562acaf"
 		agent:      string | *"gcr.io/monogon-infra/jenkins-agent:monogon-builder-1626262040@sha256:2840e1f06910c76c09816924ab88a5656222cadb945c12e61184e4e93b907b72"
 	}
 
