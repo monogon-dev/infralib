@@ -11,7 +11,8 @@ package components
 
 #Config: {
 	images: {
-		gerrit: "gcr.io/monogon-infra/gerrit:3.4.0-7@sha256:721187f21a80c6b73628a8aea03102feec0ec90cdd4fdfe723ee5a6cddf13982"
+		// Don't forget to update javaHome when the base image was updated!
+		gerrit: "gcr.io/monogon-infra/gerrit:3.4.1-1@sha256:933ca11a05130cf927575e0f568853f02ef24a244484b35b228fa75c1fd5c8dc"
 	}
 
 	// Hostname for Gerrit to run on (without https://)

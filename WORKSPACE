@@ -97,8 +97,8 @@ _java_image_repos()
 http_file(
     name = "gerrit_release",
     downloaded_file_path = "gerrit.war",
-    sha256 = "18d52948af5c7331884b2be8d392ab2f378efb3466e5d1183a65f63b2ed38f31",
-    urls = ["https://gerrit-releases.storage.googleapis.com/gerrit-3.4.0.war"],
+    sha256 = "a47a2660a62957ad1220a2e8493e72f62dc5a6b315d551b2fb91a3869461054a",
+    urls = ["https://gerrit-releases.storage.googleapis.com/gerrit-3.4.1.war"],
 )
 
 # Plugin binaries are fetched from Gerrit's official plugin repository... which happens to be a Jenkins instance:
@@ -127,10 +127,10 @@ http_file(
 
 container_pull(
     name = "gerrit_base",
-    digest = "sha256:9fb8e718b89de01c124fc0560d740979fb01882e3dad6bc42705a13b56fd1502",
+    digest = "sha256:e2c5105534eb40096a43463399c34c250d865860b0591592ac0cac41366a7723",
     registry = "index.docker.io",
     repository = "gerritcodereview/gerrit",
-    tag = "3.4.0",
+    tag = "3.4.1",
 )
 
 load("//k8s/apps/jenkins/build:workspace.bzl", "jenkins_plugin_repositories")

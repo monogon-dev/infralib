@@ -8,7 +8,7 @@ container_image(
         "@gerrit_checks_plugin_release//file:checks.jar",
         "@gerrit_oauth_plugin_release//file:oauth.jar",
         "@gerrit_simplesubmitrules_plugin_release//file:simple-submit-rules.jar",
-    ]
+    ],
 )
 
 container_image(
@@ -26,7 +26,6 @@ container_image(
     directory = "/",
     entrypoint = ["/entrypoint.sh"],
     files = [":entrypoint.sh"],
-
 )
 
 container_push(
@@ -35,5 +34,5 @@ container_push(
     image = ":gerrit_image",
     registry = "gcr.io",
     repository = "monogon-infra/gerrit",
-    tag = "3.4.0-7",
+    tag = "3.4.1-1",
 )
