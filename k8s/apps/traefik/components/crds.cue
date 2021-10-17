@@ -57,3 +57,15 @@ k8s: crdsLegacy: "traefikservices.traefik.containo.us": spec: names: {
 	plural:   "traefikservices"
 	singular: "traefikservice"
 }
+
+k8s: crdsLegacy: "serverstransports.traefik.containo.us": spec: names: {
+	kind:     "ServersTransport"
+	plural:   "serverstransports"
+	singular: "serverstransport"
+}
+
+k8s: crdsLegacy: "middlewaretcps.traefik.containo.us": spec: names: {
+	kind:     "MiddlewareTCP"
+	plural:   "middlewaretcps"
+	singular: "middlewaretcp"
+}
