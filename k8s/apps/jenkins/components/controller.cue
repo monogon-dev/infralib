@@ -164,6 +164,13 @@ k8s: {
 								mountPath: "/var/jenkins_home"
 								name:      "jenkins-controller-home"
 							},
+							// Mount an emptyDir to the "plugins" directory. This ensures that plugins
+							// are cleanly reinstalled on pod restarts, which appears to be the
+							// only way of ensuring that we run the exact set from the container image.
+							{
+								mountPath: "/var/jenkins_home/plugins"
+								name:      "jenkins-controller-plugins"
+							},
 							{
 								mountPath: "/var/jenkins_config"
 								name:      "jenkins-controller-configuration"
@@ -237,6 +244,10 @@ k8s: {
 					{
 						name: "jenkins-controller-init-scripts"
 						secret: secretName: "jenkins-controller-init-scripts"
+					},
+					{
+						name: "jenkins-controller-plugins"
+						emptyDir: {}
 					},
 				]
 			}
