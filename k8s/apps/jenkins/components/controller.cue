@@ -194,6 +194,9 @@ k8s: {
 								value: "/var/jenkins_config"
 							},
 							{
+								// https://github.com/jenkinsci/gerrit-code-review-plugin#v046---released---5-sep-2021
+								let _classFilterWorkaround = "-Dhudson.remoting.ClassFilter=com.google.gerrit.extensions.common.AvatarInfo,com.google.gerrit.extensions.common.ReviewerUpdateInfo,com.google.gerrit.extensions.common.TrackingIdInfo,com.google.gerrit.extensions.common.SubmitRequirementInfo"
+
 								// Disable setup wizard. This leaves Jenkins in
 								// an unsecure, unconfigured state by default.
 								//
@@ -206,8 +209,10 @@ k8s: {
 								// configured-by-code Jenkins, without having
 								// administrators go through a setup wizard and
 								// click things.
+								let _disableSetupWizard = "-Djenkins.install.runSetupWizard=false"
+
 								name:  "JAVA_OPTS"
-								value: "-Djenkins.install.runSetupWizard=false"
+								value: "\(_disableSetupWizard) \(_classFilterWorkaround)"
 							},
 							{
 								// Force upgrade of plugins that ship with the
