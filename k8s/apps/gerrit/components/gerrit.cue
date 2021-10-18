@@ -59,6 +59,9 @@ let _gerritConfig = """
 [cache]
   directory = cache
 
+[change]
+  mergeabilityComputationBehavior = API_REF_UPDATED_AND_CHANGE_REINDEX
+
 [cache "web_sessions"]
   maxAge = 90 days
   memoryLimit = 8192
