@@ -18,7 +18,6 @@ let _gerritConfig = """
   javaOptions = "-Dflogger.backend_factory=com.google.common.flogger.backend.log4j.Log4jBackendFactory#getInstance"
   javaOptions = "-Dflogger.logging_context=com.google.gerrit.server.logging.LoggingContext#getInstance"
   user = gerrit
-  javaHome = /usr/lib/jvm/java-11-openjdk-11.0.12.0.7-0.el8_4.x86_64
   javaOptions = -Djava.security.egd=file:/dev/./urandom
   javaOptions = --add-opens java.base/java.net=ALL-UNNAMED
   javaOptions = --add-opens java.base/java.lang.invoke=ALL-UNNAMED

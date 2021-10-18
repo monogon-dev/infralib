@@ -11,7 +11,6 @@ package components
 
 #Config: {
 	images: {
-		// Don't forget to update javaHome when the base image was updated!
 		gerrit: "gcr.io/monogon-infra/gerrit:3.4.1-2@sha256:325dba47a7924362477bdcc55941507ce2997bc2284ac7a7c74b77f978ea6c78"
 	}
 
