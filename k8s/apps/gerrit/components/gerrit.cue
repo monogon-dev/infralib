@@ -11,6 +11,9 @@ let _gerritConfig = """
   serverId = \(config.serverID)
   instanceName = \(config.instanceName)
 
+[experiments]
+  enabled = UiFeature__submit_requirements_ui
+
 [sshd]
   advertisedAddress = \(config.publicHostname):\(config.sshPort)
 
