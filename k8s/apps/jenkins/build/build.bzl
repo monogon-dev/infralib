@@ -52,6 +52,8 @@ def jenkins_plugin_files_all():
         "@jenkins_handy_uri_templates_2_api_plugin_release//file:handy-uri-templates-2-api.jpi",
         "@jenkins_htmlpublisher_plugin_release//file:htmlpublisher.jpi",
         "@jenkins_jackson2_api_plugin_release//file:jackson2-api.jpi",
+        "@jenkins_javax_activation_api_plugin_release//file:javax-activation-api.jpi",
+        "@jenkins_javax_mail_api_plugin_release//file:javax-mail-api.jpi",
         "@jenkins_jenkins_design_language_plugin_release//file:jenkins-design-language.jpi",
         "@jenkins_jjwt_api_plugin_release//file:jjwt-api.jpi",
         "@jenkins_job_dsl_plugin_release//file:job-dsl.jpi",
