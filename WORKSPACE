@@ -147,10 +147,10 @@ container_pull(
 
 container_pull(
     name = "monogon_builder",
-    digest = "sha256:afd386ff0806b394e2cc12bcddc9bf0b3d03db48d9f9e609ea174794631d7ca3",
+    digest = "sha256:37c8d25d3751f211dc30d46d0fefbda8a1074d3c409339a44dd0b601ddff623e",
     registry = "gcr.io",
     repository = "monogon-infra/monogon-builder",
-    tag = "1626219512",
+    tag = "1646697051",
 )
 
 # Forked version of smtprelay, which adds support for plain auth tokens and environment variables for secrets.
