@@ -54,8 +54,12 @@ package components
 	replicationConfig: string | *""
 
 	// Whether to reinitalize and reindex Gerrit on startup, ie. run `gerrit.war init -d $home`.
-	// This is temporarily required for some upgrades that include schema changes.
-	reinit: bool | *false
+	//
+	// For correctness, this is defaulted to true since our entrypoint has no way of knowing
+	// when a reinitialization is required. This guarantees that plugins and indexes are
+	// always up to date. On Monogon's instance, this is reasonably fast. On larger installations,
+	// it might be necessary to disable this and manually reinitialize when required by a major upgrade.
+	reinit: bool | *true
 }
 
 config: #Config
