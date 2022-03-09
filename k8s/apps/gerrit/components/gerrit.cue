@@ -3,19 +3,23 @@
 
 package components
 
+import (
+	"text/template"
+)
+
 // https://gerrit-review.googlesource.com/Documentation/config-gerrit.html
-let _gerritConfig = """
+let _gerritConfig = template.Execute("""
 [gerrit]
   basePath = git
-  canonicalWebUrl = https://\(config.publicHostname)/
-  serverId = \(config.serverID)
-  instanceName = \(config.instanceName)
+  canonicalWebUrl = https://{{.publicHostname}}/
+  serverId = {{.serverID}}
+  instanceName = {{.instanceName}}
 
 [experiments]
   enabled = UiFeature__submit_requirements_ui
 
 [sshd]
-  advertisedAddress = \(config.publicHostname):\(config.sshPort)
+  advertisedAddress = {{.publicHostname}}:{{.sshPort}}
 
 [container]
   javaOptions = "-Dflogger.backend_factory=com.google.common.flogger.backend.log4j.Log4jBackendFactory#getInstance"
@@ -40,13 +44,13 @@ let _gerritConfig = """
   enableSignedPush = false
 
 [user]
-  email = \(config.userEmail)
+  email = {{.userEmail}}
 
 [sendemail]
-  smtpServer = \(config.smtpServer)
-  smtpServerPort = \(config.smtpPort)
-  smtpUser = \(config.smtpUser)
-  smtpPass = \(config.smtpPass)
+  smtpServer = {{.smtpServer}}
+  smtpServerPort = {{.smtpPort}}
+  smtpUser = {{.smtpUser}}
+  smtpPass = {{.smtpPass}}
 
   smtpEncryption = tls
 
@@ -70,8 +74,8 @@ let _gerritConfig = """
   diskLimit = 256m
 
 [plugin "gerrit-oauth-provider-google-oauth"]
-  client-id = \(config.googleAuth.clientID)
-  client-secret = \(config.googleAuth.clientSecret)
+  client-id = {{.googleAuth.clientID}}
+  client-secret = {{.googleAuth.clientSecret}}
   use-email-as-username = true
 
 [plugin "webhooks"]
@@ -88,7 +92,7 @@ let _gerritConfig = """
   link = "https://github.com/$1/$2/issues/$3"
 
 \(config.extraConfig)
-"""
+""", config)
 
 let _customThemePlugin = """
 const customTheme = document.createElement('dom-module');
