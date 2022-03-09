@@ -73,10 +73,12 @@ let _gerritConfig = template.Execute("""
   memoryLimit = 8192
   diskLimit = 256m
 
+{{if .googleAuth -}}
 [plugin "gerrit-oauth-provider-google-oauth"]
   client-id = {{.googleAuth.clientID}}
   client-secret = {{.googleAuth.clientSecret}}
   use-email-as-username = true
+{{- end}}
 
 [plugin "webhooks"]
   sslVerify = true

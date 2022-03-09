@@ -24,7 +24,7 @@ package components
 	serverID: string
 
 	// Google OAuth credentials
-	googleAuth: #GoogleAuth
+	googleAuth?: #GoogleAuth
 
 	// SMTP authentication
 	smtpServer: string
