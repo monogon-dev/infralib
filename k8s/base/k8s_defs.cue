@@ -7,6 +7,7 @@ import (
 	core_v1 "k8s.io/api/core/v1"
 	apps_v1 "k8s.io/api/apps/v1"
 	rbac_v1 "k8s.io/api/rbac/v1"
+	networking_v1 "k8s.io/api/networking/v1"
 	admissionregistration_v1 "k8s.io/api/admissionregistration/v1"
 	apiext_v1beta1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1"
 	apiext_v1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
@@ -29,6 +30,17 @@ import (
 		apiVersion: "traefik.containo.us/v1alpha1"
 		kind:       "IngressRoute"
 		metadata: {name: Name, namespace: deploymentNamespace}
+		...
+	}
+
+	// GCP managed certificate CRDs
+	managedcertificates: [Name=_]: {
+		apiVersion: "networking.gke.io/v1"
+		kind:       "ManagedCertificate"
+		metadata: {name: Name, namespace: deploymentNamespace}
+		spec: {
+			domains: [string,...string]
+		}
 		...
 	}
 
@@ -141,6 +153,11 @@ import (
 	crds: [Name=_]: apiext_v1.#CustomResourceDefinition & {
 		apiVersion: "apiextensions.k8s.io/v1"
 		kind:       "CustomResourceDefinition"
+		metadata: {name: Name, namespace: deploymentNamespace}
+	}
+	ingresses: [Name=_]: networking_v1.#Ingress & {
+		apiVersion: "networking.k8s.io/v1"
+		kind:       "Ingress"
 		metadata: {name: Name, namespace: deploymentNamespace}
 	}
 }

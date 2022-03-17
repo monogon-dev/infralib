@@ -16,6 +16,7 @@ objects: [ for v in objectSets for x in v {x}]
 
 // Specify order in which to apply k8s objects.
 objectSets: [
+	// Native k8s resources
 	context.objects.serviceaccounts,
 	context.objects.secrets,
 	context.objects.configmaps,
@@ -29,7 +30,10 @@ objectSets: [
 	context.objects.clusterroles,
 	context.objects.rolebindings,
 	context.objects.roles,
+	context.objects.ingresses,
 
+	// CRD resources
+	context.objects.managedcertificates,
 	context.objects.ingressroutes,
 
 	context.objects.issuers,
