@@ -15,3 +15,4 @@ cue get go k8s.io/api/rbac/v1
 cue get go k8s.io/api/admissionregistration/v1
 cue get go k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1
 cue get go k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1
+cue get go k8s.io/api/networking/v1
