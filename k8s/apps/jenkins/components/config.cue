@@ -245,7 +245,7 @@ import (
 #Config: {
 	images: {
 		controller: string | *"gcr.io/monogon-infra/jenkins-controller:2.337-centos7-1@sha256:636ab4009f2f8aaf27ca73a05782dee4d5d6f0419c6645fc948296f8c6778b79"
-		agent:      string | *"gcr.io/monogon-infra/jenkins-agent:monogon-builder-1646697051@sha256:aae2e4fd67cc4aad43a0291d539a89e3c7bde9b0efea2eef58d12b5406b9c36b"
+		agent:      string | *"gcr.io/monogon-infra/jenkins-agent:monogon-builder-1649063546@sha256:9143f5124318c77a6dc97c787f178be69c66fda13a7970e863d4308bd05d76cc"
 	}
 
 	// Hostname for Jenkins to run on (without https://)
