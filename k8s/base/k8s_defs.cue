@@ -39,7 +39,39 @@ import (
 		kind:       "ManagedCertificate"
 		metadata: {name: Name, namespace: deploymentNamespace}
 		spec: {
-			domains: [string,...string]
+			domains: [string, ...string]
+		}
+		...
+	}
+	// GCP ingress-gce load balancer backend config from:
+	//     https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-features
+	backendconfigs: [Name=_]: {
+		apiVersion: "cloud.google.com/v1"
+		kind:       "BackendConfig"
+		metadata: {name: Name, namespace: deploymentNamespace}
+		spec: {
+			iap?: {
+				enabled: bool
+				oauthclientCredentials: secretName: string
+			}
+			connectionDraining?: drainingTimeoutSec: number
+			customRequestHeaders?: [string, ...string]
+			healthCheck?: {
+				checkIntervalSec?:   number
+				timeoutSec?:         number
+				healthyThreshold?:   number
+				unhealthyThreshold?: number
+				type:                "HTTP" | "HTTPS" | "HTTP2"
+				requestPath?:        string
+				port?:               number
+			}
+			logging?: {
+				enable:      bool
+				sampleRate?: number
+			}
+			securityPolicy?: name:          string
+			sessionAffinity?: affinityType: string
+			timeoutSec?: number
 		}
 		...
 	}
