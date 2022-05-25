@@ -33,7 +33,9 @@ k8s: {for agentConfig in config.agents if agentConfig.deploy {
 					image:      config.images.agent
 					workingDir: "/home/ci"
 					command: [
+						"tini",
 						"/monogon-infra/k8s/apps/jenkins/build/agentlauncher",
+						"--",
 						"-jarUrl",
 						agentConfig.jarURL,
 						"-jnlpUrl",

@@ -50,5 +50,5 @@ container_push(
     image = "agent_image",
     registry = "gcr.io",
     repository = "monogon-infra/jenkins-agent",
-    tag = "monogon-builder-1649063546",
+    tag = "monogon-builder-1653395207",
 )
