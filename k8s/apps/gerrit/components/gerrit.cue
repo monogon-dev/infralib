@@ -15,9 +15,6 @@ let _gerritConfig = template.Execute("""
   serverId = {{.serverID}}
   instanceName = {{.instanceName}}
 
-[experiments]
-  enabled = UiFeature__submit_requirements_ui
-
 [sshd]
   advertisedAddress = {{.publicHostname}}:{{.sshPort}}
 

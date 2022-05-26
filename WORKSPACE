@@ -97,40 +97,33 @@ _java_image_repos()
 http_file(
     name = "gerrit_release",
     downloaded_file_path = "gerrit.war",
-    sha256 = "18e68d025c24bd22e9b7f839a0e34688d331ecfb290334afada6ff588dc3658c",
-    urls = ["https://gerrit-ci.gerritforge.com/view/Gerrit/job/Gerrit-bazel-master/132/artifact/gerrit/bazel-bin/release.war"],
+    sha256 = "5312feff4998dd47b3ca762d52e45f0c2d4e23abf9693630f99936de0a4ebf88",
+    urls = ["https://gerrit-releases.storage.googleapis.com/gerrit-3.6.0.war"],
 )
 
 # Plugin binaries are fetched from Gerrit's official plugin repository... which happens to be a Jenkins instance:
-# https://gerrit-ci.gerritforge.com/view/Plugins-stable-3.5/
+# https://gerrit-ci.gerritforge.com/view/Plugins-stable-3.6/
 
 http_file(
     name = "gerrit_oauth_plugin_release",
     downloaded_file_path = "oauth.jar",
-    sha256 = "7780f493b50c082235c41fd790ee1a370785909aedbe695dbc9fd3df91d3f992",
-    urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-master/job/plugin-oauth-bazel-master-master/51/artifact/bazel-bin/plugins/oauth/oauth.jar"],
+    sha256 = "16a9888c8ff760e4eda744096fbc18054b5e22333823681102ee5bd7cb524e0e",
+    urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-stable-3.6/job/plugin-oauth-bazel-master-stable-3.6/1/artifact/bazel-bin/plugins/oauth/oauth.jar"],
 )
 
 http_file(
     name = "gerrit_checks_plugin_release",
     downloaded_file_path = "checks.jar",
-    sha256 = "0586ec235cbc6431e478329f410aa93fc11fbcee9994c9fbb46e73c645e6d0bc",
-    urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-master/job/plugin-checks-bazel-master/70/artifact/bazel-bin/plugins/checks/checks.jar"],
-)
-
-http_file(
-    name = "gerrit_simplesubmitrules_plugin_release",
-    downloaded_file_path = "simple-submit-rules.jar",
-    sha256 = "6742c5fb36fb36e6e9acfe28180a479ce83b48ac18716a92aab9304c5513e9ee",
-    urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-master/job/plugin-simple-submit-rules-bazel-master-master/7/artifact/bazel-bin/plugins/simple-submit-rules/simple-submit-rules.jar"],
+    sha256 = "ff435ea3cc7d671117205fe7f9c622b8e60b543e0ef39f3aeaaefe4714386e34",
+    urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-stable-3.6/job/plugin-checks-bazel-master-stable-3.6/1/artifact/bazel-bin/plugins/checks/checks.jar"],
 )
 
 container_pull(
     name = "gerrit_base",
-    digest = "sha256:d5725c2772a04fc56af5029663f00dc29de79ca91024ffb7f26f898629eb23c5",
+    digest = "sha256:b24689af2a6d75ff09cca599138a124a85d6f628220cff48b13bcb1b73967bda",
     registry = "index.docker.io",
     repository = "gerritcodereview/gerrit",
-    tag = "3.5.0",
+    tag = "3.6.0",
 )
 
 load("//k8s/apps/jenkins/build:workspace.bzl", "jenkins_plugin_repositories")
