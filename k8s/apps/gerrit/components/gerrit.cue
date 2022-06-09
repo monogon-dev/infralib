@@ -140,12 +140,17 @@ let _gerritSiteCss = """
 	}
 
 	#login_oauth div#-azure-oauth a:after {
-			content: "Azure / Office365";
+			content: "Azure / Office365 (internal)";
 			font-size: initial;
 	}
 
 	#login_oauth div#-google-oauth a:after {
 			content: "Google";
+			font-size: initial;
+	}
+
+	#login_oauth div#-github-oauth a:after {
+			content: "GitHub";
 			font-size: initial;
 	}
 
