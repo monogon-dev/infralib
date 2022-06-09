@@ -54,9 +54,9 @@ RemoteTask: {
 	_cmd:     string
 
 	if context.hostname == "local" {
-		cmd: _cmd
+		cmd: ["bash", "-c", _cmd]
 	}
 	if context.hostname != "local" {
-		cmd: "ssh \(context.hostname) \(_cmd)"
+		cmd: ["ssh", context.hostname, _cmd]
 	}
 }
