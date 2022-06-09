@@ -76,6 +76,13 @@ import (
 		...
 	}
 
+	frontendconfigs: [Name=_]: {
+		apiVersion: "networking.gke.io/v1beta1"
+		kind:       "FrontendConfig"
+		metadata: {name: Name, namespace: deploymentNamespace}
+		spec: {...}
+	}
+
 	// Cert-Manager
 	issuers: [Name=_]: {
 		apiVersion: "cert-manager.io/v1"

@@ -34,6 +34,7 @@ objectSets: [
 
 	// CRD resources
 	context.objects.backendconfigs,
+	context.objects.frontendconfigs,
 	context.objects.managedcertificates,
 	context.objects.ingressroutes,
 
