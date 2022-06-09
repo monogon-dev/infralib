@@ -16,7 +16,7 @@ let _gerritConfig = template.Execute("""
   instanceName = {{.instanceName}}
 
 [sshd]
-  advertisedAddress = {{.publicHostname}}:{{.sshPort}}
+  advertisedAddress = {{.sshHostname}}:{{.sshPort}}
 
 [container]
   javaOptions = "-Dflogger.backend_factory=com.google.common.flogger.backend.log4j.Log4jBackendFactory#getInstance"
@@ -180,26 +180,6 @@ k8s: {
 		"gerrit-data": {}
 	}
 
-	ingressroutes: "gerrit-tls": {
-		spec: {
-			entryPoints: ["websecure"]
-			routes: [
-				{
-					match: "Host(`\(config.publicHostname)`) && PathPrefix(`/`)"
-					kind:  "Rule"
-					services: [
-						{
-							kind:     "Service"
-							name:     "gerrit"
-							port:     80
-							protocol: "TCP"
-						},
-					]
-				},
-			]
-		}
-	}
-
 	services: gerrit: spec: {
 		ports: [
 			{
@@ -218,18 +198,37 @@ k8s: {
 		selector: app: "gerrit"
 	}
 
-	services: "gerrit-ssh": spec: {
-		type: "NodePort"
-		ports: [
-			{
-				name:       "git-ssh"
-				protocol:   "TCP"
-				port:       29418
-				nodePort:   config.sshPort
-				targetPort: "git-ssh"
-			},
-		]
-		selector: app: "gerrit"
+	if config.sshLoadBalancerIP == _|_ {
+		services: "gerrit-ssh": spec: {
+			type: "NodePort"
+			ports: [
+				{
+					name:       "git-ssh"
+					protocol:   "TCP"
+					port:       29418
+					nodePort:   config.sshPort
+					targetPort: "git-ssh"
+				},
+			]
+			selector: app: "gerrit"
+		}
+	}
+
+	if config.sshLoadBalancerIP != _|_ {
+		services: "gerrit-ssh-lb": spec: {
+			type:                  "LoadBalancer"
+			externalTrafficPolicy: "Local"
+			loadBalancerIP:        config.sshLoadBalancerIP
+			ports: [
+				{
+					name:       "git-ssh"
+					protocol:   "TCP"
+					port:       config.sshPort
+					targetPort: "git-ssh"
+				},
+			]
+			selector: app: "gerrit"
+		}
 	}
 
 	statefulsets: gerrit: spec: {
@@ -242,10 +241,19 @@ k8s: {
 				name: "gerrit"
 			}
 			spec: {
+				securityContext: {
+					runAsUser: 1000
+					fsGroup:   1000
+				}
 				containers: [
 					{
 						name:  "gerrit"
 						image: config.images.gerrit
+
+						resources: {
+							requests: memory: *"2Gi" | _
+							requests: cpu:    *"2" | _
+						}
 
 						// We use an environment variable instead of a CM to pass the config:
 						//

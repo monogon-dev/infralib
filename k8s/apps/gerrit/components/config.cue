@@ -9,6 +9,11 @@ package components
 	clientSecret: string
 }
 
+#GCP: {
+	// Name of a global static IP to be used for ingress.
+	ingressStaticIPName: string
+}
+
 #Config: {
 	images: {
 		gerrit: "gcr.io/monogon-infra/gerrit@sha256:68663358a6c993faeca3f8e6374a98224abadeed991138bc17b560672aa8293e"
@@ -16,6 +21,9 @@ package components
 
 	// Hostname for Gerrit to run on (without https://)
 	publicHostname: string
+
+	// SSH hostname to advertise (defaults to publicHostname).
+	sshHostname: *publicHostname | string
 
 	// Wildcard domain to use for TLS termination
 	publicDomain: string
@@ -35,9 +43,21 @@ package components
 	// Gerrit's own email address (for Git commits and notification mails)
 	userEmail: string
 
-	// NodePort requested from the cluster. The service needs to be manually
-	// deleted before changing this on an existing cluster.
-	sshPort: uint & >=30000 & <=32767
+	// Public SSH port requested from the cluster, either by means of a NodePort or
+	// LoadBalancer object. The service needs to be manually deleted before
+	// changing this on an existing cluster.
+	sshPort: uint
+
+	// If sshLoadBalancerIP is set, deploy a LoadBalancer. A NodePort is deployed otherwise.
+	sshLoadBalancerIP?: string
+
+	// Enable GCP support by specifying a GCP config.
+	// This deploys a ingress + TLS cert on publicHostname.
+	gcp?: #GCP
+
+	// Enable deploying a Traefik IngressRoute.
+	// TODO: replace by a plain Ingress object with annotations
+	enableTraefik: *true | bool
 
 	// Human-readable short name for the instance (will be part of the email subject line)
 	instanceName: string
