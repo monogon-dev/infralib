@@ -1,0 +1,18 @@
+load("@io_bazel_rules_docker//container:container.bzl", "container_image", "container_push")
+
+container_image(
+    name = "agent_image",
+    base = "@monogon_builder//image",
+    files = [
+        "run_agent.sh",
+    ],
+)
+
+container_push(
+    name = "agent_push",
+    format = "Docker",
+    image = "agent_image",
+    registry = "gcr.io",
+    repository = "monogon-infra/gha-agent",
+    tag = "monogon-builder-1656611307",
+)
