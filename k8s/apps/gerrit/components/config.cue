@@ -64,8 +64,10 @@ package components
 
 	// Custom title displayed in Gerrit's header
 	headerName:            string
-	headerBackgroundColor: string & =~"^#(?:[0-9a-fA-F]{3}){1,2}$"
+	headerBackgroundColor: string
 	headerForegroundColor: string & =~"^#(?:[0-9a-fA-F]{3}){1,2}$"
+	headerIcon:            string
+	headerIconHeight:      string | *"1.2em"
 
 	// Extra configuration to add to the main Gerrit config file
 	extraConfig: string | *""

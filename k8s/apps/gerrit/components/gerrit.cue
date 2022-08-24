@@ -93,6 +93,8 @@ let _gerritConfig = template.Execute("""
 \(config.extraConfig)
 """, config)
 
+// See https://gerrit.googlesource.com/gerrit/+/master/polygerrit-ui/app/styles/themes/app-theme.ts
+// for available CSS variables.
 let _customThemePlugin = """
 const customTheme = document.createElement('dom-module');
 customTheme.innerHTML = `<template>
@@ -101,6 +103,8 @@ customTheme.innerHTML = `<template>
             --header-background-color: \(config.headerBackgroundColor);
             --header-text-color: \(config.headerForegroundColor);
             --header-title-content: "\(config.headerName)";
+            --header-icon: url("\(config.headerIcon)");
+            --header-icon-size: \(config.headerIconHeight);
         }
     </style>
 </template>
