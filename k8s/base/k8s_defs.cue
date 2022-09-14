@@ -8,6 +8,7 @@ import (
 	apps_v1 "k8s.io/api/apps/v1"
 	rbac_v1 "k8s.io/api/rbac/v1"
 	networking_v1 "k8s.io/api/networking/v1"
+	storage_v1 "k8s.io/api/storage/v1"
 	admissionregistration_v1 "k8s.io/api/admissionregistration/v1"
 	apiext_v1beta1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1"
 	apiext_v1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
@@ -197,6 +198,12 @@ import (
 	ingresses: [Name=_]: networking_v1.#Ingress & {
 		apiVersion: "networking.k8s.io/v1"
 		kind:       "Ingress"
+		metadata: {name: Name, namespace: deploymentNamespace}
+	}
+
+	volumesnapshotclasses: [Name=_]: storage_v1.VolumeSnapshotClass & {
+		apiVersion: "snapshot.storage.k8s.io/v1"
+		kind:       "VolumeSnapshotClass"
 		metadata: {name: Name, namespace: deploymentNamespace}
 	}
 }

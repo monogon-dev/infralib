@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
+set -euo pipefail
 # Regenerate all definition from latest releases, including the dummy Go module which is used to pin dependencies.
 
-rm -rf go.mod cue.mod/gen
-
-# Pin Go dependencies
-go mod init infralib.monogon.dev/k8s
+rm -rf cue.mod/gen
 go mod tidy
 
 # Generate Cue definitions (see deps.go)
@@ -16,3 +14,4 @@ cue get go k8s.io/api/admissionregistration/v1
 cue get go k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1
 cue get go k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1
 cue get go k8s.io/api/networking/v1
+cue get go k8s.io/api/storage/v1

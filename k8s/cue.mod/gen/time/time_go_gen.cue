@@ -7,7 +7,7 @@
 // The calendrical calculations always assume a Gregorian calendar, with
 // no leap seconds.
 //
-// Monotonic Clocks
+// # Monotonic Clocks
 //
 // Operating systems provide both a “wall clock,” which is subject to
 // changes for clock synchronization, and a “monotonic clock,” which is
@@ -64,6 +64,10 @@
 // t.UnmarshalJSON, and t.UnmarshalText always create times with
 // no monotonic clock reading.
 //
+// The monotonic clock reading exists only in Time values. It is not
+// a part of Duration values or the Unix times returned by t.Unix and
+// friends.
+//
 // Note that the Go == operator compares not just the time instant but
 // also the Location and the monotonic clock reading. See the
 // documentation for the Time type for a discussion of equality
@@ -72,7 +76,6 @@
 // For debugging, the result of t.String does include the monotonic
 // clock reading if present. If t != u because of different monotonic clock readings,
 // that difference will be visible when printing t.String() and u.String().
-//
 package time
 
 // A Time represents an instant in time with nanosecond precision.
@@ -118,7 +121,6 @@ package time
 // to t == u, since t.Equal uses the most accurate comparison available and
 // correctly handles the case when only one of its arguments has a monotonic
 // clock reading.
-//
 #Time: _
 
 _#hasMonotonic: 9223372036854775808
@@ -217,7 +219,6 @@ _#internalToAbsolute: int64 & 9223371966579724800
 _#unixToInternal:     int64 & 62135596800
 _#internalToUnix:     int64 & -62135596800
 _#wallToInternal:     int64 & 59453308800
-_#internalToWall:     int64 & -59453308800
 
 // A Duration represents the elapsed time between two instants
 // as an int64 nanosecond count. The representation limits the
@@ -263,4 +264,5 @@ _#daysPer400Years:  146097
 _#daysPer100Years:  36524
 _#daysPer4Years:    1461
 
-_#timeBinaryVersion: 1
+_#timeBinaryVersionV1: 1
+_#timeBinaryVersionV2: 2
