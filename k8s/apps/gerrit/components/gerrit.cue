@@ -15,6 +15,13 @@ let _gerritConfig = template.Execute("""
   serverId = {{.serverID}}
   instanceName = {{.instanceName}}
 
+[experiments]
+  enabled = UiFeature__mention_users
+  enabled = UiFeature__render_markdown
+  enabled = UiFeature__copy_link_dialog
+  enabled = UiFeature__suggest_edit
+  enabled = UiFeature__auto_app_theme
+
 [sshd]
   advertisedAddress = {{.sshHostname}}:{{.sshPort}}
 

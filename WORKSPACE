@@ -97,33 +97,33 @@ _java_image_repos()
 http_file(
     name = "gerrit_release",
     downloaded_file_path = "gerrit.war",
-    sha256 = "5312feff4998dd47b3ca762d52e45f0c2d4e23abf9693630f99936de0a4ebf88",
-    urls = ["https://gerrit-releases.storage.googleapis.com/gerrit-3.6.0.war"],
+    sha256 = "a5b39eed937420ce0f4dd472c060b2189ec62323ee75b549dd0a2454fd5b6b3a",
+    urls = ["https://gerrit-releases.storage.googleapis.com/gerrit-3.7.0.war"],
 )
 
 # Plugin binaries are fetched from Gerrit's official plugin repository... which happens to be a Jenkins instance:
-# https://gerrit-ci.gerritforge.com/view/Plugins-stable-3.6/
+# https://gerrit-ci.gerritforge.com/view/Plugins-stable-3.7/
 
 http_file(
     name = "gerrit_oauth_plugin_release",
     downloaded_file_path = "oauth.jar",
-    sha256 = "16a9888c8ff760e4eda744096fbc18054b5e22333823681102ee5bd7cb524e0e",
-    urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-stable-3.6/job/plugin-oauth-bazel-master-stable-3.6/1/artifact/bazel-bin/plugins/oauth/oauth.jar"],
+    sha256 = "3f11c5dfbf11a6930d72ee80eb6c0507f8519e926ac1ebbcc0bef2a5d7fe9239",
+    urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-stable-3.7/job/plugin-oauth-bazel-master-stable-3.7/1/artifact/bazel-bin/plugins/oauth/oauth.jar"],
 )
 
 http_file(
     name = "gerrit_checks_plugin_release",
     downloaded_file_path = "checks.jar",
-    sha256 = "ff435ea3cc7d671117205fe7f9c622b8e60b543e0ef39f3aeaaefe4714386e34",
-    urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-stable-3.6/job/plugin-checks-bazel-master-stable-3.6/1/artifact/bazel-bin/plugins/checks/checks.jar"],
+    sha256 = "f23b05bc147f4b1c9978e0bc4a21a171a5e1cf38ea359aa2df34e5a065dac4b1",
+    urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-stable-3.7/job/plugin-checks-bazel-stable-3.7/1/artifact/bazel-bin/plugins/checks/checks.jar"],
 )
 
 container_pull(
     name = "gerrit_base",
-    digest = "sha256:b24689af2a6d75ff09cca599138a124a85d6f628220cff48b13bcb1b73967bda",
+    digest = "sha256:cc3ea550e18be7ae81f1878bbadc4f68a6c51430f2c8c35414096dcd365b4b06",
     registry = "index.docker.io",
     repository = "gerritcodereview/gerrit",
-    tag = "3.6.0",
+    tag = "3.7.0",
 )
 
 load("//k8s/apps/jenkins/build:workspace.bzl", "jenkins_plugin_repositories")

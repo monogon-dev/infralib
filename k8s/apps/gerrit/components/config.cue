@@ -16,7 +16,7 @@ package components
 
 #Config: {
 	images: {
-		gerrit: "gcr.io/monogon-infra/gerrit@sha256:68663358a6c993faeca3f8e6374a98224abadeed991138bc17b560672aa8293e"
+		gerrit: "gcr.io/monogon-infra/gerrit@sha256:ceb3571b02baa878fe1498e6e39306ae14dc6d7ca5f3ea746b9e2861b1df4211"
 	}
 
 	// Hostname for Gerrit to run on (without https://)
