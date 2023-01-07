@@ -132,10 +132,10 @@ jenkins_plugin_repositories()
 
 container_pull(
     name = "jenkins_controller_base",
-    digest = "sha256:ddaea9c5ee0e37f4b73a65b39930d8f6b60be158739a76222f957bbb65423f7b",
+    digest = "sha256:0916193b654836c6e95fd50c9f58e613dd79a54c2e8cbd8279fdc2d8c5afd409",
     registry = "index.docker.io",
     repository = "jenkins/jenkins",
-    tag = "2.337-centos7",
+    tag = "2.385-almalinux",
 )
 
 container_pull(
