@@ -195,7 +195,27 @@ k8s: {
 							},
 							{
 								// https://github.com/jenkinsci/gerrit-code-review-plugin#v046---released---5-sep-2021
-								let _classFilterWorkaround = "-Dhudson.remoting.ClassFilter=com.google.gerrit.extensions.common.AvatarInfo,com.google.gerrit.extensions.common.ReviewerUpdateInfo,com.google.gerrit.extensions.common.TrackingIdInfo,com.google.gerrit.extensions.common.SubmitRequirementInfo"
+								let _classFilterWorkaroundClasses = [
+										"com.google.gerrit.extensions.common.AccountInfo",
+										"com.google.gerrit.extensions.common.ActionInfo",
+										"com.google.gerrit.extensions.common.ApprovalInfo",
+										"com.google.gerrit.extensions.common.AvatarInfo",
+										"com.google.gerrit.extensions.common.ChangeInfo",
+										"com.google.gerrit.extensions.common.ChangeMessageInfo",
+										"com.google.gerrit.extensions.common.CommitInfo",
+										"com.google.gerrit.extensions.common.FetchInfo",
+										"com.google.gerrit.extensions.common.FileInfo",
+										"com.google.gerrit.extensions.common.GitPerson",
+										"com.google.gerrit.extensions.common.LabelInfo",
+										"com.google.gerrit.extensions.common.ReviewerUpdateInfo",
+										"com.google.gerrit.extensions.common.RevisionInfo",
+										"com.google.gerrit.extensions.common.SubmitRequirementInfo",
+										"com.google.gerrit.extensions.common.TrackingIdInfo",
+										"com.google.gerrit.extensions.common.VotingRangeInfo",
+										"com.google.gerrit.extensions.common.WebLinkInfo",
+								]
+
+								let _classFilterWorkaround = "-Dhudson.remoting.ClassFilter=\(strings.Join(_classFilterWorkaroundClasses, ","))"
 
 								// Disable setup wizard. This leaves Jenkins in
 								// an unsecure, unconfigured state by default.
