@@ -5,7 +5,7 @@ package components
 
 #Config: {
 	images: {
-		traefik: "docker.io/traefik:v2.5.2@sha256:b8802f19de00e344ae5f87d8dde9ff17360a10cf0d5e85949a065de89e69bbe3"
+		traefik: "docker.io/traefik:v2.9.6@sha256:bb7be8d50edf73d8d3a812ac8873ef354a0fe9b40d7f3880747b43a3525855d2"
 	}
 
 	// Cloudflare access token for Let's Encrypt DNS challenges.
