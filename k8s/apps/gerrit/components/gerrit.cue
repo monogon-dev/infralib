@@ -53,8 +53,10 @@ let _gerritConfig = template.Execute("""
 [sendemail]
   smtpServer = {{.smtpServer}}
   smtpServerPort = {{.smtpPort}}
+{{ if .smtpUser -}}
   smtpUser = {{.smtpUser}}
   smtpPass = {{.smtpPass}}
+{{- end }}
 
   smtpEncryption = tls
 

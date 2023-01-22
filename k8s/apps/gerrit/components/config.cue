@@ -37,8 +37,8 @@ package components
 	// SMTP authentication
 	smtpServer: string
 	smtpPort:   uint
-	smtpUser:   string
-	smtpPass:   string
+	smtpUser?:   string
+	smtpPass?:   string
 
 	// Gerrit's own email address (for Git commits and notification mails)
 	userEmail: string
