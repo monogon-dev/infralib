@@ -308,7 +308,6 @@ k8s: {
 						kind:     "Service"
 						name:     "jenkins-controller"
 						port:     80
-						protocol: "TCP"
 					},
 				]
 			},

@@ -13,7 +13,6 @@ if config.enableTraefik {
 							kind:     "Service"
 							name:     "gerrit"
 							port:     80
-							protocol: "TCP"
 						},
 					]
 				},

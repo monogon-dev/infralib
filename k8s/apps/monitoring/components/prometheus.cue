@@ -250,7 +250,6 @@ k8s: ingressroutes: "prom-tls": {
 						kind:     "Service"
 						name:     "prometheus"
 						port:     80
-						protocol: "TCP"
 					},
 				]
 			},
@@ -262,7 +261,6 @@ k8s: ingressroutes: "prom-tls": {
 						kind:     "Service"
 						name:     "prometheus-alerts"
 						port:     80
-						protocol: "TCP"
 					},
 				]
 			},

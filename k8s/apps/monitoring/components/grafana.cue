@@ -183,7 +183,6 @@ k8s: ingressroutes: "grafana-tls": {
 						kind:     "Service"
 						name:     "grafana"
 						port:     80
-						protocol: "TCP"
 					},
 				]
 			},
