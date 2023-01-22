@@ -10,7 +10,6 @@ import (
 	networking_v1 "k8s.io/api/networking/v1"
 	storage_v1 "k8s.io/api/storage/v1"
 	admissionregistration_v1 "k8s.io/api/admissionregistration/v1"
-	apiext_v1beta1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1"
 	apiext_v1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
 )
 
@@ -181,12 +180,6 @@ import (
 	roles: [Name=_]: rbac_v1.#Role & {
 		apiVersion: "rbac.authorization.k8s.io/v1"
 		kind:       "Role"
-		metadata: {name: Name, namespace: deploymentNamespace}
-	}
-
-	crdsLegacy: [Name=_]: apiext_v1beta1.#CustomResourceDefinition & {
-		apiVersion: "apiextensions.k8s.io/v1beta1"
-		kind:       "CustomResourceDefinition"
 		metadata: {name: Name, namespace: deploymentNamespace}
 	}
 

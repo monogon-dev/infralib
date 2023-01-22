@@ -46,7 +46,6 @@ objectSets: [
 // Prerequisite objects to apply first, in a separate kubectl call.
 preObjects: [ for v in [
 	context.objects.namespaces,
-	context.objects.crdsLegacy,
 	context.objects.crds,
 ] for x in v {x}]
 
