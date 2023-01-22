@@ -22,6 +22,9 @@ import (
 	// SSH remote host to deploy the objects to by invoking a remote kubectl command, or "local" to use the local kubectl.
 	hostname: string | "local"
 
+	// Remote kubectl command
+	kubectl: string | *"kubectl"
+
 	// Set namespace on all objects.
 	//
 	// The naive solution at the tool layer:
