@@ -1,0 +1,2 @@
+# @gerrit_oauth_plugin_release wants a stamp, give it the bare minimum
+build --workspace_status_command="bash ./build/workspace-status.sh"

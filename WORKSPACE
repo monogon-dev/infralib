@@ -101,15 +101,35 @@ http_file(
     urls = ["https://gerrit-releases.storage.googleapis.com/gerrit-3.7.0.war"],
 )
 
+# Gerrit OAuth plugin.
+
+git_repository(
+    name = "gerrit_plugins_oauth",
+    commit = "024c1d9e625b783b2d2cde6c2882188aeda68736",
+    remote = "https://gerrit.googlesource.com/plugins/oauth",
+    shallow_since = "1642236535 +0100",
+)
+
+load("@gerrit_plugins_oauth//:bazlets.bzl", "load_bazlets")
+
+# Imports @com_googlesource_gerrit_bazlets.
+# Should match our Gerrit version as closely as possible:
+# https://gerrit.googlesource.com/bazlets
+load_bazlets(commit = "8fa44957c3b3b89ce1d96eba67441882c54503fc")
+
+load(
+    "@com_googlesource_gerrit_bazlets//:gerrit_api.bzl",
+    "gerrit_api",
+)
+
+gerrit_api()
+
+load("@gerrit_plugins_oauth//:external_plugin_deps.bzl", "external_plugin_deps")
+
+external_plugin_deps(omit_commons_codec = False)
+
 # Plugin binaries are fetched from Gerrit's official plugin repository... which happens to be a Jenkins instance:
 # https://gerrit-ci.gerritforge.com/view/Plugins-stable-3.7/
-
-http_file(
-    name = "gerrit_oauth_plugin_release",
-    downloaded_file_path = "oauth.jar",
-    sha256 = "3f11c5dfbf11a6930d72ee80eb6c0507f8519e926ac1ebbcc0bef2a5d7fe9239",
-    urls = ["https://gerrit-ci.gerritforge.com/view/Plugins-stable-3.7/job/plugin-oauth-bazel-master-stable-3.7/1/artifact/bazel-bin/plugins/oauth/oauth.jar"],
-)
 
 http_file(
     name = "gerrit_checks_plugin_release",
