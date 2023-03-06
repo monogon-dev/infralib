@@ -36,11 +36,6 @@ load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies", "go_repository")
 
 gazelle_dependencies()
 
-load("//go:deps.bzl", "go_repositories")
-
-# gazelle:repository_macro go/deps.bzl%go_repositories
-go_repositories()
-
 # rules_docker setup
 
 http_archive(
@@ -164,12 +159,4 @@ container_pull(
     registry = "gcr.io",
     repository = "monogon-infra/monogon-builder",
     tag = "1656611307:",
-)
-
-# Forked version of smtprelay, which adds support for plain auth tokens and environment variables for secrets.
-go_repository(
-    name = "com_github_leoluk_smtprelay",
-    importpath = "github.com/leoluk/smtprelay",
-    sum = "h1:Ms5WjHimjP1LAl+7jMKnnmmrzkQmVkfOUm6kBbY/BqQ=",
-    version = "v1.5.0-1",
 )
